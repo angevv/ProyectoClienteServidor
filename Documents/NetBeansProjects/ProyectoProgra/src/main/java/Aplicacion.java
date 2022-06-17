@@ -12,4 +12,9 @@ import java.util.Date;
  */
 public class Aplicacion {
     public Date fechaAplicacion;
+    
+    public Doctor doctor;
+    public Cliente cliente;
+    public Examen examen;
 }
+

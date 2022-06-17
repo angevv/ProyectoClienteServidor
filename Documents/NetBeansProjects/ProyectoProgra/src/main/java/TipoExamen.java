@@ -9,5 +9,5 @@
  */
 public class TipoExamen {
     public int numExamen;
-   // public tipoexamen;
+   //public tipoexamen;
 }
