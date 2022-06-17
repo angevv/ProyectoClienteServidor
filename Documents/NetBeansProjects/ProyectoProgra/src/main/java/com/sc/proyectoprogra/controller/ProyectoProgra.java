@@ -7,7 +7,7 @@ package com.sc.proyectoprogra.controller;
 
 /**
  *
- * @author Angel
+ * @author Angelica
  */
 public class ProyectoProgra {
 
