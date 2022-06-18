@@ -22,9 +22,9 @@ public class Cliente {
     public String correoElectronico;
     public String direccion;
     
-    public void obtenerEdad(){
+   /* public int obtenerEdad(){
         
-    }
+    }*/
     
     public void listarClientes(){
         
