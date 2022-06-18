@@ -11,4 +11,20 @@ package com.sc.proyectoprogra.controller;
 public class TipoExamen {
     public int numExamen;
    //public tipoexamen;
+    
+    public void listarTipoExam(){
+        
+    }
+    
+    public void agregarTipoExam(){
+        
+    }
+    
+    public void editarTipoExam(){
+        
+    }
+    
+    public void eliminarTipoExam(){
+        
+    }
 }

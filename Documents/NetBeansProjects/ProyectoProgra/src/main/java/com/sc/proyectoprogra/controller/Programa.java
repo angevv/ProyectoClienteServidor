@@ -13,34 +13,35 @@ import javax.swing.JOptionPane;
 public class Programa {
     
     public void menu(){
-        //Se crea clientes de la clase Cliente
+        //Se crean clientes, doctores, aplicaciones, examenes y tipoExamenes de cada clase
         Cliente clientes = new Cliente();
+        Doctor doctores = new Doctor();
+        Aplicacion aplicaciones = new Aplicacion();
+        Examen examenes = new Examen();
+        TipoExamen tipoExamenes = new TipoExamen();
         
         int opcion;
         //Se crea un do while para que el menú se repita hasta que el usuario decida salir
         do {
             //Se desarrolla el menu principal 
             String lectura = JOptionPane.showInputDialog("********** Menú Principal **********"
-                    + "\n 1- Agendar aplicación de examen \n 2- Opciones de mantenimiento "
-                    + "\n 3- Reportes \n 4- Salir \nElija una opción del menú: ");
+                    + "\n 1- Opciones de mantenimiento "
+                    + "\n 2- Reportes \n 3- Salir \nElija una opción del menú: ");
             //Se convierte el valor lectura a entero para poder comparar la opcion con el menu
             opcion = Integer.parseInt(lectura);
             //Si la opcion no se encuentra en el menu, mostrar un mensaje de alerta
-            if (opcion != 1 && opcion != 2 && opcion != 3 && opcion!=4) {
+            if (opcion != 1 && opcion != 2 && opcion != 3 ) {
                 JOptionPane.showMessageDialog(null, "No existe esa opción en el menú");
             } 
             //Se crea un switch para las opciones del menú
             switch (opcion){
             case 1:
-                 clientes.agendarAplicacionExamen();
-                break;
-            case 2:
                 int opcionMantenimiento;
                 do{
                     //Se crea el menú de mantenimiento para las entidades
                     lectura = JOptionPane.showInputDialog("******** Menú de Mantenimiento ********"
                         + "\n 1- Tipo de examen \n 2- Exámenes "
-                        + "\n 3- Doctores \n 4- Clientes  \n 5- Aplicaciones Examenes \n 6- Volver al menú principal \nElija una opción del menú: ");
+                        + "\n 3- Doctores \n 4- Clientes  \n 5- Aplicaciones Exámenes \n 6- Volver al menú principal \nElija una opción del menú: ");
                     //Se convierte el valor lectura a entero para poder comparar la opcion con el menu
                     opcionMantenimiento = Integer.parseInt(lectura);
                     //Si la opcion no se encuentra en el menu, mostrar un mensaje de alerta
@@ -64,15 +65,19 @@ public class Programa {
                                 switch(opcionMantenTipo){
                                     case 1:
                                         //Listar
+                                        tipoExamenes.listarTipoExam();
                                         break;
                                     case 2:
-                                        //Agregar
+                                        //Agregar 
+                                        tipoExamenes.agregarTipoExam();
                                         break;
                                     case 3:
                                         //Editar
+                                        tipoExamenes.editarTipoExam();
                                         break;
                                     case 4:
                                         //Borrar
+                                        tipoExamenes.eliminarTipoExam();
                                         break;
                                 }
                             }while(opcionMantenTipo!=5);
@@ -92,15 +97,19 @@ public class Programa {
                                 switch(opcionMantenExam){
                                     case 1:
                                         //Listar
+                                        examenes.listarExamenes();
                                         break;
                                     case 2:
                                         //Agregar
+                                        examenes.agregarExamenes();
                                         break;
                                     case 3:
                                         //Editar
+                                        examenes.editarExamenes();
                                         break;
                                     case 4:
                                         //Borrar
+                                        examenes.eliminarExamenes();
                                         break;
                                 }
                             }while(opcionMantenExam!=5);
@@ -120,15 +129,19 @@ public class Programa {
                                 switch(opcionMantenDoc){
                                     case 1:
                                         //Listar
+                                       doctores.listarDoctores();
                                         break;
                                     case 2:
                                         //Agregar
+                                        doctores.agregarDoctores();
                                         break;
                                     case 3:
                                         //Editar
+                                        doctores.editarDoctores();                                      
                                         break;
                                     case 4:
                                         //Borrar
+                                        doctores.eliminarDoctores();
                                         break;
                                 }
                             }while(opcionMantenDoc!=5);
@@ -148,15 +161,19 @@ public class Programa {
                                 switch(opcionMantenCli){
                                     case 1:
                                         //Listar
+                                        clientes.listarClientes();
                                         break;
                                     case 2:
                                         //Agregar
+                                        clientes.agregarClientes();
                                         break;
                                     case 3:
                                         //Editar
+                                        clientes.editarClientes();
                                         break;
                                     case 4:
                                         //Borrar
+                                        clientes.borrarClientes();
                                         break;
                                 }
                             }while(opcionMantenCli!=5);
@@ -176,15 +193,19 @@ public class Programa {
                                 switch(opcionMantenAplicaciones){
                                     case 1:
                                         //Listar
+                                        aplicaciones.listarAplicaciones();
                                         break;
                                     case 2:
                                         //Agregar
+                                        aplicaciones.agregarAplicaciones();
                                         break;
                                     case 3:
                                         //Editar
+                                        aplicaciones.editarrAplicaciones();
                                         break;
                                     case 4:
                                         //Borrar
+                                        aplicaciones.eliminarAplicaciones();
                                         break;
                                 }
                              break;
@@ -195,11 +216,11 @@ public class Programa {
                 }while(opcionMantenimiento!=6);
                 break;
                 
-            case 3:
+            case 2:
                 clientes.generarReportes();
                 break;
             }        
-          //Repetir hasta que el usuario digite el numero 4
-        } while (opcion != 4);
+          //Repetir hasta que el usuario digite el numero 3
+        } while (opcion != 3);
     }
 }

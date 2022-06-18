@@ -15,4 +15,20 @@ public class Aplicacion {
     public Doctor doctor;
     public Cliente cliente;
     public Examen examen;
+    
+    public void listarAplicaciones(){
+        
+    }
+    
+    public void agregarAplicaciones(){
+        
+    }
+    
+    public void editarrAplicaciones(){
+        
+    }
+    
+    public void eliminarAplicaciones(){
+        
+    }
 }

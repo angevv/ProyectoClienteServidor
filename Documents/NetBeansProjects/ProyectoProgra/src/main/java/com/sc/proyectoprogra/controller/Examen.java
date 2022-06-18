@@ -13,4 +13,18 @@ public class Examen {
     public String nombre;
     public String descripcion;
     public String requisitos;
+    
+    public void listarExamenes(){
+        
+    }
+    
+    public void agregarExamenes(){
+        
+    }
+    public void editarExamenes(){
+        
+    }
+    public void eliminarExamenes(){
+        
+    }
 }
