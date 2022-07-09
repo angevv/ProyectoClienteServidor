@@ -4,11 +4,9 @@
  */
 package com.sc.proyectoprogra.controller;
 
-import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
-import java.util.Date;
 import javax.swing.JOptionPane;
 
 /**
