@@ -14,6 +14,7 @@ import javax.swing.JOptionPane;
  * @author Angelica
  */
 public class Cliente {
+    
     //Se crea una variable para llevar el conteo de los clientes ingresados
     private int cantClientes=0;
     
@@ -166,7 +167,15 @@ public class Cliente {
         
         System.out.println("El correo es inválido.");  
     }   
-      public void generarReportes(){
-        
+    public void generarReportes(){   
+        //Se crean las instancias de las clases examen, doctor y aplicacion
+       /* Examen examen = new Examen();
+        Doctor doctor = new Doctor();
+        Aplicacion aplicacion = new Aplicacion();
+        //Se muestran los datos de las aplicaciones de los examenes
+        System.out.println("Cedula Cliente: "+nombre);
+        System.out.println("Examen: "+examen.nombre);
+        System.out.println("Doctor a Cargo: "+doctor.nombre);
+        System.out.println("Fecha Aplicacion: "+aplicacion.fechaAplicacion);*/
     }
 }

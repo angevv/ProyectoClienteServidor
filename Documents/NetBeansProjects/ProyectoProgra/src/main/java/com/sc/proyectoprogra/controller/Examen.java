@@ -19,6 +19,7 @@ public class Examen {
     public String descripcion;
     public String requisitos;
     
+    //Se crea una instancia de la clase tipo examen
     TipoExamen tipoExamen = new TipoExamen();
     
     public void listarExamenes(){
@@ -36,32 +37,42 @@ public class Examen {
     }
     
     public void agregarExamenes(){
+        //Se pide seleccionar el tipo de examen que se desea agregar
         String lectura = JOptionPane.showInputDialog("Seleccione el tipo de examen: \n1- Sangre \n2- Hisopado \n3- Heces \n4- Otro");
         int opcionExamen = Integer.parseInt(lectura);
         if(opcionExamen==1){
+            //Se agregan los datos para el examen de sangre
             tipoExamen.tp = tipoExamen.tp.SANGRE;
+            //Se genera un codigo random
             codigo = (int)(Math.random()*400)+100;
             nombre = "Sangre";
             descripcion = JOptionPane.showInputDialog("Ingrese la descripción del examen: ");
             requisitos = JOptionPane.showInputDialog("Ingrese los requisitos del examen: ");
         }else if(opcionExamen==2){
+            //Se agregan los datos para el examen de hisopados
             tipoExamen.tp = tipoExamen.tp.HISOPADOS;
+            //Se genera un codigo random
             codigo = (int)(Math.random()*400)+100;
             nombre = "Hisopados";
             descripcion = JOptionPane.showInputDialog("Ingrese la descripción del examen: ");
             requisitos = JOptionPane.showInputDialog("Ingrese los requisitos del examen: ");
         }else if(opcionExamen==3){
+            //Se agregan los datos para el examen de heces
             tipoExamen.tp = tipoExamen.tp.HECES;
+            //Se genera un codigo random
             codigo = (int)(Math.random()*400)+100;
             nombre = "Heces";
             descripcion = JOptionPane.showInputDialog("Ingrese la descripción del examen: ");
             requisitos = JOptionPane.showInputDialog("Ingrese los requisitos del examen: ");
         }else{
+            //En caso de ser otro tipo de examen, solicitar los datos y el nombre del examen
+            //Se genera un codigo random
             codigo = (int)(Math.random()*400)+100;
             nombre = JOptionPane.showInputDialog("Ingrese el nombre del examen: ");
             descripcion = JOptionPane.showInputDialog("Ingrese la descripción del examen: ");
             requisitos = JOptionPane.showInputDialog("Ingrese los requisitos del examen: ");
         }
+        //Se lleva un conteo de la cantidad de examenes 
         cantExamenes= cantExamenes+1;
     }
     public void editarExamenes(){

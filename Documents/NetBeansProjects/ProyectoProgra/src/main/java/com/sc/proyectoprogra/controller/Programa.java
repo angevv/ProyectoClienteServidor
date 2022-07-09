@@ -209,7 +209,24 @@ public class Programa {
                                         break;
                                     case 2:
                                         //Agregar
-                                        aplicaciones.agregarAplicaciones();
+                                        lectura = JOptionPane.showInputDialog("Ingrese la cédula del cliente al que desea agendarle la aplicación de un examen: ");
+                                        if (lectura.equals(clientes.cedula)){
+                                            lectura = JOptionPane.showInputDialog("Ingrese el código del examen: ");
+                                            int codigo = Integer.parseInt(lectura);
+                                            if(codigo==examenes.codigo){
+                                                lectura = JOptionPane.showInputDialog("Ingrese el carnet del doctor asignado: ");
+                                                int carnet = Integer.parseInt(lectura);
+                                                if(carnet==doctores.carnet){
+                                                    aplicaciones.agregarAplicaciones();
+                                                    }else{
+                                                        JOptionPane.showMessageDialog(null, "El doctor con el carnet "+carnet+ " no existe");
+                                                    }
+                                                }else{
+                                                    JOptionPane.showMessageDialog(null, "El examen con el código "+codigo+ " no existe");
+                                                }
+                                            }else{
+                                                JOptionPane.showMessageDialog(null, "El cliente con la cédula "+lectura+ " no existe");
+                                            }
                                         break;
                                     case 3:
                                         //Editar
