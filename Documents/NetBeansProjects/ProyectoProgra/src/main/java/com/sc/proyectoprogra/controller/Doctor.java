@@ -95,7 +95,7 @@ public class Doctor {
             JOptionPane.showMessageDialog(null, "El doctor ha sido eliminado");
         }
         else{
-            //Si no existe la cedula, mostrar mensaje
+            //Si no existe el carnet, mostrar mensaje
              JOptionPane.showMessageDialog(null, "El doctor con el carnet "+buscarCarnet+ " no existe");
         }
     }
