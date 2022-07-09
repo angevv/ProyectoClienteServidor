@@ -79,6 +79,9 @@ public class Programa {
                                         //Borrar
                                         tipoExamenes.eliminarTipoExam();
                                         break;
+                                    default:
+                                        opcionMantenTipo=5;
+                                        break;
                                 }
                             }while(opcionMantenTipo!=5);
                             break;
@@ -110,6 +113,9 @@ public class Programa {
                                     case 4:
                                         //Borrar
                                         examenes.eliminarExamenes();
+                                        break;
+                                    default:
+                                        opcionMantenExam=5;
                                         break;
                                 }
                             }while(opcionMantenExam!=5);
@@ -143,6 +149,9 @@ public class Programa {
                                         //Borrar
                                         doctores.eliminarDoctores();
                                         break;
+                                    default:
+                                        opcionMantenDoc=5;
+                                        break;
                                 }
                             }while(opcionMantenDoc!=5);
                             break;
@@ -174,6 +183,9 @@ public class Programa {
                                     case 4:
                                         //Borrar
                                         clientes.borrarClientes();
+                                        break;
+                                    default:
+                                        opcionMantenCli=5;
                                         break;
                                 }
                             }while(opcionMantenCli!=5);
@@ -207,6 +219,9 @@ public class Programa {
                                         //Borrar
                                         aplicaciones.eliminarAplicaciones();
                                         break;
+                                    default:
+                                        opcionMantenAplicaciones=5;
+                                        break;
                                 }
                              break;
                             }while(opcionMantenAplicaciones!=5);
@@ -219,7 +234,10 @@ public class Programa {
             case 2:
                 clientes.generarReportes();
                 break;
-            }        
+            default:
+                opcion=3;
+                break;
+            }   
           //Repetir hasta que el usuario digite el numero 3
         } while (opcion != 3);
     }
