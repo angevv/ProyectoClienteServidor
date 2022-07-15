@@ -137,7 +137,9 @@ public class Programa {
                                         break;
                                     case 2:
                                         //Agregar
-                                        clientes.agregarClientes();
+                                        lectura = JOptionPane.showInputDialog("Digite la cantidad de clientes que desea ingresar: ");
+                                        int cantCli=Integer.parseInt(lectura);
+                                        clientes.agregarClientes(cantCli);
                                         break;
                                     case 3:
                                         //Editar

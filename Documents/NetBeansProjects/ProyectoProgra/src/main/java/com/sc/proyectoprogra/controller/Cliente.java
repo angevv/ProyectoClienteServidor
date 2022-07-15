@@ -3,11 +3,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package com.sc.proyectoprogra.controller;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import javax.swing.JOptionPane;
+
+
 
 /**
  *
@@ -18,13 +19,15 @@ public class Cliente {
     //Se crea una variable para llevar el conteo de los clientes ingresados
     private int cantClientes=0;
     
-    public String cedula;
-    public String nombre;
-    public String primerApellido;
-    public String segundoApellido;
-    public String fechaNacimiento;
-    public String telefono;
-    public String direccion;
+    public String cedula[];
+    public String nombre[];
+    public String primerApellido[];
+    public String segundoApellido[];
+    public String fechaNacimiento[];
+    public String telefono[];
+    public String direccion[];
+    public String correoElectronico[];
+    public String genero[];
     
     private String correo="";
     
@@ -52,89 +55,124 @@ public class Cliente {
     public void listarClientes(){
         //Se verifica si ya se han agregado clientes
         if (cantClientes>0){
-            //Si ya se han agregado se muestran en pantalla;
-            System.out.println("Cedula: "+cedula);
-            System.out.println( "Nombre Completo: "+nombre+" "+primerApellido+" "+segundoApellido);
-            int edad=obtenerEdad(fechaNacimiento);
-            System.out.println( "Edad: "+edad);
-            System.out.println( "Genero: "+tp);
-            System.out.println( "Direccion: "+direccion);
-           System.out.println( "Telefono: "+telefono);
-            System.out.println( "Correo: "+getCorreo());
+            //Se crea un for para mostrar todos los clientes registrados
+            for(int i=0;i<cedula.length;i++){
+                //Si ya se han agregado se muestran en pantalla;
+                System.out.println("Cliente #"+(i+1));
+                System.out.println("Cedula: "+cedula[i]);
+                System.out.println( "Nombre Completo: "+nombre[i]+" "+primerApellido[i]+" "+segundoApellido[i]);
+                int edad=obtenerEdad(fechaNacimiento[i]);
+                System.out.println( "Edad: "+edad);
+                System.out.println( "Genero: "+genero[i]);
+                System.out.println( "Direccion: "+direccion[i]);
+               System.out.println( "Telefono: "+telefono[i]);
+                System.out.println( "Correo: "+correoElectronico[i]);
+                System.out.println("");
+            }
         }else{
             //Si no se han agregado clientes, mostrar mensaje
              JOptionPane.showMessageDialog(null, "No se han agregado clientes");
-        }
+        }       
     }
     
-    public void agregarClientes(){
-        //Se solicitan los datos necesarios de los clientes
-        cedula = JOptionPane.showInputDialog("Ingrese la cédula del cliente: ");
-        nombre = JOptionPane.showInputDialog("Ingrese el nombre del cliente: ");
-        primerApellido = JOptionPane.showInputDialog("Ingrese el primer apellido del cliente: ");
-        segundoApellido = JOptionPane.showInputDialog("Ingrese el segundo apellido del cliente: ");
-        fechaNacimiento=JOptionPane.showInputDialog("Introduzca la fecha de nacimiento con el siguiente formato yyyy-mm-dd: ");
-        String lectura = JOptionPane.showInputDialog("Seleccione el género: \n1- Femenino \n2- Masculino");
-        int opcionGenero = Integer.parseInt(lectura);
-        if (opcionGenero==1){
-            tp=Genero.FEMENINO;
-        }else if (opcionGenero==2){
-            tp=Genero.MASCULINO;
-        }else{
-            JOptionPane.showMessageDialog(null, "No existe esa opción");
+    public void agregarClientes(int cant){
+        //Se crean los arreglos con la cantidad digitada por el usuario
+        cedula = new String[cant];
+        nombre = new String[cant];
+        primerApellido = new String[cant];
+        segundoApellido = new String[cant];
+        fechaNacimiento = new String[cant];
+        direccion = new String[cant];
+        telefono = new String[cant];
+        correoElectronico = new String[cant];
+        genero = new String[cant];
+        
+        //Se crea un for para agregar la cantidad de clientes que el usuario desea
+        for(int i=0;i<cant;i++){
+            //Se solicitan los datos necesarios de los clientes y se guardan en el arreglo
+            cedula[i] = JOptionPane.showInputDialog("Ingrese la cédula del cliente #"+(i+1)+": ");
+            nombre[i] = JOptionPane.showInputDialog("Ingrese el nombre del cliente #"+(i+1)+": ");
+            primerApellido[i] = JOptionPane.showInputDialog("Ingrese el primer apellido del cliente #"+(i+1)+": ");
+            segundoApellido[i] = JOptionPane.showInputDialog("Ingrese el segundo apellido del cliente #"+(i+1)+": ");
+            fechaNacimiento[i]=JOptionPane.showInputDialog("Introduzca la fecha de nacimiento con el siguiente formato yyyy-mm-dd: ");
+            String lectura = JOptionPane.showInputDialog("Seleccione el género: \n1- Femenino \n2- Masculino");
+            int opcionGenero = Integer.parseInt(lectura);
+            if (opcionGenero==1){
+                tp=Genero.FEMENINO;
+                genero[i]=tp.toString();
+            }else if (opcionGenero==2){
+                tp=Genero.MASCULINO;
+                genero[i]=tp.toString();
+            }else{
+                JOptionPane.showMessageDialog(null, "No existe esa opción");
+            }
+            direccion[i] = JOptionPane.showInputDialog("Ingrese la dirección del cliente #"+(i+1)+": ");
+            telefono[i] = JOptionPane.showInputDialog("Ingrese el teléfono del cliente #"+(i+1)+": ");
+            correo = JOptionPane.showInputDialog("Ingrese el correo electrónico del cliente #"+(i+1)+": ");
+            setCorreo(correo);
+            correoElectronico[i]=getCorreo();
+            //Se lleva un conteo de los clientes
+            cantClientes = cantClientes+1;
+            //Mostrar mensaje de verificacion
+            JOptionPane.showMessageDialog(null, "El cliente ha sido agregado");
         }
-        direccion = JOptionPane.showInputDialog("Ingrese la dirección del cliente: ");
-        telefono = JOptionPane.showInputDialog("Ingrese el teléfono del cliente: ");
-        correo = JOptionPane.showInputDialog("Ingrese el correo electrónico del cliente: ");
-        setCorreo(correo);
-        //Se lleva un conteo de los clientes
-        cantClientes = cantClientes+1;
-        //Mostrar mensaje de verificacion
-        JOptionPane.showMessageDialog(null, "El cliente ha sido agregado");
     }
     public void editarClientes(){
+        //Se crea variable para verificar si se ha encontrado la cedula
+        int encontrado=0;
         //Se solicita la cedula del cliente que se desea modificar
         String buscarCedula = JOptionPane.showInputDialog("Ingrese la cédula del cliente que desea editar: ");
-        if(buscarCedula.equals(cedula)){
-            //Si la cedula existe, se solicitan los nuevos datos del cliente y se actualizan los anteriores
-            String Nnombre = JOptionPane.showInputDialog("Ingrese el nuevo nombre del cliente: ");
-            nombre=Nnombre;
-            String NprimerApellido = JOptionPane.showInputDialog("Ingrese el nuevo primer apellido del cliente: ");
-            primerApellido=NprimerApellido;
-            String NsegundoApellido = JOptionPane.showInputDialog("Ingrese el nuevo segundo apellido del cliente: ");
-            segundoApellido=NsegundoApellido;
-            String Ndireccion = JOptionPane.showInputDialog("Ingrese la nueva dirección del cliente: ");
-            direccion=Ndireccion;
-            String Ntelefono = JOptionPane.showInputDialog("Ingrese el teléfono del cliente: ");
-            telefono=Ntelefono;
-            String Ncorreo = JOptionPane.showInputDialog("Ingrese el correo electrónico del cliente: ");
-            correo=Ncorreo;
-            setCorreo(correo);
-            //Se muestra mensaje de verificacion
-            JOptionPane.showMessageDialog(null, "El cliente ha sido modificado");
-        }else{
+        //Se crea un for para recorrer todo el arreglo y buscar la cedula
+        for(int i=0;i<cedula.length;i++){
+            if(buscarCedula.equals(cedula)){
+                //Si la cedula existe, se solicitan los nuevos datos del cliente y se actualizan los anteriores
+                String Nnombre = JOptionPane.showInputDialog("Ingrese el nuevo nombre del cliente: ");
+                nombre[i]=Nnombre;
+                String NprimerApellido = JOptionPane.showInputDialog("Ingrese el nuevo primer apellido del cliente: ");
+                primerApellido[i]=NprimerApellido;
+                String NsegundoApellido = JOptionPane.showInputDialog("Ingrese el nuevo segundo apellido del cliente: ");
+                segundoApellido[i]=NsegundoApellido;
+                String Ndireccion = JOptionPane.showInputDialog("Ingrese la nueva dirección del cliente: ");
+                direccion[i]=Ndireccion;
+                String Ntelefono = JOptionPane.showInputDialog("Ingrese el teléfono del cliente: ");
+                telefono[i]=Ntelefono;
+                String Ncorreo = JOptionPane.showInputDialog("Ingrese el correo electrónico del cliente: ");
+                correo=Ncorreo;
+                setCorreo(correo);
+                correoElectronico[i]=getCorreo();
+                //Se muestra mensaje de verificacion
+                JOptionPane.showMessageDialog(null, "El cliente ha sido modificado");
+                //Se cambia el estado si ha sido encontrado el cliente
+                encontrado=1;
+            }
+        }
+            if(encontrado!=1){
             //Si no existe la cedula, mostrar mensaje
              JOptionPane.showMessageDialog(null, "El cliente con la cédula "+buscarCedula+ " no existe");
         }
         
     }
     public void borrarClientes(){
+        //Se crea variable para verificar si se ha encontrado la cedula
+        int encontrado=0;
         //Se solicita la cedula del cliente que se desea eliminar
         String buscarCedula = JOptionPane.showInputDialog("Ingrese la cédula del cliente que desea eliminar: ");
-        if(buscarCedula.equals(cedula)){
-            //Se borra el cliente con la cedula buscada
-            cedula = "";
-            nombre = "";
-            primerApellido = "";
-            segundoApellido = "";
-            fechaNacimiento="";
-            direccion = "";
-            telefono = "";
-            correo = "";
-            cantClientes=0;
-            JOptionPane.showMessageDialog(null, "El cliente ha sido eliminado");
+        for(int i=0;i<cedula.length;i++){
+            if(buscarCedula.equals(cedula)){
+                //Se borra el cliente con la cedula buscada
+               /*cedula = ArrayUtils.removeElement(cedula, i);
+                nombre = "";
+                primerApellido = "";
+                segundoApellido = "";
+                fechaNacimiento="";
+                direccion = "";
+                telefono = "";
+                correo = "";
+                cantClientes=0;
+                JOptionPane.showMessageDialog(null, "El cliente ha sido eliminado");*/
+            }
         }
-        else{
+        if(encontrado!=1){
             //Si no existe la cedula, mostrar mensaje
              JOptionPane.showMessageDialog(null, "El cliente con la cédula "+buscarCedula+ " no existe");
         }
