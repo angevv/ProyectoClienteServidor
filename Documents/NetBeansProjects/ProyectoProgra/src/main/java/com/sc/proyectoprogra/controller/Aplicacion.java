@@ -32,6 +32,9 @@ public class Aplicacion {
     }
     
     public void listarAplicaciones(){
+        Cliente clientes = new Cliente();
+        Doctor doctores = new Doctor();
+        Examen examenes = new Examen();
         //Se verifica si ya se han agregado aplicaciones
         if (cantAplicaciones>0){
             //Si ya se han agregado se muestran en pantalla;

@@ -18,7 +18,6 @@ public class Programa {
         Doctor doctores = new Doctor();
         Aplicacion aplicaciones = new Aplicacion();
         Examen examenes = new Examen();
-        TipoExamen tipoExamenes = new TipoExamen();
         
         int opcion;
         //Se crea un do while para que el menú se repita hasta que el usuario decida salir
@@ -203,9 +202,9 @@ public class Programa {
                                     default:
                                         opcionMantenAplicaciones=5;
                                         break;
-                                }
-                             break;
+                                }                           
                             }while(opcionMantenAplicaciones!=5);
+                            break;
                     }
                     
                 //Repetir hasta que el usuario digite el numero 5
