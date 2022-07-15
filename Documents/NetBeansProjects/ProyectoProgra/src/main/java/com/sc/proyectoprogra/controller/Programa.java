@@ -40,52 +40,16 @@ public class Programa {
                 do{
                     //Se crea el menú de mantenimiento para las entidades
                     lectura = JOptionPane.showInputDialog("******** Menú de Mantenimiento ********"
-                        + "\n 1- Tipo de examen \n 2- Exámenes "
-                        + "\n 3- Doctores \n 4- Clientes  \n 5- Aplicaciones Exámenes \n 6- Volver al menú principal \nElija una opción del menú: ");
+                        + "\n 1- Exámenes "
+                        + "\n 2- Doctores \n 3- Clientes  \n 4- Aplicaciones Exámenes \n 5- Volver al menú principal \nElija una opción del menú: ");
                     //Se convierte el valor lectura a entero para poder comparar la opcion con el menu
                     opcionMantenimiento = Integer.parseInt(lectura);
                     //Si la opcion no se encuentra en el menu, mostrar un mensaje de alerta
-                    if (opcionMantenimiento != 1 && opcionMantenimiento != 2 && opcionMantenimiento != 3 && opcionMantenimiento != 4 && opcionMantenimiento != 5 && opcionMantenimiento != 6) {
+                    if (opcionMantenimiento != 1 && opcionMantenimiento != 2 && opcionMantenimiento != 3 && opcionMantenimiento != 4 && opcionMantenimiento != 5) {
                         JOptionPane.showMessageDialog(null, "No existe esa opción en el menú");
                     }
                     switch(opcionMantenimiento){
                         case 1:
-                            int opcionMantenTipo;
-                            do{
-                                //Se crea el menú de opciones de mantenimiento de tipo examen
-                                lectura = JOptionPane.showInputDialog("****** Mantenimiento Tipo Examen ******"
-                                    + "\n 1- Listar datos \n 2- Agregar datos "
-                                    + "\n 3- Editar datos \n 4- Borrar datos \n 5- Volver al menú anterior \nElija una opción del menú: ");
-                                //Se convierte el valor lectura a entero para poder comparar la opcion con el menú
-                                opcionMantenTipo = Integer.parseInt(lectura);
-                                //Si la opcion no se encuentra en el menu, mostrar un mensaje de alerta
-                                if (opcionMantenTipo != 1 && opcionMantenTipo != 2 && opcionMantenTipo != 3 && opcionMantenTipo != 4 && opcionMantenTipo != 5) {
-                                    JOptionPane.showMessageDialog(null, "No existe esa opción en el menú");
-                                }
-                                switch(opcionMantenTipo){
-                                    case 1:
-                                        //Listar
-                                        tipoExamenes.listarTipoExam();
-                                        break;
-                                    case 2:
-                                        //Agregar 
-                                        tipoExamenes.agregarTipoExam();
-                                        break;
-                                    case 3:
-                                        //Editar
-                                        tipoExamenes.editarTipoExam();
-                                        break;
-                                    case 4:
-                                        //Borrar
-                                        tipoExamenes.eliminarTipoExam();
-                                        break;
-                                    default:
-                                        opcionMantenTipo=5;
-                                        break;
-                                }
-                            }while(opcionMantenTipo!=5);
-                            break;
-                        case 2:
                             int opcionMantenExam;
                             do{
                                 //Se crea el menú de opciones de mantenimiento de exámenes
@@ -120,7 +84,7 @@ public class Programa {
                                 }
                             }while(opcionMantenExam!=5);
                             break;
-                        case 3:
+                        case 2:
                             int opcionMantenDoc;
                             do{
                                 //Se crea el menú de opciones de mantenimiento de doctores
@@ -155,7 +119,7 @@ public class Programa {
                                 }
                             }while(opcionMantenDoc!=5);
                             break;
-                        case 4:
+                        case 3:
                             int opcionMantenCli;
                             do{
                                 //Se crea el menú de opciones de mantenimiento de clientes
@@ -190,7 +154,7 @@ public class Programa {
                                 }
                             }while(opcionMantenCli!=5);
                             break;
-                        case 5:
+                        case 4:
                             int opcionMantenAplicaciones;
                             do{
                                 //Se crea el menú de opciones de mantenimiento de aplicaciones de exámenes
@@ -244,8 +208,8 @@ public class Programa {
                             }while(opcionMantenAplicaciones!=5);
                     }
                     
-                //Repetir hasta que el usuario digite el numero 6
-                }while(opcionMantenimiento!=6);
+                //Repetir hasta que el usuario digite el numero 5
+                }while(opcionMantenimiento!=5);
                 break;
                 
             case 2:

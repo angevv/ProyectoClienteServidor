@@ -33,7 +33,7 @@ public class Aplicacion {
     
     public void listarAplicaciones(){
         //Se verifica si ya se han agregado aplicaciones
-       /* if (cantAplicaciones>0){
+        if (cantAplicaciones>0){
             //Si ya se han agregado se muestran en pantalla;
             System.out.println( "Numero de Aplicacion: "+numAplicacion);
             System.out.println( "Examen: "+examenes.nombre);
@@ -43,7 +43,7 @@ public class Aplicacion {
         }else{
             //Si no se han agregado aplicaciones, mostrar mensaje
              JOptionPane.showMessageDialog(null, "No se han agregado doctores");
-        }*/
+        }
     }
     
     public void agregarAplicaciones(){

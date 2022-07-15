@@ -9,7 +9,6 @@ package com.sc.proyectoprogra.controller;
  * @author Angelica
  */
 public class TipoExamen {
-    //public int numExamen;
     
     //Se crea la enumeracion tipo examen
     public enum tipoexamen{
@@ -20,19 +19,4 @@ public class TipoExamen {
     }
        tipoexamen tp;
     
-    public void listarTipoExam(){
-        
-    }
-    
-    public void agregarTipoExam(){
-        
-    }
-    
-    public void editarTipoExam(){
-        
-    }
-    
-    public void eliminarTipoExam(){
-        
-    }
 }
