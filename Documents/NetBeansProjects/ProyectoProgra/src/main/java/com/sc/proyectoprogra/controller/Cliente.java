@@ -6,6 +6,9 @@ package com.sc.proyectoprogra.controller;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 
@@ -30,6 +33,10 @@ public class Cliente {
     public String genero[];
     
     private String correo="";
+    private String nom="";
+    private String ced="";
+    private String primerA="";
+    private String segundoA="";
     
     //Se crea la enumeracion para generos
     public enum Genero{
@@ -90,7 +97,9 @@ public class Cliente {
         //Se crea un for para agregar la cantidad de clientes que el usuario desea
         for(int i=0;i<cant;i++){
             //Se solicitan los datos necesarios de los clientes y se guardan en el arreglo
-            cedula[i] = JOptionPane.showInputDialog("Ingrese la cédula del cliente #"+(i+1)+": ");
+            ced = JOptionPane.showInputDialog("Ingrese la cédula del cliente #"+(i+1)+": ");
+            setCedula(ced);
+            cedula[i]=getCedula();
             nombre[i] = JOptionPane.showInputDialog("Ingrese el nombre del cliente #"+(i+1)+": ");
             primerApellido[i] = JOptionPane.showInputDialog("Ingrese el primer apellido del cliente #"+(i+1)+": ");
             segundoApellido[i] = JOptionPane.showInputDialog("Ingrese el segundo apellido del cliente #"+(i+1)+": ");
@@ -124,7 +133,7 @@ public class Cliente {
         String buscarCedula = JOptionPane.showInputDialog("Ingrese la cédula del cliente que desea editar: ");
         //Se crea un for para recorrer todo el arreglo y buscar la cedula
         for(int i=0;i<cedula.length;i++){
-            if(buscarCedula.equals(cedula)){
+            if(buscarCedula.equals(cedula[i])){
                 //Si la cedula existe, se solicitan los nuevos datos del cliente y se actualizan los anteriores
                 String Nnombre = JOptionPane.showInputDialog("Ingrese el nuevo nombre del cliente: ");
                 nombre[i]=Nnombre;
@@ -158,18 +167,49 @@ public class Cliente {
         //Se solicita la cedula del cliente que se desea eliminar
         String buscarCedula = JOptionPane.showInputDialog("Ingrese la cédula del cliente que desea eliminar: ");
         for(int i=0;i<cedula.length;i++){
-            if(buscarCedula.equals(cedula)){
+            if(buscarCedula.equals(cedula[i])){
                 //Se borra el cliente con la cedula buscada
-               /*cedula = ArrayUtils.removeElement(cedula, i);
-                nombre = "";
-                primerApellido = "";
-                segundoApellido = "";
-                fechaNacimiento="";
-                direccion = "";
-                telefono = "";
-                correo = "";
-                cantClientes=0;
-                JOptionPane.showMessageDialog(null, "El cliente ha sido eliminado");*/
+                /*List<String> tempList = new ArrayList<String>(Arrays.asList(cedula));
+                tempList.remove(i);
+                tempList.toArray(new String[0]);
+                tempList = new ArrayList<String>(Arrays.asList(nombre));
+                tempList.remove(i);
+                tempList.toArray(new String[0]);
+                tempList = new ArrayList<String>(Arrays.asList(primerApellido));
+                tempList.remove(i);
+                tempList.toArray(new String[0]);
+                tempList = new ArrayList<String>(Arrays.asList(segundoApellido));
+                tempList.remove(i);
+                tempList.toArray(new String[0]);
+                tempList = new ArrayList<String>(Arrays.asList(fechaNacimiento));
+                tempList.remove(i);
+                tempList.toArray(new String[0]);
+                tempList = new ArrayList<String>(Arrays.asList(direccion));
+                tempList.remove(i);
+                tempList.toArray(new String[0]);
+                tempList = new ArrayList<String>(Arrays.asList(correoElectronico));
+                tempList.remove(i);
+                tempList.toArray(new String[0]);
+                tempList = new ArrayList<String>(Arrays.asList(telefono));
+                tempList.remove(i);
+                tempList.toArray(new String[0]);
+                tempList = new ArrayList<String>(Arrays.asList(genero));
+                tempList.remove(i);
+                tempList.toArray(new String[0]);*/
+
+                /*cedula[i] = " ";
+                nombre[i] = " ";
+                primerApellido[i] = " ";
+                segundoApellido[i] = " ";
+                fechaNacimiento[i]=" ";
+                direccion[i] = " ";
+                telefono[i] = " ";
+                correoElectronico[i] = " ";
+                genero[i]=" ";*/
+               //Se muestra mensaje de verificacion
+                JOptionPane.showMessageDialog(null, "El cliente ha sido eliminado");
+               //Se cambia el estado si ha sido encontrado el cliente
+                encontrado=1;
             }
         }
         if(encontrado!=1){
@@ -205,6 +245,16 @@ public class Cliente {
         
         System.out.println("El correo es inválido.");  
     }   
+    //Se crean el get y set para la cedula
+   public String getCedula(){
+        return ced;
+    }
+    
+    public void setCedula(String ced)
+    {
+       this.ced=ced;
+    }   
+    
     public void generarReportes(){   
         //Se crean las instancias de las clases examen, doctor y aplicacion
        /* Examen examen = new Examen();
