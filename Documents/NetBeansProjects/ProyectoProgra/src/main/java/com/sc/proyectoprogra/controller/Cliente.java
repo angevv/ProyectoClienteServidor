@@ -33,8 +33,8 @@ public class Cliente {
     public String genero[];
     
     private String correo="";
-    private String nom="";
     private String ced="";
+    private String nom="";
     private String primerA="";
     private String segundoA="";
     
@@ -97,9 +97,7 @@ public class Cliente {
         //Se crea un for para agregar la cantidad de clientes que el usuario desea
         for(int i=0;i<cant;i++){
             //Se solicitan los datos necesarios de los clientes y se guardan en el arreglo
-            ced = JOptionPane.showInputDialog("Ingrese la cédula del cliente #"+(i+1)+": ");
-            setCedula(ced);
-            cedula[i]=getCedula();
+            cedula[i] = JOptionPane.showInputDialog("Ingrese la cédula del cliente #"+(i+1)+": ");
             nombre[i] = JOptionPane.showInputDialog("Ingrese el nombre del cliente #"+(i+1)+": ");
             primerApellido[i] = JOptionPane.showInputDialog("Ingrese el primer apellido del cliente #"+(i+1)+": ");
             segundoApellido[i] = JOptionPane.showInputDialog("Ingrese el segundo apellido del cliente #"+(i+1)+": ");
@@ -246,14 +244,14 @@ public class Cliente {
         System.out.println("El correo es inválido.");  
     }   
     //Se crean el get y set para la cedula
-   public String getCedula(){
-        return ced;
+  /* public String[] getCedula(){
+        return cedula;
     }
     
-    public void setCedula(String ced)
+    public void setCedula(String cedula[])
     {
-       this.ced=ced;
-    }   
+       this.cedula=cedula;
+    }   */
     
     public void generarReportes(){   
         //Se crean las instancias de las clases examen, doctor y aplicacion

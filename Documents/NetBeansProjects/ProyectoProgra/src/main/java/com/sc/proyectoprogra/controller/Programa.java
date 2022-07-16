@@ -178,6 +178,9 @@ public class Programa {
                                         break;
                                     case 2:
                                         //Agregar
+                                       /* for(int i = 0;i<clientes.cedula.length;i++){
+                                            System.out.println(clientes.cedula[i]);
+                                        }*/
                                         lectura = JOptionPane.showInputDialog("Digite la cantidad de aplicaciones de exámenes que desea agregar: ");
                                         int cantApli=Integer.parseInt(lectura);
                                         aplicaciones.agregarAplicaciones(cantApli);
