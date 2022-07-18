@@ -74,8 +74,10 @@ public class Aplicacion {
         aplicaciones = new String[cant][5];
         for (int i = 0; i < cant; i++) {
             String lectura = JOptionPane.showInputDialog("Ingrese la cédula del cliente al que desea agendarle la aplicación de un examen: ");
-            for (int buscarC = 0; buscarC < clientes.cedula.length; buscarC++) {
-                if (lectura.equals(clientes.cedula[buscarC])) {
+    
+            System.out.println(clientes.CantCliente());
+            for (int buscarC = 0; buscarC < clientes.CantCliente(); buscarC++) {
+                if (clientes.cedula[buscarC].equals(lectura)) {
                     lectura = JOptionPane.showInputDialog("Ingrese el código del examen: ");
                     int codigo = Integer.parseInt(lectura);
                     for (int buscarCo = 0; buscarCo < examenes.codigo.length; buscarCo++) {

@@ -85,6 +85,7 @@ public class Examen {
             JOptionPane.showMessageDialog(null, "El examen ha sido agregado");
         }
     }
+        
     public void editarExamenes(){
         //Se crea variable para verificar si se ha encontrado el codigo
         int encontrado=0;

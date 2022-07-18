@@ -18,11 +18,11 @@ import javax.swing.JOptionPane;
  * @author Angelica
  */
 public class Cliente {
-    
+
     //Se crea una variable para llevar el conteo de los clientes ingresados
-    private int cantClientes=0;
+    public static int cantClientes;
     
-    public String cedula[];
+    public static String cedula[];
     public String nombre[];
     public String primerApellido[];
     public String segundoApellido[];
@@ -37,6 +37,53 @@ public class Cliente {
     private String nom="";
     private String primerA="";
     private String segundoA="";
+    
+    
+    public String cedulas;
+
+    public String getCedulas() {
+        return cedulas;
+    }
+
+    public void setCedulas(String cedulas) {
+        this.cedulas = cedulas;
+    }
+    public String nombres;
+    public String primerApellidos;
+    public String segundoApellidos;
+    public String fechaNacimientos;
+    public String telefonos;
+    public String direccions;
+    public String correoElectronicos;
+    public String generos;
+     
+    public Cliente(){
+
+    }
+    
+    public Cliente ( String prcedulas,
+    String prnombres,
+    String prprimerApellidos,
+    String prsegundoApellidos,
+    String prfechaNacimientos,
+    String prtelefonos,
+    String prdireccions,
+    String prcorreoElectronicos,
+    String prgeneros){
+        
+         this.cedulas= prcedulas;
+    this.nombres=prnombres;
+    this.primerApellidos=prprimerApellidos;
+    this.segundoApellidos=prsegundoApellidos;
+    this.fechaNacimientos=prfechaNacimientos;
+    this.telefonos=prtelefonos;
+    this.direccions=prdireccions;
+    this.correoElectronicos=prcorreoElectronicos;
+    this.generos=prgeneros;
+        
+    }
+    
+    
     
     //Se crea la enumeracion para generos
     public enum Genero{
@@ -57,6 +104,7 @@ public class Cliente {
         //Se devuelve la edad del cliente
         int dif = (int)diferencia;  
         return dif;
+        
     }
     
     public void listarClientes(){
@@ -82,6 +130,7 @@ public class Cliente {
         }       
     }
     
+      
     public void agregarClientes(int cant){
         //Se crean los arreglos con la cantidad digitada por el usuario
         cedula = new String[cant];
@@ -122,7 +171,7 @@ public class Cliente {
             cantClientes = cantClientes+1;
             //Mostrar mensaje de verificacion
             JOptionPane.showMessageDialog(null, "El cliente ha sido agregado");
-        }
+       }
     }
     public void editarClientes(){
         //Se crea variable para verificar si se ha encontrado la cedula
@@ -164,8 +213,11 @@ public class Cliente {
         int encontrado=0;
         //Se solicita la cedula del cliente que se desea eliminar
         String buscarCedula = JOptionPane.showInputDialog("Ingrese la cédula del cliente que desea eliminar: ");
-        for(int i=0;i<cedula.length;i++){
-            if(buscarCedula.equals(cedula[i])){
+        for(int i=0;i<cantClientes;i++){
+            if(cedula[i].equals(buscarCedula)){
+                
+                //cedula[1]==null;
+                
                 //Se borra el cliente con la cedula buscada
                 /*List<String> tempList = new ArrayList<String>(Arrays.asList(cedula));
                 tempList.remove(i);
@@ -222,6 +274,11 @@ public class Cliente {
         return correo.substring(0, 3) + "..." + correo.substring(correo.indexOf("@"));
     }
     
+    public int CantCliente(){
+       
+        return cantClientes;
+    }
+            
     //Se verifica que el correo tenga un formato correcto, si no mostrar un mensaje
     public void setCorreo(String correo)
     {

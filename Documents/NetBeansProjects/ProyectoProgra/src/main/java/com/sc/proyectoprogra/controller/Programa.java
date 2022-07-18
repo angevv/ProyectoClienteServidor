@@ -4,6 +4,7 @@
  */
 package com.sc.proyectoprogra.controller;
 
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 /**
@@ -13,6 +14,10 @@ import javax.swing.JOptionPane;
 public class Programa {
     
     public void menu(){
+        
+        try 
+        {
+        
         //Se crean clientes, doctores, aplicaciones, examenes y tipoExamenes de cada clase
         Cliente clientes = new Cliente();
         Doctor doctores = new Doctor();
@@ -143,6 +148,32 @@ public class Programa {
                                         //Agregar
                                         lectura = JOptionPane.showInputDialog("Digite la cantidad de clientes que desea ingresar: ");
                                         int cantCli=Integer.parseInt(lectura);
+                                        
+                                        /* Clientes[] arr = new Clientes[cantCli];
+                                           
+                                                                                 
+                                         arr[0].setCedulas(JOptionPane.showInputDialog("Digite la cantidad de clientes que desea ingresar: "));
+                                         arr[0].setCedulas(JOptionPane.showInputDialog("Digite la cantidad de clientes que desea ingresar: "));
+                                         arr[0].setCedulas(JOptionPane.showInputDialog("Digite la cantidad de clientes que desea ingresar: "));
+                                         arr[0].setCedulas(JOptionPane.showInputDialog("Digite la cantidad de clientes que desea ingresar: "));
+                                         arr[0].setCedulas(JOptionPane.showInputDialog("Digite la cantidad de clientes que desea ingresar: "));
+                                         arr[0].setCedulas(JOptionPane.showInputDialog("Digite la cantidad de clientes que desea ingresar: "));
+                                         arr[0].setCedulas(JOptionPane.showInputDialog("Digite la cantidad de clientes que desea ingresar: "));
+                                         arr[0].setCedulas(JOptionPane.showInputDialog("Digite la cantidad de clientes que desea ingresar: "));
+                                         arr[0].setCedulas(JOptionPane.showInputDialog("Digite la cantidad de clientes que desea ingresar: "));
+                                         
+                                         arr[0]= new Clientes("1","a","a","a","a","a","a","a","a");
+                                         arr[1]= new Clientes("2","b","b","b","b","b","b","b","b");    
+                                         
+                                         arr[0]=null;
+                                          */                     
+                                          
+                                  
+                                  //ArrayList<Clientes> nombreArrayList = new ArrayList<Clientes>();
+                                  
+                                 // nombreArrayList.
+                                  
+                                        
                                         clientes.agregarClientes(cantCli);
                                         break;
                                     case 3:
@@ -155,7 +186,7 @@ public class Programa {
                                         break;
                                     default:
                                         opcionMantenCli=5;
-                                        break;
+                                        break;               
                                 }
                             }while(opcionMantenCli!=5);
                             break;
@@ -215,5 +246,13 @@ public class Programa {
             }   
           //Repetir hasta que el usuario digite el numero 3
         } while (opcion != 3);
-    }
+    
+            }  catch (Exception  e1) {
+
+                
+           } 
+        
+        }
+        
+        
 }
