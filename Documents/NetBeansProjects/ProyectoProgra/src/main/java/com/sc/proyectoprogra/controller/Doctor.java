@@ -12,15 +12,15 @@ import javax.swing.JOptionPane;
  */
 public class Doctor {
     //Se crea variable para llevar el conteo de los doctores 
-    private int cantDoctores=0;
+    public static int cantDoctores=0;
     
-    public int carnet[];
-    public String nombre[];
-    public String primerApellido[];
-    public String segundoApellido[];
-    public String especialidad[];
-    public String cargo[];
-    public String telefono[];
+    public static int carnet[];
+    public static String nombre[];
+    public static String primerApellido[];
+    public static String segundoApellido[];
+    public static String especialidad[];
+    public static String cargo[];
+    public static String telefono[];
  
     
     public void listarDoctores(){
@@ -28,13 +28,13 @@ public class Doctor {
         if (cantDoctores>0){
             for(int i=0;i<carnet.length;i++){
             //Si ya se han agregado se muestran en pantalla
+                System.out.println("");
                 System.out.println("Doctor #"+(i+1));
                 System.out.println( "Carnet: "+carnet[i]);
                 System.out.println( "Nombre Completo: "+nombre[i]+" "+primerApellido[i]+" "+segundoApellido[i]);
                 System.out.println( "Especialidad: "+especialidad[i]);
                 System.out.println( "Cargo: "+cargo[i]);
                 System.out.println( "Telefono: "+telefono[i]);
-                System.out.println("");
             }
         }else{
             //Si no se han agregado doctores, mostrar mensaje
@@ -69,55 +69,71 @@ public class Doctor {
         }
     }
     public void editarDoctores(){
-        //Se crea variable para verificar si se ha encontrado el carnet
-        int encontrado=0;
-        //Se solicita el carnet del doctor que se desea modificar
-        String lectura = JOptionPane.showInputDialog("Ingrese el carnet del doctor que desea editar: ");
-        int buscarCarnet=Integer.parseInt(lectura);
-        for(int i =0; i < carnet.length;i++){
-            if(buscarCarnet==carnet[i]){
-                //Si el carnet existe, se solicitan los nuevos datos del doctor y se actualizan los anteriores
-                String Nnombre = JOptionPane.showInputDialog("Ingrese el nuevo nombre del doctor: ");
-                nombre[i]=Nnombre;
-                String NprimerApellido = JOptionPane.showInputDialog("Ingrese el nuevo primer apellido del doctor: ");
-                primerApellido[i]=NprimerApellido;
-                String NsegundoApellido = JOptionPane.showInputDialog("Ingrese el nuevo segundo apellido del doctor: ");
-                segundoApellido[i]=NsegundoApellido;
-                String Nespecialidad = JOptionPane.showInputDialog("Ingrese la nueva especialidad del doctor: ");
-                especialidad[i]=Nespecialidad;
-                String Ncargo = JOptionPane.showInputDialog("Ingrese el nuevo cargo del doctor: ");
-                cargo[i] = Ncargo;
-                String Ntelefono = JOptionPane.showInputDialog("Ingrese el nuevo teléfono del doctor: ");
-                telefono[i]=Ntelefono;
-                //Se muestra mensaje de verificacion
-                JOptionPane.showMessageDialog(null, "El doctor ha sido modificado");
-                encontrado=1;
+        if (cantDoctores>0){
+            //Se crea variable para verificar si se ha encontrado el carnet
+            int encontrado=0;
+            //Se solicita el carnet del doctor que se desea modificar
+            String lectura = JOptionPane.showInputDialog("Ingrese el carnet del doctor que desea editar: ");
+            int buscarCarnet=Integer.parseInt(lectura);
+            for(int i =0; i < carnet.length;i++){
+                if(buscarCarnet==carnet[i]){
+                    //Si el carnet existe, se solicitan los nuevos datos del doctor y se actualizan los anteriores
+                    String Nnombre = JOptionPane.showInputDialog("Ingrese el nuevo nombre del doctor: ");
+                    nombre[i]=Nnombre;
+                    String NprimerApellido = JOptionPane.showInputDialog("Ingrese el nuevo primer apellido del doctor: ");
+                    primerApellido[i]=NprimerApellido;
+                    String NsegundoApellido = JOptionPane.showInputDialog("Ingrese el nuevo segundo apellido del doctor: ");
+                    segundoApellido[i]=NsegundoApellido;
+                    String Nespecialidad = JOptionPane.showInputDialog("Ingrese la nueva especialidad del doctor: ");
+                    especialidad[i]=Nespecialidad;
+                    String Ncargo = JOptionPane.showInputDialog("Ingrese el nuevo cargo del doctor: ");
+                    cargo[i] = Ncargo;
+                    String Ntelefono = JOptionPane.showInputDialog("Ingrese el nuevo teléfono del doctor: ");
+                    telefono[i]=Ntelefono;
+                    //Se muestra mensaje de verificacion
+                    JOptionPane.showMessageDialog(null, "El doctor ha sido modificado");
+                    encontrado=1;
+                }
             }
-        }
-        if(encontrado!=1){
-            //Si no existe el carnet, mostrar mensaje
-             JOptionPane.showMessageDialog(null, "El doctor con el carnet "+buscarCarnet+ " no existe");
+            if(encontrado!=1){
+                //Si no existe el carnet, mostrar mensaje
+                 JOptionPane.showMessageDialog(null, "El doctor con el carnet "+buscarCarnet+ " no existe");
+            }
+         }else{
+            //Si no se han agregado doctores, mostrar mensaje
+             JOptionPane.showMessageDialog(null, "No se han agregado doctores");
         }
     }
     public void eliminarDoctores(){
-        //Se solicita el carnet del doctor que se desea modificar
-      /*  String lectura = JOptionPane.showInputDialog("Ingrese el carnet del doctor que desea editar: ");
-        int buscarCarnet=Integer.parseInt(lectura);
-        if(buscarCarnet==carnet){
-            //Se borra el doctor con el carnet buscado
-            carnet = 0;
-            nombre = "";
-            primerApellido = "";
-            segundoApellido = "";
-            especialidad="";
-            cargo = "";
-            telefono = "";
-            cantDoctores=0;
-            JOptionPane.showMessageDialog(null, "El doctor ha sido eliminado");
+        if (cantDoctores>0){
+             //Se solicita el carnet del doctor que se desea modificar
+            /*  String lectura = JOptionPane.showInputDialog("Ingrese el carnet del doctor que desea editar: ");
+              int buscarCarnet=Integer.parseInt(lectura);
+              if(buscarCarnet==carnet){
+                  //Se borra el doctor con el carnet buscado
+                  carnet = 0;
+                  nombre = "";
+                  primerApellido = "";
+                  segundoApellido = "";
+                  especialidad="";
+                  cargo = "";
+                  telefono = "";
+                  cantDoctores=0;
+                  JOptionPane.showMessageDialog(null, "El doctor ha sido eliminado");
+              }
+              else{
+                  //Si no existe el carnet, mostrar mensaje
+                   JOptionPane.showMessageDialog(null, "El doctor con el carnet "+buscarCarnet+ " no existe");
+              }*/
+        }else{
+            //Si no se han agregado doctores, mostrar mensaje
+             JOptionPane.showMessageDialog(null, "No se han agregado doctores");
         }
-        else{
-            //Si no existe el carnet, mostrar mensaje
-             JOptionPane.showMessageDialog(null, "El doctor con el carnet "+buscarCarnet+ " no existe");
-        }*/
+       
+    }
+    
+    public int CantDoctores(){
+       
+        return cantDoctores;
     }
 }

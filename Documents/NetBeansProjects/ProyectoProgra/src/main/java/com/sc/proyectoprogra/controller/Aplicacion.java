@@ -39,8 +39,8 @@ public class Aplicacion {
         //Se verifica si ya se han agregado aplicaciones
         if (cantAplicaciones>0){
             for(int i=0;i<cantAplicaciones;i++){
-                for(int j=0;j<5;j++){
                 //Si ya se han agregado se muestran en pantalla;
+                System.out.println("");
                 System.out.println( "Numero de Aplicacion: "+aplicaciones[i][0]);
                 int codExamen = Integer.parseInt(aplicaciones[i][1]);
                 for (int idExamen=0;idExamen < examenes.codigo.length;idExamen++){
@@ -60,8 +60,7 @@ public class Aplicacion {
                     }
                 }
                 System.out.println( "Fecha: "+aplicaciones[i][4]);
-                }
-                System.out.println("");
+
             }
         }else{
             //Si no se han agregado aplicaciones, mostrar mensaje
@@ -70,22 +69,30 @@ public class Aplicacion {
     }
     
     public void agregarAplicaciones(int cant) {
+        //Se declaran variables de encontrado
+        int encontradoCli=0;
+        int encontradoDoc=0;
+        int encontradoExam=0;
         //Se crea el tamano de la matriz
         aplicaciones = new String[cant][5];
         for (int i = 0; i < cant; i++) {
             String lectura = JOptionPane.showInputDialog("Ingrese la cédula del cliente al que desea agendarle la aplicación de un examen: ");
     
-            System.out.println(clientes.CantCliente());
+           // System.out.println(clientes.CantCliente());
+            //System.out.println(clientes.cedula[0]);
             for (int buscarC = 0; buscarC < clientes.CantCliente(); buscarC++) {
                 if (clientes.cedula[buscarC].equals(lectura)) {
+                    encontradoCli=1;
                     lectura = JOptionPane.showInputDialog("Ingrese el código del examen: ");
                     int codigo = Integer.parseInt(lectura);
-                    for (int buscarCo = 0; buscarCo < examenes.codigo.length; buscarCo++) {
+                    for (int buscarCo = 0; buscarCo < examenes.CantExamenes(); buscarCo++) {
                         if (codigo == examenes.codigo[buscarCo]) {
+                            encontradoExam=1;
                             lectura = JOptionPane.showInputDialog("Ingrese el carnet del doctor asignado: ");
                             int carnet = Integer.parseInt(lectura);
-                            for (int buscarCar = 0; buscarCar < doctores.carnet.length; buscarCar++) {
+                            for (int buscarCar = 0; buscarCar < doctores.CantDoctores(); buscarCar++) {
                                 if (carnet == doctores.carnet[buscarCar]) {
+                                    encontradoDoc=1;
                                     //Se crea un numero random de aplicacion
                                     numAplicacion = (int) (Math.random() * 500) + 50;
                                     Random aleatorio;
@@ -102,17 +109,20 @@ public class Aplicacion {
                                     aplicaciones[i][2]=Integer.toString(doctores.carnet[buscarCar]);
                                     aplicaciones[i][3]=clientes.cedula[buscarC];
                                     aplicaciones[i][4]=sdf.format(fechaAplicacion.getTime());
-                                } else {
-                                    JOptionPane.showMessageDialog(null, "El doctor con el carnet " + carnet + " no existe");
-                                }
+                                } 
                             }
-                        } else {
-                            JOptionPane.showMessageDialog(null, "El examen con el código " + codigo + " no existe");
-                        }
+                        } 
                     }
-                } else {
-                    JOptionPane.showMessageDialog(null, "El cliente con la cédula " + lectura + " no existe");
-                }
+                } 
+            }
+            if(encontradoCli!=1){
+                JOptionPane.showMessageDialog(null, "El cliente con esa cédula no existe");
+            }
+            else if(encontradoExam!=1){
+                JOptionPane.showMessageDialog(null, "El examen con ese código no existe");
+            }
+            else if(encontradoDoc!=1){
+                JOptionPane.showMessageDialog(null, "El doctor con ese carnet no existe");
             }
 
         }
@@ -121,36 +131,66 @@ public class Aplicacion {
 
     
     public void editarrAplicaciones(){
-        //Se solicita el numero de aplicacion que se desea modificar
-       /* String lectura = JOptionPane.showInputDialog("Ingrese el número de la aplicación examen que desea editar: ");
-        int buscarAplicacion=Integer.parseInt(lectura);
-        if(buscarAplicacion==numAplicacion){
-            //Si el numero existe, se solicitan los nuevos datos de la aplicacion del examen y se actualizan los anteriores
-            lectura = JOptionPane.showInputDialog("Ingrese el código del nuevo examen: ");
-            int Ncodigo=Integer.parseInt(lectura);
-            examenes.codigo=Ncodigo;
-            lectura = JOptionPane.showInputDialog("Ingrese el carnet del nuevo doctor: ");
-            int Ncarnet=Integer.parseInt(lectura);
-            doctores.carnet=Ncarnet;
-            lectura = JOptionPane.showInputDialog("Desea cambiar la fecha de la aplicación del examen: Si/No");
-            if(lectura=="Si"){
-                Random aleatorio;
-                aleatorio = new Random();
-                fechaAplicacion = Calendar.getInstance();
-                //Se crea una fecha random para la aplicacion del examen
-                fechaAplicacion.set (aleatorio.nextInt(1)+2023, aleatorio.nextInt(12)+1, aleatorio.nextInt(30)+1);
-                //Se imprime el numero y la fecha
-                System.out.println("La aplicacion del examen #"+numAplicacion+" tiene una nueva fecha para "+sdf.format(fechaAplicacion.getTime()));
-            }
-            //Se muestra mensaje de verificacion
-            JOptionPane.showMessageDialog(null, "La aplicación del examen ha sido modificado");
-        }else{
-            //Si no existe el numero, mostrar mensaje
-             JOptionPane.showMessageDialog(null, "La aplicación con el #"+buscarAplicacion+ " no existe");
-        }*/
+        if (cantAplicaciones>0){
+            int encontradoCod=0;
+            int encontradoCarn=0;
+            //Se solicita el numero de aplicacion que se desea modificar
+            String lectura = JOptionPane.showInputDialog("Ingrese el número de la aplicación examen que desea editar: ");
+             for(int i=0;i<cantAplicaciones;i++){
+                 if(lectura.equals(aplicaciones[i][0])){
+                 //Si el numero existe, se solicitan los nuevos datos de la aplicacion del examen y se actualizan los anteriores
+                 String codN = JOptionPane.showInputDialog("Ingrese el código del nuevo examen: ");
+                 int Ncodigo=Integer.parseInt(codN);
+                 for(int buscarExam=0;buscarExam<examenes.CantExamenes();buscarExam++){
+                     if(Ncodigo==examenes.codigo[buscarExam]){
+                         encontradoCod=1;
+                     }
+                 }
+                 if(encontradoCod==1){
+                     aplicaciones[i][1]=codN;
+                 }else{
+                     JOptionPane.showMessageDialog(null, "El código del nuevo examen no existe");
+                 }
+                 String carN = JOptionPane.showInputDialog("Ingrese el carnet del nuevo doctor: ");
+                 int Ncarnet=Integer.parseInt(carN);
+                 for(int buscarDoc=0;buscarDoc<doctores.CantDoctores();buscarDoc++){
+                     if(Ncarnet==doctores.carnet[buscarDoc]){
+                         encontradoCarn=1;
+                     }
+                 }
+                 if(encontradoCarn==1){
+                     aplicaciones[i][2]=carN;
+                 }else{
+                     JOptionPane.showMessageDialog(null, "El código del nuevo examen no existe");
+                 }
+                 String fechaN = JOptionPane.showInputDialog("Desea cambiar la fecha de la aplicación del examen: \n1- Si \n2- No");
+                 int opcion=Integer.parseInt(fechaN);
+                 if(opcion==1){
+                     Random aleatorio;
+                     aleatorio = new Random();
+                     fechaAplicacion = Calendar.getInstance();
+                     //Se crea una fecha random para la aplicacion del examen
+                     fechaAplicacion.set (aleatorio.nextInt(1)+2023, aleatorio.nextInt(12)+1, aleatorio.nextInt(30)+1);
+                     //Se imprime el numero y la fecha
+                     System.out.println("La aplicacion del examen #"+numAplicacion+" tiene una nueva fecha para "+sdf.format(fechaAplicacion.getTime()));
+                     aplicaciones[i][4]=sdf.format(fechaAplicacion.getTime());
+                 }
+                 //Se muestra mensaje de verificacion
+                 JOptionPane.showMessageDialog(null, "La aplicación del examen ha sido modificado");
+             }else{
+                 //Si no existe el numero, mostrar mensaje
+                  JOptionPane.showMessageDialog(null, "La aplicación con el #"+lectura+ " no existe");
+             }
+             }
+         
+       }else{
+            //Si no se han agregado aplicaciones, mostrar mensaje
+             JOptionPane.showMessageDialog(null, "No se han agregado aplicaciones");
+        }
     }
     
     public void eliminarAplicaciones(){
+        if (cantAplicaciones>0){
         //Se solicita el numero de aplicacion que se desea modificar
         /*String lectura = JOptionPane.showInputDialog("Ingrese el número de la aplicación examen que desea editar: ");
         int buscarAplicacion=Integer.parseInt(lectura);
@@ -166,5 +206,32 @@ public class Aplicacion {
             //Si no existe el carnet, mostrar mensaje
               JOptionPane.showMessageDialog(null, "La aplicación con el #"+buscarAplicacion+ " no existe");
         }*/
+       }else{
+            //Si no se han agregado aplicaciones, mostrar mensaje
+             JOptionPane.showMessageDialog(null, "No se han agregado aplicaciones");
+        }
+}
+    public void GenerarReportes(){
+        System.out.println("********** Reportes **********");
+        //Se verifica si ya se han agregado aplicaciones
+        if (cantAplicaciones>0){
+            for(int i=0;i<cantAplicaciones;i++){
+                //Si ya se han agregado se muestran en pantalla;
+                System.out.println("");
+                System.out.println("Aplicacion de examen #"+(i+1));
+                System.out.println( "Numero de Aplicacion: "+aplicaciones[i][0]);
+                int codExamen = Integer.parseInt(aplicaciones[i][1]);
+                for (int idExamen=0;idExamen < examenes.codigo.length;idExamen++){
+                    if(codExamen==examenes.codigo[idExamen]){
+                        System.out.println( "Nombre del examen: "+examenes.nombre[idExamen]);
+                    }
+                }
+                System.out.println( "Fecha: "+aplicaciones[i][4]);
+
+            }
+        }else{
+            //Si no se han agregado aplicaciones, mostrar mensaje
+             JOptionPane.showMessageDialog(null, "No se puede generar un reporte porque no se han agregado aplicaciones de examenes");
+        }
     }
 }

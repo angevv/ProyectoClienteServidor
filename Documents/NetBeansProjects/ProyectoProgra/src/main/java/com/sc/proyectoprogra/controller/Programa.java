@@ -4,6 +4,14 @@
  */
 package com.sc.proyectoprogra.controller;
 
+
+import static com.sc.proyectoprogra.controller.Cliente.direccion;
+import static com.sc.proyectoprogra.controller.Cliente.fechaNacimiento;
+import static com.sc.proyectoprogra.controller.Cliente.genero;
+import static com.sc.proyectoprogra.controller.Cliente.nombre;
+import static com.sc.proyectoprogra.controller.Cliente.primerApellido;
+import static com.sc.proyectoprogra.controller.Cliente.segundoApellido;
+import static com.sc.proyectoprogra.controller.Cliente.telefono;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
@@ -15,8 +23,7 @@ public class Programa {
     
     public void menu(){
         
-        try 
-        {
+        //try {
         
         //Se crean clientes, doctores, aplicaciones, examenes y tipoExamenes de cada clase
         Cliente clientes = new Cliente();
@@ -148,33 +155,41 @@ public class Programa {
                                         //Agregar
                                         lectura = JOptionPane.showInputDialog("Digite la cantidad de clientes que desea ingresar: ");
                                         int cantCli=Integer.parseInt(lectura);
-                                        
-                                        /* Clientes[] arr = new Clientes[cantCli];
-                                           
-                                                                                 
-                                         arr[0].setCedulas(JOptionPane.showInputDialog("Digite la cantidad de clientes que desea ingresar: "));
-                                         arr[0].setCedulas(JOptionPane.showInputDialog("Digite la cantidad de clientes que desea ingresar: "));
-                                         arr[0].setCedulas(JOptionPane.showInputDialog("Digite la cantidad de clientes que desea ingresar: "));
-                                         arr[0].setCedulas(JOptionPane.showInputDialog("Digite la cantidad de clientes que desea ingresar: "));
-                                         arr[0].setCedulas(JOptionPane.showInputDialog("Digite la cantidad de clientes que desea ingresar: "));
-                                         arr[0].setCedulas(JOptionPane.showInputDialog("Digite la cantidad de clientes que desea ingresar: "));
-                                         arr[0].setCedulas(JOptionPane.showInputDialog("Digite la cantidad de clientes que desea ingresar: "));
-                                         arr[0].setCedulas(JOptionPane.showInputDialog("Digite la cantidad de clientes que desea ingresar: "));
-                                         arr[0].setCedulas(JOptionPane.showInputDialog("Digite la cantidad de clientes que desea ingresar: "));
-                                         
-                                         arr[0]= new Clientes("1","a","a","a","a","a","a","a","a");
-                                         arr[1]= new Clientes("2","b","b","b","b","b","b","b","b");    
-                                         
-                                         arr[0]=null;
-                                          */                     
-                                          
-                                  
-                                  //ArrayList<Clientes> nombreArrayList = new ArrayList<Clientes>();
-                                  
-                                 // nombreArrayList.
-                                  
-                                        
-                                        clientes.agregarClientes(cantCli);
+                                     /*   for (int i=0;i<cantCli;i++){
+                                            String cedula = JOptionPane.showInputDialog("Ingrese la cédula del cliente #"+(i+1)+": ");
+                                            clientes.setCedulas(cedula);
+                                            String nombre = JOptionPane.showInputDialog("Ingrese el nombre del cliente #"+(i+1)+": ");
+                                            clientes.setNombres(nombre);
+                                            String primerA = JOptionPane.showInputDialog("Ingrese el primer apellido del cliente #"+(i+1)+": ");
+                                            clientes.setPrimerA(primerA);
+                                            String segundoA = JOptionPane.showInputDialog("Ingrese el segundo apellido del cliente #"+(i+1)+": ");
+                                            clientes.setSegundoA(segundoA);
+                                            String fechaN=JOptionPane.showInputDialog("Introduzca la fecha de nacimiento con el siguiente formato yyyy-mm-dd: ");
+                                            clientes.setFechaN(fechaN);
+                                            String genero = JOptionPane.showInputDialog("Seleccione el género: \n1- Femenino \n2- Masculino");
+                                            int opcionGenero = Integer.parseInt(genero);
+                                            if (opcionGenero==1){
+                                                clientes.tp=Cliente.Genero.FEMENINO;
+                                                String generos=clientes.tp.toString();
+                                                clientes.setGeneros(generos);
+                                            }else if (opcionGenero==2){
+                                                clientes.tp=Cliente.Genero.MASCULINO;
+                                                String generos=clientes.tp.toString();
+                                                clientes.setGeneros(generos);
+                                            }else{
+                                                JOptionPane.showMessageDialog(null, "No existe esa opción");
+                                            }
+                                           String direccion = JOptionPane.showInputDialog("Ingrese la dirección del cliente #"+(i+1)+": ");
+                                           clientes.setDirecciones(direccion);
+                                           String telefono = JOptionPane.showInputDialog("Ingrese el teléfono del cliente #"+(i+1)+": ");
+                                           clientes.setTelefonos(telefono);
+                                           String correo = JOptionPane.showInputDialog("Ingrese el correo electrónico del cliente #"+(i+1)+": ");
+                                           clientes.setCorreo(correo);
+                                           clientes.agregarClientes(i,cantCli);
+                                        }*/
+                                       /* clientes.setCedulas("1");
+                                        clientes.cedula[0]=clientes.getCedulas();*/
+                                       clientes.agregarClientes(cantCli);
                                         break;
                                     case 3:
                                         //Editar
@@ -238,7 +253,7 @@ public class Programa {
                 break;
                 
             case 2:
-                clientes.generarReportes();
+                aplicaciones.GenerarReportes();
                 break;
             default:
                 opcion=3;
@@ -247,10 +262,10 @@ public class Programa {
           //Repetir hasta que el usuario digite el numero 3
         } while (opcion != 3);
     
-            }  catch (Exception  e1) {
+          /*  }  catch (Exception  e1) {
 
                 
-           } 
+           } */
         
         }
         

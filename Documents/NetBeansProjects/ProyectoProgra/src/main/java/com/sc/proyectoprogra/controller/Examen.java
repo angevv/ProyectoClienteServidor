@@ -12,12 +12,12 @@ import javax.swing.JOptionPane;
  */
 public class Examen {
     //Se crea una variable para llevar el conteo de examenes
-    private int cantExamenes=0;
+    public static int cantExamenes=0;
     
-    public int codigo[];
-    public String nombre[];
-    public String descripcion[];
-    public String requisitos[];
+    public static int codigo[];
+    public static String nombre[];
+    public static String descripcion[];
+    public static String requisitos[];
     
     //Se crea una instancia de la clase tipo examen
     TipoExamen tipoExamen = new TipoExamen();
@@ -27,6 +27,7 @@ public class Examen {
         if (cantExamenes>0){
              for(int i=0;i<codigo.length;i++){
                 //Si ya se han agregado se muestran en pantalla;
+                System.out.println("");
                 System.out.println("Examen #"+(i+1));
                 System.out.println( "Codigo: "+codigo[i]);
                 System.out.println( "Nombre: "+nombre[i]);
@@ -67,7 +68,7 @@ public class Examen {
                     //nombre[i] = "Sangre";
                 }else{
                    //Se agrega el nombre del examen para examen de heces
-                    tipoExamen.tp = tipoExamen.tp.SANGRE;           
+                    tipoExamen.tp = tipoExamen.tp.HECES;           
                     nombre[i]=tipoExamen.tp.toString();
                     //nombre[i] = "Sangre";
                 }
@@ -87,45 +88,62 @@ public class Examen {
     }
         
     public void editarExamenes(){
-        //Se crea variable para verificar si se ha encontrado el codigo
-        int encontrado=0;
-        //Se solicita el codigo del examen que se desea modificar
-        String lectura = JOptionPane.showInputDialog("Ingrese el código del examen que desea editar: ");
-        int buscarCodigo=Integer.parseInt(lectura);
-        for(int i =0; i < codigo.length;i++){
-            if(buscarCodigo==codigo[i]){
-                //Si el código existe, se solicitan los nuevos datos del examen y se actualizan los anteriores
-                String Ndescripcion = JOptionPane.showInputDialog("Ingrese la nueva descripción del examen: ");
-                descripcion[i]=Ndescripcion;
-                String Nrequisitos = JOptionPane.showInputDialog("Ingrese los nuevos requisitos del examen: ");
-                requisitos[i]=Nrequisitos;
-                //Se muestra mensaje de verificacion
-                JOptionPane.showMessageDialog(null, "El examen ha sido modificado");
-                //Se le asigna 1 a encontrado
-                encontrado=1;
+        //Se verifica si ya se han agregado examenes
+        if (cantExamenes>0){
+            //Se crea variable para verificar si se ha encontrado el codigo
+            int encontrado=0;
+            //Se solicita el codigo del examen que se desea modificar
+            String lectura = JOptionPane.showInputDialog("Ingrese el código del examen que desea editar: ");
+            int buscarCodigo=Integer.parseInt(lectura);
+            for(int i =0; i < codigo.length;i++){
+                if(buscarCodigo==codigo[i]){
+                    //Si el código existe, se solicitan los nuevos datos del examen y se actualizan los anteriores
+                    String Ndescripcion = JOptionPane.showInputDialog("Ingrese la nueva descripción del examen: ");
+                    descripcion[i]=Ndescripcion;
+                    String Nrequisitos = JOptionPane.showInputDialog("Ingrese los nuevos requisitos del examen: ");
+                    requisitos[i]=Nrequisitos;
+                    //Se muestra mensaje de verificacion
+                    JOptionPane.showMessageDialog(null, "El examen ha sido modificado");
+                    //Se le asigna 1 a encontrado
+                    encontrado=1;
+                }
             }
-        }
-        if(encontrado!=1){
-            //Si no existe el codigo, mostrar mensaje
-             JOptionPane.showMessageDialog(null, "El examen con el código "+buscarCodigo+ " no existe");
+            if(encontrado!=1){
+                //Si no existe el codigo, mostrar mensaje
+                 JOptionPane.showMessageDialog(null, "El examen con el código "+buscarCodigo+ " no existe");
+            }
+        }else{
+            //Si no se han agregado doctores, mostrar mensaje
+             JOptionPane.showMessageDialog(null, "No se han agregado exámenes");
         }
     }
     public void eliminarExamenes(){
-        //Se solicita el codigo del examen que se desea eliminar
-       /* String lectura = JOptionPane.showInputDialog("Ingrese el código del examen que desea eliminar: ");
-        int buscarCodigo=Integer.parseInt(lectura);
-        if(buscarCodigo==codigo){
-            //Se borra el examen con el codigo buscado
-            codigo = 0;
-            nombre = "";
-            descripcion = "";
-            requisitos = "";
-            cantExamenes=0;
-            JOptionPane.showMessageDialog(null, "El examen ha sido eliminado");
+        //Se verifica si ya se han agregado examenes
+        if (cantExamenes>0){
+            //Se solicita el codigo del examen que se desea eliminar
+           /* String lectura = JOptionPane.showInputDialog("Ingrese el código del examen que desea eliminar: ");
+            int buscarCodigo=Integer.parseInt(lectura);
+            if(buscarCodigo==codigo){
+                //Se borra el examen con el codigo buscado
+                codigo = 0;
+                nombre = "";
+                descripcion = "";
+                requisitos = "";
+                cantExamenes=0;
+                JOptionPane.showMessageDialog(null, "El examen ha sido eliminado");
+            }
+            else{
+                //Si no existe el codigo, mostrar mensaje
+                 JOptionPane.showMessageDialog(null, "El examen con el código "+buscarCodigo+ " no existe");
+            }*/
+       }else{
+            //Si no se han agregado doctores, mostrar mensaje
+             JOptionPane.showMessageDialog(null, "No se han agregado exámenes");
         }
-        else{
-            //Si no existe el codigo, mostrar mensaje
-             JOptionPane.showMessageDialog(null, "El examen con el código "+buscarCodigo+ " no existe");
-        }*/
+    }
+    
+    public int CantExamenes(){
+       
+        return cantExamenes;
     }
 }
