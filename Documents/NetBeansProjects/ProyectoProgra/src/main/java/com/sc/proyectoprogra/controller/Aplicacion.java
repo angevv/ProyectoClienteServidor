@@ -38,7 +38,12 @@ public class Aplicacion {
     public void listarAplicaciones(){
         //Se verifica si ya se han agregado aplicaciones
         if (cantAplicaciones>0){
+            System.out.println("");
+             System.out.println("****** Aplicaciones de Examenes ******");
             for(int i=0;i<cantAplicaciones;i++){
+                if(aplicaciones[i][0]==null){
+                    
+                }else{
                 //Si ya se han agregado se muestran en pantalla;
                 System.out.println("");
                 System.out.println( "Numero de Aplicacion: "+aplicaciones[i][0]);
@@ -60,7 +65,7 @@ public class Aplicacion {
                     }
                 }
                 System.out.println( "Fecha: "+aplicaciones[i][4]);
-
+                }
             }
         }else{
             //Si no se han agregado aplicaciones, mostrar mensaje
@@ -190,22 +195,81 @@ public class Aplicacion {
     }
     
     public void eliminarAplicaciones(){
+        int encontrado=0;
         if (cantAplicaciones>0){
         //Se solicita el numero de aplicacion que se desea modificar
-        /*String lectura = JOptionPane.showInputDialog("Ingrese el número de la aplicación examen que desea editar: ");
-        int buscarAplicacion=Integer.parseInt(lectura);
-        if(buscarAplicacion==numAplicacion){
-            //Se borra la aplicacion
-            numAplicacion = 0;
-            examenes.codigo=0;
-            doctores.carnet=0;
-            cantAplicaciones=0;
-            JOptionPane.showMessageDialog(null, "La aplicación del examen ha sido eliminado");
+        String lectura = JOptionPane.showInputDialog("Ingrese el número de la aplicación examen que desea eliminar: ");
+        for(int filas=0;filas<cantAplicaciones;filas++){
+            //for(int columnas=0;columnas<5;columnas++){
+                if(lectura.equals(aplicaciones[filas][0])){
+                    aplicaciones[filas][0]=null;
+                    aplicaciones[filas][1]=null;
+                    aplicaciones[filas][2]=null;
+                    aplicaciones[filas][3]=null;
+                    aplicaciones[filas][4]=null;
+                   /* int f = Integer.parseInt(lectura);
+                    f=f-1;
+                    String[][] destino = new String[aplicaciones.length - 1][];
+                    int j=0;
+                    for(int i=0;i<aplicaciones.length;i++){
+                        if(i!=f){
+                            System.arraycopy(aplicaciones, i, destino, j, 1);
+                            j++;
+                        }
+                    }
+                    for(int x=0;x<cantAplicaciones;x++){
+                       for(int o=0;o<5;o++){
+                           System.out.println(destino[x][o] );
+                       }
+                   }*/
+                  /*  int[][] destino = new int[aplicaciones.length - 1][];
+
+                    System.out.println("Origen [Original]: ");
+                    for(int x=0;x<cantAplicaciones;x++){
+                       for(int o=0;o<5;o++){
+                           System.out.println(aplicaciones[x][o] );
+                       }
+                   }
+
+                    System.arraycopy(aplicaciones, 0, destino, 0, 1); // copia la primera a la
+                                                                                                            // primera
+                    System.arraycopy(aplicaciones, 2, destino, 1, 1); // copia la tercera y la en
+                                                                                                            // la segunda
+                    System.out.println("Destino: ");
+                    for(int x=0;x<cantAplicaciones;x++){
+                       for(int o=0;o<5;o++){
+                           System.out.println(destino[x][o] );
+                       }
+                   }
+
+                    System.arraycopy(destino, 0, aplicaciones, 0, destino.length);
+                    System.out.println("Origen: ");
+                    for(int x=0;x<cantAplicaciones;x++){
+                       for(int o=0;o<5;o++){
+                           System.out.println(aplicaciones[x][o] );
+                       }
+                   }*/
+                    //Si se encuentra se borra la aplicacion
+                   /* String[][] nuevaMatriz = new String[aplicaciones.length-1][aplicaciones[0].length];
+                    for(int i=0; i < aplicaciones.length; i++){             
+                    if(i != filas){
+                       for(int j=0; j<aplicaciones[i].length; j++){                
+                            nuevaMatriz[i][j] = aplicaciones[filas][j];                    
+                       }
+                     filas++;               
+                    }              
+                }*/
+                    encontrado=1;
+                   JOptionPane.showMessageDialog(null, "La aplicación del examen ha sido eliminado");
+                   //cantAplicaciones=cantAplicaciones-1;
+                   break;
+            }
+       // }
         }
-        else{
+        if(encontrado!=1){
             //Si no existe el carnet, mostrar mensaje
-              JOptionPane.showMessageDialog(null, "La aplicación con el #"+buscarAplicacion+ " no existe");
-        }*/
+              JOptionPane.showMessageDialog(null, "La aplicación con el #"+lectura+ " no existe");
+        }
        }else{
             //Si no se han agregado aplicaciones, mostrar mensaje
              JOptionPane.showMessageDialog(null, "No se han agregado aplicaciones");

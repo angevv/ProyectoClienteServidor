@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package com.sc.proyectoprogra.controller;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
@@ -22,8 +23,8 @@ public class Cliente {
     //Se crea una variable para llevar el conteo de los clientes ingresados
     public static int cantClientes;
     
-   /* public String cedula[] = new String[10];
-    //public static String cedula[] = new String[10];
+   /*public String cedula[] = new String[10];
+    public static String cedula[] = new String[10];
     public static String nombre[]= new String[10];
     public static String primerApellido[]= new String[10];
     public static String segundoApellido[]= new String[10];
@@ -42,6 +43,16 @@ public class Cliente {
     public static String direccion[];
     public static String correoElectronico[];
     public static String genero[];
+    
+    /*String cedula[100];
+    String nombre[];
+    String primerApellido[];
+    String segundoApellido[];
+    String fechaNacimiento[];
+    String telefono[];
+    String direccion[];
+    String correoElectronico[];
+    String genero[];*/
     
     private String correo="";
    /* private String cedulas="";
@@ -125,6 +136,8 @@ public class Cliente {
     public void listarClientes(){
         //Se verifica si ya se han agregado clientes
         if (cantClientes>0){
+            System.out.println("");
+             System.out.println("********** Clientes **********");
             //Se crea un for para mostrar todos los clientes registrados
             for(int i=0;i<cedula.length;i++){
                 //Si ya se han agregado se muestran en pantalla;
@@ -239,50 +252,54 @@ public class Cliente {
             for(int i=0;i<cantClientes;i++){
                 if(cedula[i].equals(buscarCedula)){
 
-                    //cedula[1]==null;
+                    String[] nuevaCedula = new String[cedula.length - 1];
+                    String[] nuevosNombres = new String[nombre.length - 1];
+                    String[] nuevoPrimerA = new String[primerApellido.length - 1];
+                    String[] nuevoSegundoA = new String[segundoApellido.length - 1];
+                    String[] nuevaFechN = new String[fechaNacimiento.length - 1];
+                    String[] nuevoGen = new String[genero.length - 1];
+                     String[] nuevoDir = new String[direccion.length - 1];
+                    String[] nuevoTelef = new String[telefono.length - 1];
+                     String[] nuevoCorreo = new String[correoElectronico.length - 1];
 
-                    //Se borra el cliente con la cedula buscada
-                    /*List<String> tempList = new ArrayList<String>(Arrays.asList(cedula));
-                    tempList.remove(i);
-                    tempList.toArray(new String[0]);
-                    tempList = new ArrayList<String>(Arrays.asList(nombre));
-                    tempList.remove(i);
-                    tempList.toArray(new String[0]);
-                    tempList = new ArrayList<String>(Arrays.asList(primerApellido));
-                    tempList.remove(i);
-                    tempList.toArray(new String[0]);
-                    tempList = new ArrayList<String>(Arrays.asList(segundoApellido));
-                    tempList.remove(i);
-                    tempList.toArray(new String[0]);
-                    tempList = new ArrayList<String>(Arrays.asList(fechaNacimiento));
-                    tempList.remove(i);
-                    tempList.toArray(new String[0]);
-                    tempList = new ArrayList<String>(Arrays.asList(direccion));
-                    tempList.remove(i);
-                    tempList.toArray(new String[0]);
-                    tempList = new ArrayList<String>(Arrays.asList(correoElectronico));
-                    tempList.remove(i);
-                    tempList.toArray(new String[0]);
-                    tempList = new ArrayList<String>(Arrays.asList(telefono));
-                    tempList.remove(i);
-                    tempList.toArray(new String[0]);
-                    tempList = new ArrayList<String>(Arrays.asList(genero));
-                    tempList.remove(i);
-                    tempList.toArray(new String[0]);*/
-
-                    /*cedula[i] = " ";
-                    nombre[i] = " ";
-                    primerApellido[i] = " ";
-                    segundoApellido[i] = " ";
-                    fechaNacimiento[i]=" ";
-                    direccion[i] = " ";
-                    telefono[i] = " ";
-                    correoElectronico[i] = " ";
-                    genero[i]=" ";*/
+                    System.arraycopy(cedula, 0, nuevaCedula, 0, i);
+                    System.arraycopy(nombre, 0, nuevosNombres, 0, i);
+                    System.arraycopy(primerApellido, 0, nuevoPrimerA, 0, i);
+                    System.arraycopy(segundoApellido, 0, nuevoSegundoA, 0, i);
+                    System.arraycopy(fechaNacimiento, 0, nuevaFechN, 0, i);
+                    System.arraycopy(genero, 0, nuevoGen, 0, i);
+                    System.arraycopy(direccion, 0, nuevoDir, 0, i);
+                    System.arraycopy(telefono, 0, nuevoTelef, 0, i);
+                    System.arraycopy(correoElectronico, 0, nuevoCorreo, 0, i);
+                    
+                    if (cedula.length != i) {
+                        System.arraycopy(cedula, i + 1, nuevaCedula, i, cedula.length - i - 1);
+                        System.arraycopy(nombre, i + 1, nuevosNombres, i, nombre.length - i - 1);
+                        System.arraycopy(primerApellido, i + 1, nuevoPrimerA, i, primerApellido.length - i - 1);
+                        System.arraycopy(segundoApellido, i + 1, nuevoSegundoA, i, segundoApellido.length - i - 1);
+                        System.arraycopy(fechaNacimiento, i + 1, nuevaFechN, i, fechaNacimiento.length - i - 1);
+                        System.arraycopy(genero, i + 1, nuevoGen, i, genero.length - i - 1);
+                        System.arraycopy(direccion, i + 1, nuevoDir, i, direccion.length - i - 1);
+                        System.arraycopy(correoElectronico, i + 1, nuevoCorreo, i, correoElectronico.length - i - 1);
+                        System.arraycopy(telefono, i + 1, nuevoTelef, i, telefono.length - i - 1);
+                    }
+  
+                    cedula = Arrays.copyOf(nuevaCedula, nuevaCedula.length);
+                    nombre = Arrays.copyOf(nuevosNombres, nuevosNombres.length);
+                    primerApellido = Arrays.copyOf(nuevoPrimerA, nuevoPrimerA.length);
+                    segundoApellido = Arrays.copyOf(nuevoSegundoA, nuevoSegundoA.length);
+                     fechaNacimiento = Arrays.copyOf(nuevaFechN, nuevaFechN.length);
+                    genero = Arrays.copyOf(nuevoGen, nuevoGen.length);
+                    direccion = Arrays.copyOf(nuevoDir, nuevoDir.length);
+                    correoElectronico = Arrays.copyOf(nuevoCorreo, nuevoCorreo.length);
+                    telefono = Arrays.copyOf(nuevoTelef, nuevoTelef.length);
+                    
                    //Se muestra mensaje de verificacion
                     JOptionPane.showMessageDialog(null, "El cliente ha sido eliminado");
                    //Se cambia el estado si ha sido encontrado el cliente
                     encontrado=1;
+                    cantClientes=cantClientes-1;
+                    break;
                 }
             }
             if(encontrado!=1){
@@ -400,15 +417,4 @@ public class Cliente {
         this.generos = generos;
     }*/
     
-  public void generarReportes(){   
-       // Se crean las instancias de las clases examen, doctor y aplicacion
-      /* Examen examen = new Examen();
-        Doctor doctor = new Doctor();
-        Aplicacion aplicacion = new Aplicacion();
-        Se muestran los datos de las aplicaciones de los examenes
-        System.out.println("Cedula Cliente: "+nombre);
-        System.out.println("Examen: "+examen.nombre);
-        System.out.println("Doctor a Cargo: "+doctor.nombre);
-        System.out.println("Fecha Aplicacion: "+aplicacion.fechaAplicacion);*/
-    }
 }

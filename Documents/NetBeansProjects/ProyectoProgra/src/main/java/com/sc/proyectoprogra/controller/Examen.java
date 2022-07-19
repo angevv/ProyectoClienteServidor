@@ -4,6 +4,7 @@
  */
 package com.sc.proyectoprogra.controller;
 
+import java.util.Arrays;
 import javax.swing.JOptionPane;
 
 /**
@@ -25,6 +26,8 @@ public class Examen {
     public void listarExamenes(){
         //Se verifica si ya se han agregado examenes
         if (cantExamenes>0){
+            System.out.println("");
+             System.out.println("********** Examenes **********");
              for(int i=0;i<codigo.length;i++){
                 //Si ya se han agregado se muestran en pantalla;
                 System.out.println("");
@@ -118,24 +121,47 @@ public class Examen {
         }
     }
     public void eliminarExamenes(){
+        int encontrado=0;
         //Se verifica si ya se han agregado examenes
         if (cantExamenes>0){
             //Se solicita el codigo del examen que se desea eliminar
-           /* String lectura = JOptionPane.showInputDialog("Ingrese el código del examen que desea eliminar: ");
+           String lectura = JOptionPane.showInputDialog("Ingrese el código del examen que desea eliminar: ");
             int buscarCodigo=Integer.parseInt(lectura);
-            if(buscarCodigo==codigo){
-                //Se borra el examen con el codigo buscado
-                codigo = 0;
-                nombre = "";
-                descripcion = "";
-                requisitos = "";
-                cantExamenes=0;
-                JOptionPane.showMessageDialog(null, "El examen ha sido eliminado");
+            for(int i=0;i<cantExamenes;i++){
+                if(buscarCodigo==codigo[i]){
+                    int[] nuevosCodigos = new int[codigo.length - 1];
+                    String[] nuevosNombres = new String[nombre.length - 1];
+                    String[] nuevosDescrip = new String[descripcion.length - 1];
+                    String[] nuevosRequi = new String[requisitos.length - 1];
+
+                    System.arraycopy(codigo, 0, nuevosCodigos, 0, i);
+                    System.arraycopy(nombre, 0, nuevosNombres, 0, i);
+                    System.arraycopy(descripcion, 0, nuevosDescrip, 0, i);
+                    System.arraycopy(requisitos, 0, nuevosRequi, 0, i);
+                    if (codigo.length != i) {
+                        System.arraycopy(codigo, i + 1, nuevosCodigos, i, codigo.length - i - 1);
+                        System.arraycopy(nombre, i + 1, nuevosNombres, i, nombre.length - i - 1);
+                        System.arraycopy(descripcion, i + 1, nuevosDescrip, i, descripcion.length - i - 1);
+                        System.arraycopy(requisitos, i + 1, nuevosRequi, i, requisitos.length - i - 1);
+                    }
+  
+                    codigo = Arrays.copyOf(nuevosCodigos, nuevosCodigos.length);
+                    nombre = Arrays.copyOf(nuevosNombres, nuevosNombres.length);
+                    descripcion = Arrays.copyOf(nuevosDescrip, nuevosDescrip.length);
+                    requisitos = Arrays.copyOf(nuevosRequi, nuevosRequi.length);
+                    
+              
+                    encontrado=1;
+                     JOptionPane.showMessageDialog(null, "El examen se ha eliminado");
+                     cantExamenes=cantExamenes-1;
+                    break;
             }
-            else{
+            
+            }
+             if(encontrado!=1){
                 //Si no existe el codigo, mostrar mensaje
                  JOptionPane.showMessageDialog(null, "El examen con el código "+buscarCodigo+ " no existe");
-            }*/
+            }
        }else{
             //Si no se han agregado doctores, mostrar mensaje
              JOptionPane.showMessageDialog(null, "No se han agregado exámenes");

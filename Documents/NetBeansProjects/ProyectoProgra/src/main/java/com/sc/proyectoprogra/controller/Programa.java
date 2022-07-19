@@ -3,16 +3,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package com.sc.proyectoprogra.controller;
-
-
-import static com.sc.proyectoprogra.controller.Cliente.direccion;
-import static com.sc.proyectoprogra.controller.Cliente.fechaNacimiento;
-import static com.sc.proyectoprogra.controller.Cliente.genero;
-import static com.sc.proyectoprogra.controller.Cliente.nombre;
-import static com.sc.proyectoprogra.controller.Cliente.primerApellido;
-import static com.sc.proyectoprogra.controller.Cliente.segundoApellido;
-import static com.sc.proyectoprogra.controller.Cliente.telefono;
-import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 /**
@@ -20,16 +10,17 @@ import javax.swing.JOptionPane;
  * @author Angelica
  */
 public class Programa {
-    
-    public void menu(){
-        
-        //try {
-        
-        //Se crean clientes, doctores, aplicaciones, examenes y tipoExamenes de cada clase
+        //Se crean clientes, doctores, aplicaciones, examenes y tipoExamenes de cada clase 
         Cliente clientes = new Cliente();
         Doctor doctores = new Doctor();
         Aplicacion aplicaciones = new Aplicacion();
         Examen examenes = new Examen();
+        
+        //Clientes cliente = new Clientes();
+        
+    public void menu(){
+        
+        //try {
         
         int opcion;
         //Se crea un do while para que el menú se repita hasta que el usuario decida salir
@@ -155,41 +146,7 @@ public class Programa {
                                         //Agregar
                                         lectura = JOptionPane.showInputDialog("Digite la cantidad de clientes que desea ingresar: ");
                                         int cantCli=Integer.parseInt(lectura);
-                                     /*   for (int i=0;i<cantCli;i++){
-                                            String cedula = JOptionPane.showInputDialog("Ingrese la cédula del cliente #"+(i+1)+": ");
-                                            clientes.setCedulas(cedula);
-                                            String nombre = JOptionPane.showInputDialog("Ingrese el nombre del cliente #"+(i+1)+": ");
-                                            clientes.setNombres(nombre);
-                                            String primerA = JOptionPane.showInputDialog("Ingrese el primer apellido del cliente #"+(i+1)+": ");
-                                            clientes.setPrimerA(primerA);
-                                            String segundoA = JOptionPane.showInputDialog("Ingrese el segundo apellido del cliente #"+(i+1)+": ");
-                                            clientes.setSegundoA(segundoA);
-                                            String fechaN=JOptionPane.showInputDialog("Introduzca la fecha de nacimiento con el siguiente formato yyyy-mm-dd: ");
-                                            clientes.setFechaN(fechaN);
-                                            String genero = JOptionPane.showInputDialog("Seleccione el género: \n1- Femenino \n2- Masculino");
-                                            int opcionGenero = Integer.parseInt(genero);
-                                            if (opcionGenero==1){
-                                                clientes.tp=Cliente.Genero.FEMENINO;
-                                                String generos=clientes.tp.toString();
-                                                clientes.setGeneros(generos);
-                                            }else if (opcionGenero==2){
-                                                clientes.tp=Cliente.Genero.MASCULINO;
-                                                String generos=clientes.tp.toString();
-                                                clientes.setGeneros(generos);
-                                            }else{
-                                                JOptionPane.showMessageDialog(null, "No existe esa opción");
-                                            }
-                                           String direccion = JOptionPane.showInputDialog("Ingrese la dirección del cliente #"+(i+1)+": ");
-                                           clientes.setDirecciones(direccion);
-                                           String telefono = JOptionPane.showInputDialog("Ingrese el teléfono del cliente #"+(i+1)+": ");
-                                           clientes.setTelefonos(telefono);
-                                           String correo = JOptionPane.showInputDialog("Ingrese el correo electrónico del cliente #"+(i+1)+": ");
-                                           clientes.setCorreo(correo);
-                                           clientes.agregarClientes(i,cantCli);
-                                        }*/
-                                       /* clientes.setCedulas("1");
-                                        clientes.cedula[0]=clientes.getCedulas();*/
-                                       clientes.agregarClientes(cantCli);
+                                        clientes.agregarClientes(cantCli);
                                         break;
                                     case 3:
                                         //Editar
@@ -224,10 +181,6 @@ public class Programa {
                                         break;
                                     case 2:
                                         //Agregar
-                                       /* for(int i = 0;i<clientes.cedula.length;i++){
-                                            System.out.println(clientes.cedula[i]);
-                                        }*/
-                                        //System.out.println(clientes.cedula.length);
                                         lectura = JOptionPane.showInputDialog("Digite la cantidad de aplicaciones de exámenes que desea agregar: ");
                                         int cantApli=Integer.parseInt(lectura);
                                         aplicaciones.agregarAplicaciones(cantApli);
