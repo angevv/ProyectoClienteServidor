@@ -7,9 +7,7 @@ package com.sc.proyectoprogra.controller;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import javax.swing.JOptionPane;
 
 
@@ -23,93 +21,27 @@ public class Cliente {
     //Se crea una variable para llevar el conteo de los clientes ingresados
     public static int cantClientes;
     
-   /*public String cedula[] = new String[10];
-    public static String cedula[] = new String[10];
-    public static String nombre[]= new String[10];
-    public static String primerApellido[]= new String[10];
-    public static String segundoApellido[]= new String[10];
-    public static String fechaNacimiento[]= new String[10];
-    public static String telefono[]= new String[10];
-    public static String direccion[]= new String[10];
-    public static String correoElectronico[]= new String[10];
-    public static String genero[]= new String[10];*/
+   //Se crean los arreglos necesarios con las respectivas dimensiones
+    public static String cedula[] = new String[100];
+    public static String nombre[]= new String[100];
+    public static String primerApellido[]= new String[100];
+    public static String segundoApellido[]= new String[100];
+    public static String fechaNacimiento[]= new String[100];
+    public static String telefono[]= new String[100];
+    public static String direccion[]= new String[100];
+    public static String correoElectronico[]= new String[100];
+    public static String genero[]= new String[100];
     
-    public static String cedula[];
-    public static String nombre[];
-    public static String primerApellido[];
-    public static String segundoApellido[];
-    public static String fechaNacimiento[];
-    public static String telefono[];
-    public static String direccion[];
-    public static String correoElectronico[];
-    public static String genero[];
-    
-    /*String cedula[100];
-    String nombre[];
-    String primerApellido[];
-    String segundoApellido[];
-    String fechaNacimiento[];
-    String telefono[];
-    String direccion[];
-    String correoElectronico[];
-    String genero[];*/
-    
+    //Se crean los datos para generar los sets y gets
     private String correo="";
-   /* private String cedulas="";
+    private String cedulas="";
     private String nombres="";
     private String primerA="";
     private String segundoA="";
     private String fechaN="";
     private String telefonos="";
     private String direcciones="";
-    private String generos="";*/
-    
-    
-   /* public String cedulas;
-
-    public String getCedulas() {
-        return cedulas;
-    }
-
-    public void setCedulas(String cedulas) {
-        this.cedulas = cedulas;
-    }
-    public String nombres;
-    public String primerApellidos;
-    public String segundoApellidos;
-    public String fechaNacimientos;
-    public String telefonos;
-    public String direccions;
-    public String correoElectronicos;
-    public String generos;
-     
-    public Cliente(){
-
-    }
-    
-    public Cliente ( String prcedulas,
-    String prnombres,
-    String prprimerApellidos,
-    String prsegundoApellidos,
-    String prfechaNacimientos,
-    String prtelefonos,
-    String prdireccions,
-    String prcorreoElectronicos,
-    String prgeneros){
-        
-         this.cedulas= prcedulas;
-    this.nombres=prnombres;
-    this.primerApellidos=prprimerApellidos;
-    this.segundoApellidos=prsegundoApellidos;
-    this.fechaNacimientos=prfechaNacimientos;
-    this.telefonos=prtelefonos;
-    this.direccions=prdireccions;
-    this.correoElectronicos=prcorreoElectronicos;
-    this.generos=prgeneros;
-        
-    }
-    */
-    
+    private String generos="";
     
     //Se crea la enumeracion para generos
     public enum Genero{
@@ -117,6 +49,7 @@ public class Cliente {
         MASCULINO
     }
     
+    //Se genera un tp de tipo genero
     Genero tp;
     
     //Se crea una funcion para obtener la edad del cliente
@@ -132,25 +65,48 @@ public class Cliente {
         return dif;
         
     }
+   
+   //Se crea una funcion para determinar si el correo es correcto
+   public int comprobarCorreo(String correo){
+        int arroba = correo.indexOf("@");
+        
+        if (arroba > 0)
+        {
+            int punto = correo.indexOf(".", arroba);
+            if (punto >= arroba + 2)
+            {
+                String dominio = correo.substring(punto + 1);
+                if (dominio != null && dominio.length() > 0)
+                {
+                    //Si el correo es correcto, devuelve 1
+                    return 1;
+                }
+            }
+        }
+        //Si el correo es incorrecto, devuelve 0
+        return 0; 
+   }
     
     public void listarClientes(){
         //Se verifica si ya se han agregado clientes
         if (cantClientes>0){
             System.out.println("");
              System.out.println("********** Clientes **********");
-            //Se crea un for para mostrar todos los clientes registrados
-            for(int i=0;i<cedula.length;i++){
-                //Si ya se han agregado se muestran en pantalla;
-                System.out.println("Cliente #"+(i+1));
-                System.out.println("Cedula: "+cedula[i]);
-                System.out.println( "Nombre Completo: "+nombre[i]+" "+primerApellido[i]+" "+segundoApellido[i]);
-                int edad=obtenerEdad(fechaNacimiento[i]);
-                System.out.println( "Edad: "+edad);
-                System.out.println( "Genero: "+genero[i]);
-                System.out.println( "Direccion: "+direccion[i]);
-               System.out.println( "Telefono: "+telefono[i]);
-                System.out.println( "Correo: "+correoElectronico[i]);
-                System.out.println("");
+            //Se crea un for para mostrar todos los clientes registrados y se imprimen los valores que no sean null
+            for(int i=0;i<cantClientes;i++){
+                if(cedula[i]!=null){
+                    //Si ya se han agregado se muestran en pantalla;
+                    System.out.println("Cliente #"+(i+1));
+                    System.out.println("Cedula: "+cedula[i]);
+                    System.out.println( "Nombre Completo: "+nombre[i]+" "+primerApellido[i]+" "+segundoApellido[i]);
+                    int edad=obtenerEdad(fechaNacimiento[i]);
+                    System.out.println( "Edad: "+edad);
+                    System.out.println( "Genero: "+genero[i]);
+                    System.out.println( "Direccion: "+direccion[i]);
+                   System.out.println( "Telefono: "+telefono[i]);
+                    System.out.println( "Correo: "+correoElectronico[i]);
+                    System.out.println("");
+                }
             }
         }else{
             //Si no se han agregado clientes, mostrar mensaje
@@ -159,46 +115,70 @@ public class Cliente {
     }
     
       
-    public void agregarClientes(int cant){
-        //Se crean los arreglos con la cantidad digitada por el usuario
-       cedula = new String[cant];
-        nombre = new String[cant];
-        primerApellido = new String[cant];
-        segundoApellido = new String[cant];
-        fechaNacimiento = new String[cant];
-        direccion = new String[cant];
-        telefono = new String[cant];
-        correoElectronico = new String[cant];
-        genero = new String[cant];
-        
+    public void agregarClientes(int cant){        
         //Se crea un for para agregar la cantidad de clientes que el usuario desea
-       for(int i=0;i<cant;i++){
-            //Se solicitan los datos necesarios de los clientes y se guardan en el arreglo
-            cedula[i] = JOptionPane.showInputDialog("Ingrese la cédula del cliente #"+(i+1)+": ");
-            nombre[i] = JOptionPane.showInputDialog("Ingrese el nombre del cliente #"+(i+1)+": ");
-            primerApellido[i] = JOptionPane.showInputDialog("Ingrese el primer apellido del cliente #"+(i+1)+": ");
-            segundoApellido[i] = JOptionPane.showInputDialog("Ingrese el segundo apellido del cliente #"+(i+1)+": ");
-            fechaNacimiento[i]=JOptionPane.showInputDialog("Introduzca la fecha de nacimiento con el siguiente formato yyyy-mm-dd: ");
-            String lectura = JOptionPane.showInputDialog("Seleccione el género: \n1- Femenino \n2- Masculino");
-            int opcionGenero = Integer.parseInt(lectura);
-            if (opcionGenero==1){
-                tp=Genero.FEMENINO;
-                genero[i]=tp.toString();
-            }else if (opcionGenero==2){
-                tp=Genero.MASCULINO;
-                genero[i]=tp.toString();
-            }else{
-                JOptionPane.showMessageDialog(null, "No existe esa opción");
-            }
-            direccion[i] = JOptionPane.showInputDialog("Ingrese la dirección del cliente #"+(i+1)+": ");
-            telefono[i] = JOptionPane.showInputDialog("Ingrese el teléfono del cliente #"+(i+1)+": ");
-            correo = JOptionPane.showInputDialog("Ingrese el correo electrónico del cliente #"+(i+1)+": ");
-            setCorreo(correo);
-            correoElectronico[i]=getCorreo();
-            //Se lleva un conteo de los clientes
-            cantClientes = cantClientes+1;
-            //Mostrar mensaje de verificacion
-            JOptionPane.showMessageDialog(null, "El cliente ha sido agregado");
+       for(int c=0;c<cant;c++){
+           //Se recorre todo el arreglo y se indica que en el campo null, agregar el nuevo valor
+           for(int i=0;i<100;i++ ){
+                if(cedula[i]==null){
+                     //Se solicitan los datos necesarios de los clientes y se utlizan los sets y gets para guardarlos en los arreglos
+                     cedulas = JOptionPane.showInputDialog("Ingrese la cédula del cliente #"+(i+1)+": ");
+                     setCedulas(cedulas);
+                     cedula[i]=getCedulas();
+                     nombres = JOptionPane.showInputDialog("Ingrese el nombre del cliente #"+(i+1)+": ");
+                     setNombres(nombres);
+                     nombre[i]=getNombres();
+                     primerA = JOptionPane.showInputDialog("Ingrese el primer apellido del cliente #"+(i+1)+": ");
+                     setPrimerA(primerA);
+                     primerApellido[i]=getPrimerA();
+                     segundoA = JOptionPane.showInputDialog("Ingrese el segundo apellido del cliente #"+(i+1)+": ");
+                     setSegundoA(segundoA);
+                     segundoApellido[i]=getSegundoA();
+                     fechaN=JOptionPane.showInputDialog("Introduzca la fecha de nacimiento con el siguiente formato yyyy-mm-dd: ");
+                     setFechaN(fechaN);
+                     fechaNacimiento[i]=getFechaN();
+                     //Se solicita que elija el genero
+                     String lectura = JOptionPane.showInputDialog("Seleccione el género: \n1- Femenino \n2- Masculino");
+                     int opcionGenero = Integer.parseInt(lectura);
+                     if (opcionGenero==1){
+                         //Si es 1, se le asigna femenino al tp
+                         tp=Genero.FEMENINO;
+                         generos=tp.toString();
+                         setGeneros(generos);
+                         genero[i]=getGeneros();
+                     }else if (opcionGenero==2){
+                         //Si es 2, se le asigna masculino al tp
+                         tp=Genero.MASCULINO;
+                         generos=tp.toString();
+                         setGeneros(generos);
+                         genero[i]=getGeneros();
+                     }else{
+                         //Si selecciona otra opcion, mostrar mensaje
+                         JOptionPane.showMessageDialog(null, "No existe esa opción");
+                     }
+                     direcciones = JOptionPane.showInputDialog("Ingrese la dirección del cliente #"+(i+1)+": ");
+                     setDirecciones(direcciones);
+                     direccion[i]=getDirecciones();
+                     telefonos = JOptionPane.showInputDialog("Ingrese el teléfono del cliente #"+(i+1)+": ");
+                     setTelefonos(telefonos);
+                     telefono[i]=getTelefonos();
+                     correo = JOptionPane.showInputDialog("Ingrese el correo electrónico del cliente #"+(i+1)+": ");
+                     int verificar = comprobarCorreo(correo);
+                     //Solicitar el correo hasta que el usuario ingrese un formato valido
+                     while(verificar==0){
+                         System.out.println("El correo es invalido."); 
+                         correo = JOptionPane.showInputDialog("Ingrese el correo electrónico del cliente #"+(i+1)+": ");
+                         verificar = comprobarCorreo(correo);
+                     }
+                     setCorreo(correo);
+                     correoElectronico[i]=getCorreo();
+                     //Se lleva un conteo de los clientes
+                     cantClientes = cantClientes+1;
+                     //Mostrar mensaje de verificacion
+                     JOptionPane.showMessageDialog(null, "El cliente ha sido agregado");
+                     break;
+                }
+           }
        }
     }
     public void editarClientes(){
@@ -213,17 +193,34 @@ public class Cliente {
                 if(buscarCedula.equals(cedula[i])){
                     //Si la cedula existe, se solicitan los nuevos datos del cliente y se actualizan los anteriores
                     String Nnombre = JOptionPane.showInputDialog("Ingrese el nuevo nombre del cliente: ");
-                    nombre[i]=Nnombre;
+                    nombres=Nnombre;
+                    setNombres(nombres);
+                    nombre[i]=getNombres();
                     String NprimerApellido = JOptionPane.showInputDialog("Ingrese el nuevo primer apellido del cliente: ");
-                    primerApellido[i]=NprimerApellido;
+                    primerA=NprimerApellido;
+                    setPrimerA(primerA);
+                    primerApellido[i]=getPrimerA();
                     String NsegundoApellido = JOptionPane.showInputDialog("Ingrese el nuevo segundo apellido del cliente: ");
-                    segundoApellido[i]=NsegundoApellido;
+                    segundoA=NsegundoApellido;
+                    setSegundoA(segundoA);
+                    segundoApellido[i]=getSegundoA();
                     String Ndireccion = JOptionPane.showInputDialog("Ingrese la nueva dirección del cliente: ");
-                    direccion[i]=Ndireccion;
+                    direcciones=Ndireccion;
+                    setDirecciones(direcciones);
+                    direccion[i]=getDirecciones();
                     String Ntelefono = JOptionPane.showInputDialog("Ingrese el teléfono del cliente: ");
-                    telefono[i]=Ntelefono;
+                    telefonos=Ntelefono;
+                    setTelefonos(telefonos);
+                    telefono[i]=getTelefonos();
                     String Ncorreo = JOptionPane.showInputDialog("Ingrese el correo electrónico del cliente: ");
                     correo=Ncorreo;
+                    int verificar = comprobarCorreo(correo);
+                    //Solicitar el correo hasta que el usuario ingrese un formato correcto
+                     while(verificar==0){
+                         System.out.println("El correo es invalido."); 
+                         correo = JOptionPane.showInputDialog("Ingrese el correo electrónico del cliente #"+(i+1)+": ");
+                         verificar = comprobarCorreo(correo);
+                     }
                     setCorreo(correo);
                     correoElectronico[i]=getCorreo();
                     //Se muestra mensaje de verificacion
@@ -250,8 +247,10 @@ public class Cliente {
             //Se solicita la cedula del cliente que se desea eliminar
             String buscarCedula = JOptionPane.showInputDialog("Ingrese la cédula del cliente que desea eliminar: ");
             for(int i=0;i<cantClientes;i++){
+                //Se verifica que la cedula exista en el arreglo
                 if(cedula[i].equals(buscarCedula)){
 
+                    //Si la cedula se encuentra, se crean arreglos con un campo menos que el arreglo original
                     String[] nuevaCedula = new String[cedula.length - 1];
                     String[] nuevosNombres = new String[nombre.length - 1];
                     String[] nuevoPrimerA = new String[primerApellido.length - 1];
@@ -262,6 +261,7 @@ public class Cliente {
                     String[] nuevoTelef = new String[telefono.length - 1];
                      String[] nuevoCorreo = new String[correoElectronico.length - 1];
 
+                      //Se copian los datos antes del dato especificado, del arreglo original al nuevo
                     System.arraycopy(cedula, 0, nuevaCedula, 0, i);
                     System.arraycopy(nombre, 0, nuevosNombres, 0, i);
                     System.arraycopy(primerApellido, 0, nuevoPrimerA, 0, i);
@@ -273,6 +273,7 @@ public class Cliente {
                     System.arraycopy(correoElectronico, 0, nuevoCorreo, 0, i);
                     
                     if (cedula.length != i) {
+                        //Se terminan de copiar los datos, menos el dato especificado
                         System.arraycopy(cedula, i + 1, nuevaCedula, i, cedula.length - i - 1);
                         System.arraycopy(nombre, i + 1, nuevosNombres, i, nombre.length - i - 1);
                         System.arraycopy(primerApellido, i + 1, nuevoPrimerA, i, primerApellido.length - i - 1);
@@ -284,6 +285,7 @@ public class Cliente {
                         System.arraycopy(telefono, i + 1, nuevoTelef, i, telefono.length - i - 1);
                     }
   
+                    //Se pasan los nuevos datos a los arreglos originales
                     cedula = Arrays.copyOf(nuevaCedula, nuevaCedula.length);
                     nombre = Arrays.copyOf(nuevosNombres, nuevosNombres.length);
                     primerApellido = Arrays.copyOf(nuevoPrimerA, nuevoPrimerA.length);
@@ -298,6 +300,7 @@ public class Cliente {
                     JOptionPane.showMessageDialog(null, "El cliente ha sido eliminado");
                    //Se cambia el estado si ha sido encontrado el cliente
                     encontrado=1;
+                    //Se reduce la cantidad de clientes
                     cantClientes=cantClientes-1;
                     break;
                 }
@@ -318,35 +321,13 @@ public class Cliente {
         return correo.substring(0, 3) + "..." + correo.substring(correo.indexOf("@"));
     }
             
-    //Se verifica que el correo tenga un formato correcto, si no mostrar un mensaje
     public void setCorreo(String correo)
     {
-        int arroba = correo.indexOf("@");
-        
-        if (arroba > 0)
-        {
-            int punto = correo.indexOf(".", arroba);
-            if (punto >= arroba + 2)
-            {
-                String dominio = correo.substring(punto + 1);
-                if (dominio != null && dominio.length() > 0)
-                {
-                    this.correo = correo;
-                    return;
-                }
-            }
-        }
-        
-        System.out.println("El correo es inválido.");  
+       this.correo=correo;
     }   
     
-    public int CantCliente(){
-       
-        return cantClientes;
-    }
-    
     //Se crean los set y get de cedula
-   /* public String getCedulas() {
+    public String getCedulas() {
         return cedulas;
     }
 
@@ -415,6 +396,12 @@ public class Cliente {
 
     public void setGeneros(String generos) {
         this.generos = generos;
-    }*/
+    }
+    
+    //Se crea una funcion para devolver la cantidad de clientes
+     public int CantCliente(){
+       
+        return cantClientes;
+    }
     
 }

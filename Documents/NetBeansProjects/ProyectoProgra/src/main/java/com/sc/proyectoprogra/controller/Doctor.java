@@ -15,13 +15,14 @@ public class Doctor {
     //Se crea variable para llevar el conteo de los doctores 
     public static int cantDoctores=0;
     
-    public static int carnet[];
-    public static String nombre[];
-    public static String primerApellido[];
-    public static String segundoApellido[];
-    public static String especialidad[];
-    public static String cargo[];
-    public static String telefono[];
+    //Se crean los arreglos con las respectivas dimensiones
+    public static int carnet[] = new int[100];
+    public static String nombre[]= new String[100];
+    public static String primerApellido[]= new String[100];
+    public static String segundoApellido[]= new String[100];
+    public static String especialidad[]= new String[100];
+    public static String cargo[]= new String[100];
+    public static String telefono[]= new String[100];
  
     
     public void listarDoctores(){
@@ -29,15 +30,19 @@ public class Doctor {
         if (cantDoctores>0){
             System.out.println("");
             System.out.println("********** Doctores **********");
+            //Se crea un for para recorrer todos los arreglos
             for(int i=0;i<carnet.length;i++){
-            //Si ya se han agregado se muestran en pantalla
-                System.out.println("");
-                System.out.println("Doctor #"+(i+1));
-                System.out.println( "Carnet: "+carnet[i]);
-                System.out.println( "Nombre Completo: "+nombre[i]+" "+primerApellido[i]+" "+segundoApellido[i]);
-                System.out.println( "Especialidad: "+especialidad[i]);
-                System.out.println( "Cargo: "+cargo[i]);
-                System.out.println( "Telefono: "+telefono[i]);
+                //Se indica que los campos que tengan valor null no se impriman
+                if(nombre[i]!=null){
+                //Si muestran los datos en pantalla
+                    System.out.println("");
+                    System.out.println("Doctor #"+(i+1));
+                    System.out.println( "Carnet: "+carnet[i]);
+                    System.out.println( "Nombre Completo: "+nombre[i]+" "+primerApellido[i]+" "+segundoApellido[i]);
+                    System.out.println( "Especialidad: "+especialidad[i]);
+                    System.out.println( "Cargo: "+cargo[i]);
+                    System.out.println( "Telefono: "+telefono[i]);
+                }
             }
         }else{
             //Si no se han agregado doctores, mostrar mensaje
@@ -46,38 +51,38 @@ public class Doctor {
     }
     
     public void agregarDoctores(int cant){
-        //Se configura el tamano de los arreglos
-        nombre = new String[cant];
-        primerApellido = new String[cant];
-        segundoApellido = new String[cant];
-        especialidad = new String[cant];
-        cargo = new String[cant];
-        telefono = new String[cant];
-        carnet = new int[cant];
         //Se crea un for para agregar la cantidad de doctores que el usuario desea
-        for(int i=0;i<cant;i++){
-            //Se solicita la informacion necesaria para agregar un doctor
-            nombre[i] = JOptionPane.showInputDialog("Ingrese el nombre del doctor #"+(i+1)+": ");
-            primerApellido[i] = JOptionPane.showInputDialog("Ingrese el primer apellido del doctor #"+(i+1)+": ");
-            segundoApellido[i] = JOptionPane.showInputDialog("Ingrese el segundo apellido del doctor #"+(i+1)+": ");
-            especialidad[i] = JOptionPane.showInputDialog("Ingrese la especialidad del doctor #"+(i+1)+": ");
-            cargo[i] = JOptionPane.showInputDialog("Ingrese el cargo del doctor #"+(i+1)+": ");
-            telefono[i] = JOptionPane.showInputDialog("Ingrese el teléfono del doctor #"+(i+1)+": ");
-            //Se lleva un conteo de los doctores
-            cantDoctores = cantDoctores+1;
-            //Se le asigna un carnet al doctor
-            carnet[i] = (int)(Math.random()*250)+100;
-            //Mostrar mensaje de verificacion
-            JOptionPane.showMessageDialog(null, "El doctor ha sido agregado");
+        for(int c=0;c<cant;c++){
+            //Se recorre todo el arreglo y se indica que en el campo que tenga valor null, agregar la informacion
+           for(int i=0;i<100;i++ ){
+                if(nombre[i]==null){
+                    //Se solicita la informacion necesaria para agregar un doctor
+                    nombre[i] = JOptionPane.showInputDialog("Ingrese el nombre del doctor #"+(i+1)+": ");
+                    primerApellido[i] = JOptionPane.showInputDialog("Ingrese el primer apellido del doctor #"+(i+1)+": ");
+                    segundoApellido[i] = JOptionPane.showInputDialog("Ingrese el segundo apellido del doctor #"+(i+1)+": ");
+                    especialidad[i] = JOptionPane.showInputDialog("Ingrese la especialidad del doctor #"+(i+1)+": ");
+                    cargo[i] = JOptionPane.showInputDialog("Ingrese el cargo del doctor #"+(i+1)+": ");
+                    telefono[i] = JOptionPane.showInputDialog("Ingrese el teléfono del doctor #"+(i+1)+": ");
+                    //Se lleva un conteo de los doctores
+                    cantDoctores = cantDoctores+1;
+                    //Se le asigna un carnet al doctor
+                    carnet[i] = (int)(Math.random()*250)+100;
+                    //Mostrar mensaje de verificacion
+                    JOptionPane.showMessageDialog(null, "El doctor ha sido agregado");
+                    break;
+                }
+           }
         }
     }
     public void editarDoctores(){
+        //Se verifica que se hayan registrado doctores
         if (cantDoctores>0){
             //Se crea variable para verificar si se ha encontrado el carnet
             int encontrado=0;
             //Se solicita el carnet del doctor que se desea modificar
             String lectura = JOptionPane.showInputDialog("Ingrese el carnet del doctor que desea editar: ");
             int buscarCarnet=Integer.parseInt(lectura);
+            //Se compara el carnet con los carnet del arreglo
             for(int i =0; i < carnet.length;i++){
                 if(buscarCarnet==carnet[i]){
                     //Si el carnet existe, se solicitan los nuevos datos del doctor y se actualizan los anteriores
@@ -108,14 +113,16 @@ public class Doctor {
         }
     }
     public void eliminarDoctores(){
+        //Se verifica que se hayan ingresado doctores
         int encontrado=0;
         if (cantDoctores>0){
             //Se solicita el carnet del doctor que se desea modificar
             String lectura = JOptionPane.showInputDialog("Ingrese el carnet del doctor que desea editar: ");
               int buscarCarnet=Integer.parseInt(lectura);
+              //Se compara el carnet con los carnet del arreglo
               for(int i =0;i<cantDoctores;i++){
               if(buscarCarnet==carnet[i]){
-                  //Se borra el doctor con el carnet buscado
+                  //Si el carnet se encuentra, se crean arreglos con un campo menos que el arreglo original
                     int[] nuevosCarnet = new int[carnet.length - 1];
                     String[] nuevosNombres = new String[nombre.length - 1];
                     String[] nuevoPrimerA = new String[primerApellido.length - 1];
@@ -123,7 +130,8 @@ public class Doctor {
                     String[] nuevoEspeci = new String[especialidad.length - 1];
                     String[] nuevoCargo = new String[cargo.length - 1];
                     String[] nuevoTelef = new String[telefono.length - 1];
-
+                    
+                    //Se copian los datos antes del dato especificado del arreglo original al nuevo
                     System.arraycopy(carnet, 0, nuevosCarnet, 0, i);
                     System.arraycopy(nombre, 0, nuevosNombres, 0, i);
                     System.arraycopy(primerApellido, 0, nuevoPrimerA, 0, i);
@@ -133,6 +141,7 @@ public class Doctor {
                     System.arraycopy(telefono, 0, nuevoTelef, 0, i);
                     
                     if (carnet.length != i) {
+                        //Se terminan de copiar los datos, menos el dato especificado
                         System.arraycopy(carnet, i + 1, nuevosCarnet, i, carnet.length - i - 1);
                         System.arraycopy(nombre, i + 1, nuevosNombres, i, nombre.length - i - 1);
                         System.arraycopy(primerApellido, i + 1, nuevoPrimerA, i, primerApellido.length - i - 1);
@@ -141,7 +150,8 @@ public class Doctor {
                         System.arraycopy(cargo, i + 1, nuevoCargo, i, cargo.length - i - 1);
                         System.arraycopy(telefono, i + 1, nuevoTelef, i, telefono.length - i - 1);
                     }
-  
+                    
+                    //Se pasan los nuevos datos a los arreglos originales
                     carnet = Arrays.copyOf(nuevosCarnet, nuevosCarnet.length);
                     nombre = Arrays.copyOf(nuevosNombres, nuevosNombres.length);
                     primerApellido = Arrays.copyOf(nuevoPrimerA, nuevoPrimerA.length);
@@ -152,7 +162,9 @@ public class Doctor {
                     
               
                     encontrado=1;
+                    //Se muestra mensaje de verificacion
                     JOptionPane.showMessageDialog(null, "El doctor ha sido eliminado");
+                    //Se reduce la cantidad de doctores
                     cantDoctores=cantDoctores-1;
                     break;
                   
@@ -169,6 +181,7 @@ public class Doctor {
        
     }
     
+    //Se crea una funcion para devolver la cantidad de doctores
     public int CantDoctores(){
        
         return cantDoctores;
