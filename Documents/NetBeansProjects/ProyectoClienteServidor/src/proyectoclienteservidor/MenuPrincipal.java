@@ -70,7 +70,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         jMenu1.setText("Usuarios");
 
-        MenuRegistroUsuarios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/add-friend (1).png"))); // NOI18N
         MenuRegistroUsuarios.setText("Registro");
         MenuRegistroUsuarios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

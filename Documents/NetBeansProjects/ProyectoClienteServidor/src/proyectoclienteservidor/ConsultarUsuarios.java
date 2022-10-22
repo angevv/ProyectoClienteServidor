@@ -15,6 +15,8 @@ public class ConsultarUsuarios extends javax.swing.JFrame {
      */
     public ConsultarUsuarios() {
         initComponents();
+        setLocationRelativeTo(null);
+        setResizable(false);
     }
 
     /**

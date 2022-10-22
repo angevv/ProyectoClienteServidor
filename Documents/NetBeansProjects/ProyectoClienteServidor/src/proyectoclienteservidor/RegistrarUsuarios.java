@@ -15,6 +15,8 @@ public class RegistrarUsuarios extends javax.swing.JFrame {
      */
     public RegistrarUsuarios() {
         initComponents();
+        setLocationRelativeTo(null);
+        setResizable(false);
     }
 
     /**
