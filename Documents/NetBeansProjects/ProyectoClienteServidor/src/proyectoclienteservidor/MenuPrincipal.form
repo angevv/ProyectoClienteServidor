@@ -86,7 +86,7 @@
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="MenuCajas">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Mostrar listado"/>
+                <Property name="text" type="java.lang.String" value="Mostrar Listado"/>
               </Properties>
             </MenuItem>
           </SubComponents>

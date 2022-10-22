@@ -118,7 +118,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         jMenu4.setText("Cajas");
 
-        MenuCajas.setText("Mostrar listado");
+        MenuCajas.setText("Mostrar Listado");
         jMenu4.add(MenuCajas);
 
         jMenuBar1.add(jMenu4);
