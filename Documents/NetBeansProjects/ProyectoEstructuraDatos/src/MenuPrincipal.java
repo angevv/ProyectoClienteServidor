@@ -59,6 +59,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jMenu1.setText("Usuarios");
 
         MenuRegistroUsuarios.setText("Registro");
+        MenuRegistroUsuarios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MenuRegistroUsuariosActionPerformed(evt);
+            }
+        });
         jMenu1.add(MenuRegistroUsuarios);
 
         jMenuBar1.add(jMenu1);
@@ -110,6 +115,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
             System.exit(0);
         }
     }//GEN-LAST:event_formWindowClosing
+
+    private void MenuRegistroUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuRegistroUsuariosActionPerformed
+        // TODO add your handling code here:
+        new RegistrarUsuarios().setVisible(true);
+    }//GEN-LAST:event_MenuRegistroUsuariosActionPerformed
 
     /**
      * @param args the command line arguments
