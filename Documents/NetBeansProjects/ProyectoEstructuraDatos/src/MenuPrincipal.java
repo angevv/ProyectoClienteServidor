@@ -79,6 +79,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jMenu2.add(MenuCatalogoEventos);
 
         MenuCatalogoAsientos.setText("Asientos");
+        MenuCatalogoAsientos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MenuCatalogoAsientosActionPerformed(evt);
+            }
+        });
         jMenu2.add(MenuCatalogoAsientos);
 
         jMenuBar1.add(jMenu2);
@@ -133,13 +138,18 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     private void MenuCatalogoEventosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuCatalogoEventosActionPerformed
         // TODO add your handling code here:
-        
+         new CatalogoEventos().setVisible(true);
     }//GEN-LAST:event_MenuCatalogoEventosActionPerformed
 
     private void MenuVentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuVentasActionPerformed
         // TODO add your handling code here:
         new Ventas().setVisible(true);
     }//GEN-LAST:event_MenuVentasActionPerformed
+
+    private void MenuCatalogoAsientosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuCatalogoAsientosActionPerformed
+        // TODO add your handling code here:
+         new CatalogoAsientos().setVisible(true);
+    }//GEN-LAST:event_MenuCatalogoAsientosActionPerformed
 
     /**
      * @param args the command line arguments
