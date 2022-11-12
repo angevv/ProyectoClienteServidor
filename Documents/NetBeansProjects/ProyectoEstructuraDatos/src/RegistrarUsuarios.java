@@ -26,7 +26,8 @@ public class RegistrarUsuarios extends javax.swing.JFrame {
         this.inicio=null;
         this.fin=null;
     }
-
+//hnjnjbhvhjblk
+    
     //Cola 
     private NodoCUsuario inicio;
     private NodoCUsuario fin;
@@ -43,7 +44,7 @@ public class RegistrarUsuarios extends javax.swing.JFrame {
         txtNombreUsuario.setText("");
         txtApellido1Usuario.setText("");
         txtApellido2Usuario.setText("");
-        txtNicknameUsuario.setText("");
+       // txtNicknameUsuario.setText("");
         txtContrasenaUsuario.setText("");;
         buttonGroup1.clearSelection();
         txtNombreUsuario.requestFocus();
