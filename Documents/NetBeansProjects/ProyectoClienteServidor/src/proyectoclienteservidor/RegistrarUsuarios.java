@@ -5,6 +5,7 @@
 package proyectoclienteservidor;
 
 import java.awt.Dimension;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -21,6 +22,16 @@ public class RegistrarUsuarios extends javax.swing.JFrame {
         setResizable(false);
         this.setSize(new Dimension(450, 360));
         this.setMinimumSize(new Dimension(450, 360));
+    }
+    
+    public void limpiar(){
+        txtNombreUsuario.setText("");
+        txtApellido1Usuario.setText("");
+        txtApellido2Usuario.setText("");
+        txtNicknameUsuario.setText("");
+        txtContrasenaUsuario.setText("");
+        rbActivo.setSelected(false);
+        rbInactivo.setSelected(false);
     }
 
     /**
@@ -50,7 +61,7 @@ public class RegistrarUsuarios extends javax.swing.JFrame {
         btnRegresar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setSize(new java.awt.Dimension(444, 326));
 
         jLabel1.setText("Registro de Usuarios");
@@ -74,8 +85,18 @@ public class RegistrarUsuarios extends javax.swing.JFrame {
         btnAgregar.setText("Agregar");
 
         btnRegresar.setText("Regresar");
+        btnRegresar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegresarActionPerformed(evt);
+            }
+        });
 
         btnCancelar.setText("Cancelar");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -175,6 +196,18 @@ public class RegistrarUsuarios extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(null, "¡Datos no guardados!",
+                        "Registro cancelado", JOptionPane.INFORMATION_MESSAGE);
+        limpiar();
+    }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_btnRegresarActionPerformed
 
     /**
      * @param args the command line arguments

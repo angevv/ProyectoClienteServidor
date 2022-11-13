@@ -48,7 +48,7 @@ public class ConsultarUsuarios extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JSeparator();
         btnRegresar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(444, 326));
         setSize(new java.awt.Dimension(444, 326));
 
