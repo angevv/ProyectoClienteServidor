@@ -91,9 +91,19 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jMenu2.setText("Catálogos");
 
         MenuCatalogoProveedores.setText("Proveedores");
+        MenuCatalogoProveedores.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MenuCatalogoProveedoresActionPerformed(evt);
+            }
+        });
         jMenu2.add(MenuCatalogoProveedores);
 
         MenuCatalogoClientes.setText("Clientes");
+        MenuCatalogoClientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MenuCatalogoClientesActionPerformed(evt);
+            }
+        });
         jMenu2.add(MenuCatalogoClientes);
 
         MenuCatalogoServicios.setText("Servicios");
@@ -105,6 +115,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jMenu2.add(MenuCatalogoServicios);
 
         MenuCatalogoPaquetes.setText("Paquetes Especiales");
+        MenuCatalogoPaquetes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MenuCatalogoPaquetesActionPerformed(evt);
+            }
+        });
         jMenu2.add(MenuCatalogoPaquetes);
 
         jMenuBar1.add(jMenu2);
@@ -158,12 +173,28 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     private void MenuCatalogoServiciosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuCatalogoServiciosActionPerformed
         // TODO add your handling code here:
+        new Servicios().setVisible(true);
     }//GEN-LAST:event_MenuCatalogoServiciosActionPerformed
 
     private void MenuConsultaUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuConsultaUsuariosActionPerformed
         // TODO add your handling code here:
          new ConsultarUsuarios().setVisible(true);
     }//GEN-LAST:event_MenuConsultaUsuariosActionPerformed
+
+    private void MenuCatalogoProveedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuCatalogoProveedoresActionPerformed
+        // TODO add your handling code here:
+        new Proveedores().setVisible(true);
+    }//GEN-LAST:event_MenuCatalogoProveedoresActionPerformed
+
+    private void MenuCatalogoPaquetesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuCatalogoPaquetesActionPerformed
+        // TODO add your handling code here:
+         new PaquetesEspeciales().setVisible(true);
+    }//GEN-LAST:event_MenuCatalogoPaquetesActionPerformed
+
+    private void MenuCatalogoClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuCatalogoClientesActionPerformed
+        // TODO add your handling code here:
+        new Clientes().setVisible(true);
+    }//GEN-LAST:event_MenuCatalogoClientesActionPerformed
 
     /**
      * @param args the command line arguments
