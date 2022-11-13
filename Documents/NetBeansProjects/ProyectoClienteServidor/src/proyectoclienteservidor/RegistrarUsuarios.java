@@ -4,15 +4,15 @@
  */
 package proyectoclienteservidor;
 
-import java.awt.Dimension;
 import javax.swing.JOptionPane;
-
+import java.io.*;
 /**
  *
  * @author Angel
  */
 public class RegistrarUsuarios extends javax.swing.JFrame {
 
+    private int encontrado;
     /**
      * Creates new form RegistrarUsuarios
      */
@@ -20,8 +20,9 @@ public class RegistrarUsuarios extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         setResizable(false);
-        this.setSize(new Dimension(450, 360));
-        this.setMinimumSize(new Dimension(450, 360));
+        setTitle("Registro de Usuarios");
+      //  this.setSize(new Dimension(450, 360));
+      //  this.setMinimumSize(new Dimension(450, 360));
     }
     
     public void limpiar(){
@@ -34,6 +35,72 @@ public class RegistrarUsuarios extends javax.swing.JFrame {
         rbInactivo.setSelected(false);
     }
 
+    public void agregar() {
+        encontrado = 0;
+        try {
+            DatosUsuarios du = new DatosUsuarios();
+            du.setNombre(txtNombreUsuario.getText());
+            du.setApellido1(txtApellido1Usuario.getText());
+            du.setApellido2(txtApellido2Usuario.getText());
+            du.setUsuario(txtNicknameUsuario.getText());
+            du.setContrasena(txtContrasenaUsuario.getText());
+            if(rbActivo.isSelected()){
+                du.setEstado(rbActivo.getText());
+            }else{
+                du.setEstado(rbInactivo.getText());
+            }
+            encontrado = buscar(du.getUsuario(), encontrado);
+            if (encontrado == 0) {
+                DataOutputStream salida = new DataOutputStream(new FileOutputStream("usuarios.dat", true));
+                salida.writeUTF(du.getNombre());
+                salida.writeUTF(du.getApellido1());
+                salida.writeUTF(du.getApellido2());
+                salida.writeUTF(du.getUsuario());
+                salida.writeUTF(du.getContrasena());
+                salida.writeUTF(du.getEstado());
+                JOptionPane.showMessageDialog(null, "¡Datos agregados correctamente!",
+                        "Datos Agregados", JOptionPane.INFORMATION_MESSAGE);
+                limpiar();
+                salida.close();
+            } else {
+                JOptionPane.showMessageDialog(null, "¡Ya existe un registro con ese usuario!",
+                        "Datos Existentes", JOptionPane.ERROR_MESSAGE);
+            }
+        } catch (IOException ex01) {
+            JOptionPane.showMessageDialog(null, "¡Ocurrió un error al guardar!",
+                    "Error al guardar", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
+    public int buscar(String usuario, int encontrado) {
+        try {
+            DataInputStream entrada = new DataInputStream(new FileInputStream("usuarios.dat"));
+            try {
+                DatosUsuarios du = new DatosUsuarios();
+                while ((true) && (encontrado == 0)) {
+                    du.setNombre(entrada.readUTF());
+                    du.setApellido1(entrada.readUTF());
+                    du.setApellido2(entrada.readUTF());
+                    du.setUsuario(entrada.readUTF());
+                    du.setContrasena(entrada.readUTF());
+                    du.setEstado(entrada.readUTF());
+                    if (du.getUsuario().equals(usuario)) {
+                        encontrado = 1;
+                    }
+                }
+            } catch (EOFException eeof) {
+                entrada.close();
+            }
+        } catch (FileNotFoundException fnfe) {
+            JOptionPane.showMessageDialog(null, "¡Archivo no encontrado!", "Archivo no encontrado",
+                    JOptionPane.ERROR_MESSAGE);
+        } catch (IOException eioe) {
+            JOptionPane.showMessageDialog(null, "¡Error en el dispositivo de almacenamiento!",
+                    "Error en el dispositivo", JOptionPane.ERROR_MESSAGE);
+        }
+        return encontrado;
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -43,6 +110,7 @@ public class RegistrarUsuarios extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        panel1 = new java.awt.Panel();
         jLabel2 = new javax.swing.JLabel();
         txtNombreUsuario = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
@@ -58,28 +126,53 @@ public class RegistrarUsuarios extends javax.swing.JFrame {
         rbInactivo = new javax.swing.JRadioButton();
         jToolBar1 = new javax.swing.JToolBar();
         jButton2 = new javax.swing.JButton();
-        jButton9 = new javax.swing.JButton();
         jButton11 = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+
+        javax.swing.GroupLayout panel1Layout = new javax.swing.GroupLayout(panel1);
+        panel1.setLayout(panel1Layout);
+        panel1Layout.setHorizontalGroup(
+            panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        panel1Layout.setVerticalGroup(
+            panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setSize(new java.awt.Dimension(444, 326));
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel2.setText("Nombre: ");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 110, -1, -1));
+        getContentPane().add(txtNombreUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 110, 156, -1));
 
         jLabel3.setText("Primer Apellido: ");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 150, -1, -1));
+        getContentPane().add(txtApellido2Usuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 190, 156, -1));
 
         jLabel4.setText("Segundo Apellido: ");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 190, -1, -1));
+        getContentPane().add(txtApellido1Usuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 150, 156, -1));
 
         jLabel5.setText("Usuario:");
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(73, 231, -1, -1));
+        getContentPane().add(txtNicknameUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 229, 156, -1));
 
         jLabel6.setText("Contraseña:");
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 270, -1, -1));
+        getContentPane().add(txtContrasenaUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 270, 156, -1));
 
         jLabel7.setText("Estado:");
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 310, -1, -1));
 
         rbActivo.setText("Activo");
+        getContentPane().add(rbActivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 310, 91, -1));
 
         rbInactivo.setText("Inactivo");
+        getContentPane().add(rbInactivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 310, 91, -1));
 
         jToolBar1.setRollover(true);
 
@@ -95,21 +188,6 @@ public class RegistrarUsuarios extends javax.swing.JFrame {
         });
         jToolBar1.add(jButton2);
 
-        jButton9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/activar.png"))); // NOI18N
-        jButton9.setToolTipText("Inactiva un usuario");
-        jButton9.setFocusable(false);
-        jButton9.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton9.setMaximumSize(new java.awt.Dimension(36, 36));
-        jButton9.setMinimumSize(new java.awt.Dimension(33, 33));
-        jButton9.setPreferredSize(new java.awt.Dimension(31, 31));
-        jButton9.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jButton9.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton9ActionPerformed(evt);
-            }
-        });
-        jToolBar1.add(jButton9);
-
         jButton11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/salir.png"))); // NOI18N
         jButton11.setToolTipText("Regresa al Menú Principal");
         jButton11.setFocusable(false);
@@ -123,116 +201,37 @@ public class RegistrarUsuarios extends javax.swing.JFrame {
         });
         jToolBar1.add(jButton11);
 
+        getContentPane().add(jToolBar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 418, -1));
+
         jLabel8.setFont(new java.awt.Font("Trebuchet MS", 1, 24)); // NOI18N
         jLabel8.setText("USUARIOS");
+        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 50, -1, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(145, 145, 145)
-                .addComponent(jLabel8)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(73, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addGap(12, 12, 12)
-                        .addComponent(txtApellido2Usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(61, 61, 61)
-                        .addComponent(txtNombreUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addGap(25, 25, 25)
-                        .addComponent(txtApellido1Usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel5)
-                        .addGap(65, 65, 65)
-                        .addComponent(txtNicknameUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel6)
-                        .addGap(45, 45, 45)
-                        .addComponent(txtContrasenaUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel7)
-                        .addGap(69, 69, 69)
-                        .addComponent(rbActivo, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)
-                        .addComponent(rbInactivo, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(56, 56, 56))
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 420, Short.MAX_VALUE)
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32)
-                .addComponent(jLabel8)
-                .addGap(37, 37, 37)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(2, 2, 2)
-                        .addComponent(jLabel2))
-                    .addComponent(txtNombreUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(12, 12, 12)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(2, 2, 2)
-                        .addComponent(jLabel3))
-                    .addComponent(txtApellido1Usuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(10, 10, 10)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(2, 2, 2)
-                        .addComponent(jLabel4))
-                    .addComponent(txtApellido2Usuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(12, 12, 12)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(2, 2, 2)
-                        .addComponent(jLabel5))
-                    .addComponent(txtNicknameUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(12, 12, 12)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(2, 2, 2)
-                        .addComponent(jLabel6))
-                    .addComponent(txtContrasenaUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(4, 4, 4)
-                        .addComponent(jLabel7))
-                    .addComponent(rbActivo)
-                    .addComponent(rbInactivo))
-                .addContainerGap(48, Short.MAX_VALUE))
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 340, Short.MAX_VALUE)
         );
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 420, 340));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
 
-       /* if (jTextField1.getText().equals("")){
-            JOptionPane.showMessageDialog(null, "¡Se debe ingresar una identificación!",
-                "Error al agregar", JOptionPane.ERROR_MESSAGE);
+       if (txtNombreUsuario.getText().equals("")){
+            JOptionPane.showMessageDialog(null, "¡Se deben ingresar datos!",
+                "Error al Agregar", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        agregar();*/
+        agregar();
     }//GEN-LAST:event_jButton2ActionPerformed
-
-    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
-      /*  if (jTextField1.getText().equals("")){
-            JOptionPane.showMessageDialog(null, "¡Se debe ingresar una identificación para inactivar!",
-                "Error al inactivar", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        inactivar();*/
-    }//GEN-LAST:event_jButton9ActionPerformed
 
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
         //SE GUARDA EN EL ARCHIVO CADA VEZ QUE SE VUELVE AL MENÚ PRINCIPAL
@@ -277,7 +276,6 @@ public class RegistrarUsuarios extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -285,7 +283,9 @@ public class RegistrarUsuarios extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JToolBar jToolBar1;
+    private java.awt.Panel panel1;
     private javax.swing.JRadioButton rbActivo;
     private javax.swing.JRadioButton rbInactivo;
     private javax.swing.JTextField txtApellido1Usuario;
