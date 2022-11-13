@@ -75,7 +75,7 @@ public class PaquetesEspeciales extends javax.swing.JFrame implements Catalogos{
 
         jLabel3.setText("jLabel3");
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Trebuchet MS", 1, 24)); // NOI18N
         jLabel1.setText("PAQUETE SERVICIOS");
@@ -103,7 +103,7 @@ public class PaquetesEspeciales extends javax.swing.JFrame implements Catalogos{
         jToolBar1.setRollover(true);
 
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/add.png"))); // NOI18N
-        jButton2.setToolTipText("Agrega un servicio");
+        jButton2.setToolTipText("Agrega un paquete de servicio");
         jButton2.setFocusable(false);
         jButton2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -115,7 +115,7 @@ public class PaquetesEspeciales extends javax.swing.JFrame implements Catalogos{
         jToolBar1.add(jButton2);
 
         jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/edit.png"))); // NOI18N
-        jButton5.setToolTipText("Modifica los datos de un servicio");
+        jButton5.setToolTipText("Modifica los datos de un paquete de servicio");
         jButton5.setFocusable(false);
         jButton5.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton5.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -127,7 +127,7 @@ public class PaquetesEspeciales extends javax.swing.JFrame implements Catalogos{
         jToolBar1.add(jButton5);
 
         jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/asking.png"))); // NOI18N
-        jButton6.setToolTipText("Consulta un servicio");
+        jButton6.setToolTipText("Consulta un paquete de servicio");
         jButton6.setFocusable(false);
         jButton6.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton6.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -139,7 +139,7 @@ public class PaquetesEspeciales extends javax.swing.JFrame implements Catalogos{
         jToolBar1.add(jButton6);
 
         jButton9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/activar.png"))); // NOI18N
-        jButton9.setToolTipText("Inactiva un servicio");
+        jButton9.setToolTipText("Inactiva un paquete de servicio");
         jButton9.setFocusable(false);
         jButton9.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton9.setMaximumSize(new java.awt.Dimension(36, 36));

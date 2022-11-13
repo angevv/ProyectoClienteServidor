@@ -44,6 +44,7 @@ public class Clientes extends javax.swing.JFrame implements Catalogos {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
+        paquetesEspeciales1 = new proyectoclienteservidor.PaquetesEspeciales();
         jToolBar1 = new javax.swing.JToolBar();
         jButton2 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
@@ -98,12 +99,12 @@ public class Clientes extends javax.swing.JFrame implements Catalogos {
         jLabel8.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         jLabel8.setText("Estado:");
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jToolBar1.setRollover(true);
 
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/add.png"))); // NOI18N
-        jButton2.setToolTipText("Agrega un proveedor");
+        jButton2.setToolTipText("Agrega un cliente");
         jButton2.setFocusable(false);
         jButton2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -115,7 +116,7 @@ public class Clientes extends javax.swing.JFrame implements Catalogos {
         jToolBar1.add(jButton2);
 
         jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/edit.png"))); // NOI18N
-        jButton5.setToolTipText("Modifica los datos de un proveedor");
+        jButton5.setToolTipText("Modifica los datos de un cliente");
         jButton5.setFocusable(false);
         jButton5.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton5.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -127,7 +128,7 @@ public class Clientes extends javax.swing.JFrame implements Catalogos {
         jToolBar1.add(jButton5);
 
         jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/asking.png"))); // NOI18N
-        jButton6.setToolTipText("Consulta un proveedor");
+        jButton6.setToolTipText("Consulta un cliente");
         jButton6.setFocusable(false);
         jButton6.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton6.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -139,7 +140,7 @@ public class Clientes extends javax.swing.JFrame implements Catalogos {
         jToolBar1.add(jButton6);
 
         jButton9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/activar.png"))); // NOI18N
-        jButton9.setToolTipText("Inactiva un proveedor");
+        jButton9.setToolTipText("Inactiva un cliente");
         jButton9.setFocusable(false);
         jButton9.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton9.setMaximumSize(new java.awt.Dimension(36, 36));
@@ -379,6 +380,7 @@ public class Clientes extends javax.swing.JFrame implements Catalogos {
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
     private javax.swing.JToolBar jToolBar1;
+    private proyectoclienteservidor.PaquetesEspeciales paquetesEspeciales1;
     private javax.swing.JRadioButton rbActivo;
     private javax.swing.JRadioButton rbActivo1;
     private javax.swing.JTextField txtNombreUsuario;
