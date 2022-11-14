@@ -6,9 +6,11 @@
 public class NodoCatalogoAsientos {
     private DatosCatalogoAsientos elemento;
     private NodoCatalogoAsientos siguiente;
+    private NodoCatalogoAsientos anterior;
     
     public NodoCatalogoAsientos(){
         this.siguiente = null;
+        this.anterior = null;
     }
 
     public DatosCatalogoAsientos getElemento() {
@@ -26,4 +28,12 @@ public class NodoCatalogoAsientos {
     public void setSiguiente(NodoCatalogoAsientos siguiente) {
         this.siguiente = siguiente;
     }
+
+    public NodoCatalogoAsientos getAnterior() {
+        return anterior;
+    }
+
+    public void setAnterior(NodoCatalogoAsientos anterior) {
+        this.anterior = anterior;
+    }   
 }
