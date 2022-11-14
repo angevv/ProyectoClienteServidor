@@ -45,7 +45,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
         MenuConsultarUsuarios = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         MenuCatalogoEventos = new javax.swing.JMenuItem();
+        EditarCatalogoEventos = new javax.swing.JMenuItem();
+        InactivarCatalogoEventos = new javax.swing.JMenuItem();
         MenuCatalogoAsientos = new javax.swing.JMenuItem();
+        EditarCatalogoAsientos = new javax.swing.JMenuItem();
+        InactivarCatalogoAsientos = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         MenuVentas = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
@@ -88,6 +92,22 @@ public class MenuPrincipal extends javax.swing.JFrame {
         });
         jMenu2.add(MenuCatalogoEventos);
 
+        EditarCatalogoEventos.setText("   Editar eventos");
+        EditarCatalogoEventos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EditarCatalogoEventosActionPerformed(evt);
+            }
+        });
+        jMenu2.add(EditarCatalogoEventos);
+
+        InactivarCatalogoEventos.setText("   Inactivar eventos");
+        InactivarCatalogoEventos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                InactivarCatalogoEventosActionPerformed(evt);
+            }
+        });
+        jMenu2.add(InactivarCatalogoEventos);
+
         MenuCatalogoAsientos.setText("Asientos");
         MenuCatalogoAsientos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -95,6 +115,22 @@ public class MenuPrincipal extends javax.swing.JFrame {
             }
         });
         jMenu2.add(MenuCatalogoAsientos);
+
+        EditarCatalogoAsientos.setText("   Editar asientos");
+        EditarCatalogoAsientos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EditarCatalogoAsientosActionPerformed(evt);
+            }
+        });
+        jMenu2.add(EditarCatalogoAsientos);
+
+        InactivarCatalogoAsientos.setText("   Inactivar asientos");
+        InactivarCatalogoAsientos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                InactivarCatalogoAsientosActionPerformed(evt);
+            }
+        });
+        jMenu2.add(InactivarCatalogoAsientos);
 
         jMenuBar1.add(jMenu2);
 
@@ -166,6 +202,26 @@ public class MenuPrincipal extends javax.swing.JFrame {
       new ConsultarUsuarios().setVisible(true);
     }//GEN-LAST:event_MenuConsultarUsuariosActionPerformed
 
+    private void EditarCatalogoEventosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditarCatalogoEventosActionPerformed
+        // TODO add your handling code here:
+        new EditarEventos().setVisible(true);
+    }//GEN-LAST:event_EditarCatalogoEventosActionPerformed
+
+    private void InactivarCatalogoEventosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InactivarCatalogoEventosActionPerformed
+        // TODO add your handling code here:
+        new InactivarEventos().setVisible(true);
+    }//GEN-LAST:event_InactivarCatalogoEventosActionPerformed
+
+    private void EditarCatalogoAsientosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditarCatalogoAsientosActionPerformed
+        // TODO add your handling code here:
+        new EditarAsientos().setVisible(true);
+    }//GEN-LAST:event_EditarCatalogoAsientosActionPerformed
+
+    private void InactivarCatalogoAsientosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InactivarCatalogoAsientosActionPerformed
+        // TODO add your handling code here:
+        new InactivarAsientos().setVisible(true);
+    }//GEN-LAST:event_InactivarCatalogoAsientosActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -202,6 +258,10 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem EditarCatalogoAsientos;
+    private javax.swing.JMenuItem EditarCatalogoEventos;
+    private javax.swing.JMenuItem InactivarCatalogoAsientos;
+    private javax.swing.JMenuItem InactivarCatalogoEventos;
     private javax.swing.JMenuItem MenuCajas;
     private javax.swing.JMenuItem MenuCatalogoAsientos;
     private javax.swing.JMenuItem MenuCatalogoEventos;

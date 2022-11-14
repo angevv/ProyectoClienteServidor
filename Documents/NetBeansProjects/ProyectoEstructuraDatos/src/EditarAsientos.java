@@ -10,13 +10,16 @@ import javax.swing.JOptionPane;
  *
  * @author andrescedeno
  */
-public class EditarCatalogoAsientos extends javax.swing.JFrame {
+public class EditarAsientos extends javax.swing.JFrame {
 
     /**
      * Creates new form CatalogoAsientos
      */
-    public EditarCatalogoAsientos() {
+    public EditarAsientos() {
         initComponents();
+        setLocationRelativeTo(null);
+        setResizable(false);
+        setTitle("Editar Asientos");
         //Lista Doble Circular
         this.inicio=null;
         this.fin=null;
@@ -40,7 +43,6 @@ public class EditarCatalogoAsientos extends javax.swing.JFrame {
         txtNumeroAsiento.setText("");
         txtCostoAsiento.setText("");
     }
-    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -52,41 +54,28 @@ public class EditarCatalogoAsientos extends javax.swing.JFrame {
 
         opcionesCodigoArea = new javax.swing.ButtonGroup();
         opcionesEstado = new javax.swing.ButtonGroup();
-        CatalogoAsientos = new javax.swing.JLabel();
-        CodigoArea = new javax.swing.JLabel();
-        rbPRE = new javax.swing.JRadioButton();
-        rbNOR = new javax.swing.JRadioButton();
-        jLabel1 = new javax.swing.JLabel();
-        txtNumeroAsiento = new javax.swing.JTextField();
+        jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         txtCostoAsiento = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         rbLIB = new javax.swing.JRadioButton();
         rbOCU = new javax.swing.JRadioButton();
+        lblEditarsientos = new javax.swing.JLabel();
         btnAgregar = new javax.swing.JButton();
+        CodigoArea = new javax.swing.JLabel();
         btnCancelar = new javax.swing.JButton();
+        rbPRE = new javax.swing.JRadioButton();
         btnRegresar = new javax.swing.JButton();
-        jLabel4 = new javax.swing.JLabel();
-        txtConsultarAsiento = new javax.swing.JTextField();
+        rbNOR = new javax.swing.JRadioButton();
+        jLabel1 = new javax.swing.JLabel();
+        txtNumeroAsiento = new javax.swing.JTextField();
+        lblBuscarEditarNombreAsiento = new javax.swing.JLabel();
+        txtBuscarNombreAsiento = new javax.swing.JTextField();
+        btnBuscarNombreAsiento = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        CatalogoAsientos.setText("Editar Catálogo de Asientos");
-
-        CodigoArea.setText("Código de área:");
-
-        opcionesCodigoArea.add(rbPRE);
-        rbPRE.setText("PRE");
-
-        opcionesCodigoArea.add(rbNOR);
-        rbNOR.setText("NOR");
-        rbNOR.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rbNORActionPerformed(evt);
-            }
-        });
-
-        jLabel1.setText("Número de asiento:");
+        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         jLabel2.setText("Costo de venta:");
 
@@ -103,12 +92,17 @@ public class EditarCatalogoAsientos extends javax.swing.JFrame {
             }
         });
 
+        lblEditarsientos.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblEditarsientos.setText("EDITAR ASIENTOS");
+
         btnAgregar.setText("Agregar");
         btnAgregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAgregarActionPerformed(evt);
             }
         });
+
+        CodigoArea.setText("Código de área:");
 
         btnCancelar.setText("Cancelar");
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
@@ -117,6 +111,9 @@ public class EditarCatalogoAsientos extends javax.swing.JFrame {
             }
         });
 
+        opcionesCodigoArea.add(rbPRE);
+        rbPRE.setText("PRE");
+
         btnRegresar.setText("Regresar");
         btnRegresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -124,78 +121,123 @@ public class EditarCatalogoAsientos extends javax.swing.JFrame {
             }
         });
 
-        jLabel4.setText("Consultar asiento:");
+        opcionesCodigoArea.add(rbNOR);
+        rbNOR.setText("NOR");
+        rbNOR.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbNORActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setText("Número de asiento:");
+
+        lblBuscarEditarNombreAsiento.setText("Ingrese el nombre del asiento que desea editar:");
+
+        btnBuscarNombreAsiento.setText("Buscar");
+        btnBuscarNombreAsiento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarNombreAsientoActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblEditarsientos)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(CodigoArea)
+                                    .addComponent(jLabel3))
+                                .addGap(40, 40, 40)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(rbLIB)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(rbPRE)
+                                        .addComponent(txtNumeroAsiento)
+                                        .addComponent(txtCostoAsiento, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(rbOCU)
+                                    .addComponent(rbNOR)))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(70, 70, 70)
+                        .addComponent(btnAgregar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnCancelar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnRegresar))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel1))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel2))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(lblBuscarEditarNombreAsiento)
+                        .addGap(78, 78, 78)
+                        .addComponent(txtBuscarNombreAsiento, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnBuscarNombreAsiento)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblEditarsientos)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblBuscarEditarNombreAsiento)
+                    .addComponent(txtBuscarNombreAsiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnBuscarNombreAsiento))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(rbPRE)
+                    .addComponent(CodigoArea))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(rbNOR)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(txtNumeroAsiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(txtCostoAsiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(rbLIB)
+                    .addComponent(jLabel3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(rbOCU)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnCancelar)
+                    .addComponent(btnAgregar)
+                    .addComponent(btnRegresar))
+                .addGap(41, 41, 41))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(32, 32, 32)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(CatalogoAsientos)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(CodigoArea)
-                                    .addComponent(jLabel1)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel4))
-                                .addGap(23, 23, 23)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(rbLIB)
-                                    .addComponent(rbNOR)
-                                    .addComponent(rbPRE)
-                                    .addComponent(txtNumeroAsiento)
-                                    .addComponent(txtCostoAsiento, javax.swing.GroupLayout.DEFAULT_SIZE, 182, Short.MAX_VALUE)
-                                    .addComponent(rbOCU)
-                                    .addComponent(txtConsultarAsiento)))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(89, 89, 89)
-                        .addComponent(btnAgregar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnCancelar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnRegresar)))
-                .addContainerGap(59, Short.MAX_VALUE))
+                .addGap(20, 20, 20)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addComponent(CatalogoAsientos)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(txtConsultarAsiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(8, 8, 8)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(CodigoArea)
-                    .addComponent(rbPRE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(rbNOR)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(txtNumeroAsiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(txtCostoAsiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(rbLIB))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(rbOCU)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAgregar)
-                    .addComponent(btnCancelar)
-                    .addComponent(btnRegresar))
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addGap(20, 20, 20)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(20, 20, 20))
         );
 
         pack();
@@ -265,6 +307,23 @@ public class EditarCatalogoAsientos extends javax.swing.JFrame {
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
         this.dispose();
     }//GEN-LAST:event_btnRegresarActionPerformed
+    //BUSCAR
+    private void btnBuscarNombreAsientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarNombreAsientoActionPerformed
+        // TODO add your handling code here:
+         if(!esVaciaDC()){
+            String s="";
+            NodoCatalogoAsientos aux=inicio;
+            s=s+aux.getElemento().getCodigoArea()+"--"+aux.getElemento().getNumeroAsiento()+"--"+aux.getElemento().getCostoVenta()+"--"+aux.getElemento().getEstado()+"<==>";
+            aux=aux.getSiguiente();
+            while(aux!=inicio){
+                s=s+aux.getElemento().getCodigoArea()+"--"+aux.getElemento().getNumeroAsiento()+"--"+aux.getElemento().getCostoVenta()+"--"+aux.getElemento().getEstado()+"<==>";
+                aux=aux.getSiguiente();
+            }
+            JOptionPane.showMessageDialog(null,"La lista contiene: \n"+s);
+        } else {
+            JOptionPane.showMessageDialog(null,"No existen elementos para mostrar, lista vacia");
+        }
+    }//GEN-LAST:event_btnBuscarNombreAsientoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -302,22 +361,24 @@ public class EditarCatalogoAsientos extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel CatalogoAsientos;
     private javax.swing.JLabel CodigoArea;
     private javax.swing.JButton btnAgregar;
+    private javax.swing.JButton btnBuscarNombreAsiento;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnRegresar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel lblBuscarEditarNombreAsiento;
+    private javax.swing.JLabel lblEditarsientos;
     private javax.swing.ButtonGroup opcionesCodigoArea;
     private javax.swing.ButtonGroup opcionesEstado;
     private javax.swing.JRadioButton rbLIB;
     private javax.swing.JRadioButton rbNOR;
     private javax.swing.JRadioButton rbOCU;
     private javax.swing.JRadioButton rbPRE;
-    private javax.swing.JTextField txtConsultarAsiento;
+    private javax.swing.JTextField txtBuscarNombreAsiento;
     private javax.swing.JTextField txtCostoAsiento;
     private javax.swing.JTextField txtNumeroAsiento;
     // End of variables declaration//GEN-END:variables

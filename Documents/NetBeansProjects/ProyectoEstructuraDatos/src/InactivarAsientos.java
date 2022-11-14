@@ -10,16 +10,16 @@ import javax.swing.JOptionPane;
  *
  * @author andrescedeno
  */
-public class CatalogoAsientos extends javax.swing.JFrame {
+public class InactivarAsientos extends javax.swing.JFrame {
 
     /**
      * Creates new form CatalogoAsientos
      */
-    public CatalogoAsientos() {
+    public InactivarAsientos() {
         initComponents();
         setLocationRelativeTo(null);
         setResizable(false);
-        setTitle("Catalogo de Asientos");
+        setTitle("Inactivar Asientos");
         //Lista Doble Circular
         this.inicio=null;
         this.fin=null;
@@ -54,39 +54,28 @@ public class CatalogoAsientos extends javax.swing.JFrame {
 
         opcionesCodigoArea = new javax.swing.ButtonGroup();
         opcionesEstado = new javax.swing.ButtonGroup();
-        CatalogoAsientos = new javax.swing.JLabel();
-        CodigoArea = new javax.swing.JLabel();
-        rbPRE = new javax.swing.JRadioButton();
-        rbNOR = new javax.swing.JRadioButton();
-        jLabel1 = new javax.swing.JLabel();
-        txtNumeroAsiento = new javax.swing.JTextField();
+        jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         txtCostoAsiento = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         rbLIB = new javax.swing.JRadioButton();
         rbOCU = new javax.swing.JRadioButton();
+        lblInactivarAsientos = new javax.swing.JLabel();
         btnAgregar = new javax.swing.JButton();
+        CodigoArea = new javax.swing.JLabel();
         btnCancelar = new javax.swing.JButton();
+        rbPRE = new javax.swing.JRadioButton();
         btnRegresar = new javax.swing.JButton();
+        rbNOR = new javax.swing.JRadioButton();
+        jLabel1 = new javax.swing.JLabel();
+        txtNumeroAsiento = new javax.swing.JTextField();
+        lblBuscarInactivarNombreAsiento = new javax.swing.JLabel();
+        txtBuscarInactivarNombreAsiento = new javax.swing.JTextField();
+        btnBuscarInactivarNombreAsiento = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        CatalogoAsientos.setText("Catálogo de Asientos");
-
-        CodigoArea.setText("Código de área:");
-
-        opcionesCodigoArea.add(rbPRE);
-        rbPRE.setText("PRE");
-
-        opcionesCodigoArea.add(rbNOR);
-        rbNOR.setText("NOR");
-        rbNOR.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rbNORActionPerformed(evt);
-            }
-        });
-
-        jLabel1.setText("Número de asiento:");
+        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         jLabel2.setText("Costo de venta:");
 
@@ -103,12 +92,17 @@ public class CatalogoAsientos extends javax.swing.JFrame {
             }
         });
 
+        lblInactivarAsientos.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblInactivarAsientos.setText("INACTIVAR ASIENTOS");
+
         btnAgregar.setText("Agregar");
         btnAgregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAgregarActionPerformed(evt);
             }
         });
+
+        CodigoArea.setText("Código de área:");
 
         btnCancelar.setText("Cancelar");
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
@@ -117,6 +111,9 @@ public class CatalogoAsientos extends javax.swing.JFrame {
             }
         });
 
+        opcionesCodigoArea.add(rbPRE);
+        rbPRE.setText("PRE");
+
         btnRegresar.setText("Regresar");
         btnRegresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -124,71 +121,123 @@ public class CatalogoAsientos extends javax.swing.JFrame {
             }
         });
 
+        opcionesCodigoArea.add(rbNOR);
+        rbNOR.setText("NOR");
+        rbNOR.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbNORActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setText("Número de asiento:");
+
+        lblBuscarInactivarNombreAsiento.setText("Ingrese el nombre del asiento que desea editar:");
+
+        btnBuscarInactivarNombreAsiento.setText("Buscar");
+        btnBuscarInactivarNombreAsiento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarInactivarNombreAsientoActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblInactivarAsientos)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(CodigoArea)
+                                    .addComponent(jLabel3))
+                                .addGap(40, 40, 40)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(rbLIB)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(rbPRE)
+                                        .addComponent(txtNumeroAsiento)
+                                        .addComponent(txtCostoAsiento, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(rbOCU)
+                                    .addComponent(rbNOR)))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(70, 70, 70)
+                        .addComponent(btnAgregar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnCancelar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnRegresar))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel1))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel2))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(lblBuscarInactivarNombreAsiento)
+                        .addGap(78, 78, 78)
+                        .addComponent(txtBuscarInactivarNombreAsiento, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnBuscarInactivarNombreAsiento)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblInactivarAsientos)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblBuscarInactivarNombreAsiento)
+                    .addComponent(txtBuscarInactivarNombreAsiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnBuscarInactivarNombreAsiento))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(rbPRE)
+                    .addComponent(CodigoArea))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(rbNOR)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(txtNumeroAsiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(txtCostoAsiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(rbLIB)
+                    .addComponent(jLabel3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(rbOCU)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnCancelar)
+                    .addComponent(btnAgregar)
+                    .addComponent(btnRegresar))
+                .addGap(41, 41, 41))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(32, 32, 32)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(CatalogoAsientos)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(CodigoArea)
-                                    .addComponent(jLabel1)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel3))
-                                .addGap(23, 23, 23)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(rbLIB)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(rbNOR)
-                                        .addComponent(rbPRE)
-                                        .addComponent(txtNumeroAsiento)
-                                        .addComponent(txtCostoAsiento, javax.swing.GroupLayout.DEFAULT_SIZE, 182, Short.MAX_VALUE))
-                                    .addComponent(rbOCU)))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(89, 89, 89)
-                        .addComponent(btnAgregar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnCancelar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnRegresar)))
-                .addContainerGap(59, Short.MAX_VALUE))
+                .addGap(20, 20, 20)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(20, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(42, 42, 42)
-                .addComponent(CatalogoAsientos)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(CodigoArea)
-                    .addComponent(rbPRE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(rbNOR)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(txtNumeroAsiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(txtCostoAsiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(rbLIB))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(rbOCU)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAgregar)
-                    .addComponent(btnCancelar)
-                    .addComponent(btnRegresar))
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addGap(20, 20, 20)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(20, 20, 20))
         );
 
         pack();
@@ -250,9 +299,9 @@ public class CatalogoAsientos extends javax.swing.JFrame {
     }//GEN-LAST:event_rbOCUActionPerformed
     //CANCELAR
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-//        JOptionPane.showMessageDialog(null, "¡Datos no guardados!",
-//                "Registro cancelado", JOptionPane.INFORMATION_MESSAGE);
-//        limpiar();
+        JOptionPane.showMessageDialog(null, "¡Datos no guardados!",
+                "Registro cancelado", JOptionPane.INFORMATION_MESSAGE);
+        limpiar();
     }//GEN-LAST:event_btnCancelarActionPerformed
     //REGRESAR
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
@@ -271,6 +320,23 @@ public class CatalogoAsientos extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null,"No existen elementos para mostrar, lista vacia");
         }
     }//GEN-LAST:event_btnRegresarActionPerformed
+    //BUSCAR
+    private void btnBuscarInactivarNombreAsientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarInactivarNombreAsientoActionPerformed
+        // TODO add your handling code here:
+        if(!esVaciaDC()){
+            String s="";
+            NodoCatalogoAsientos aux=inicio;
+            s=s+aux.getElemento().getCodigoArea()+"--"+aux.getElemento().getNumeroAsiento()+"--"+aux.getElemento().getCostoVenta()+"--"+aux.getElemento().getEstado()+"<==>";
+            aux=aux.getSiguiente();
+            while(aux!=inicio){
+                s=s+aux.getElemento().getCodigoArea()+"--"+aux.getElemento().getNumeroAsiento()+"--"+aux.getElemento().getCostoVenta()+"--"+aux.getElemento().getEstado()+"<==>";
+                aux=aux.getSiguiente();
+            }
+            JOptionPane.showMessageDialog(null,"La lista contiene: \n"+s);
+        } else {
+            JOptionPane.showMessageDialog(null,"No existen elementos para mostrar, lista vacia");
+        }
+    }//GEN-LAST:event_btnBuscarInactivarNombreAsientoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -308,20 +374,24 @@ public class CatalogoAsientos extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel CatalogoAsientos;
     private javax.swing.JLabel CodigoArea;
     private javax.swing.JButton btnAgregar;
+    private javax.swing.JButton btnBuscarInactivarNombreAsiento;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnRegresar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel lblBuscarInactivarNombreAsiento;
+    private javax.swing.JLabel lblInactivarAsientos;
     private javax.swing.ButtonGroup opcionesCodigoArea;
     private javax.swing.ButtonGroup opcionesEstado;
     private javax.swing.JRadioButton rbLIB;
     private javax.swing.JRadioButton rbNOR;
     private javax.swing.JRadioButton rbOCU;
     private javax.swing.JRadioButton rbPRE;
+    private javax.swing.JTextField txtBuscarInactivarNombreAsiento;
     private javax.swing.JTextField txtCostoAsiento;
     private javax.swing.JTextField txtNumeroAsiento;
     // End of variables declaration//GEN-END:variables
