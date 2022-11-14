@@ -10,12 +10,12 @@ import javax.swing.JOptionPane;
  *
  * @author andrescedeno
  */
-public class CatalogoAsientos extends javax.swing.JFrame {
+public class EditarCatalogoAsientos extends javax.swing.JFrame {
 
     /**
      * Creates new form CatalogoAsientos
      */
-    public CatalogoAsientos() {
+    public EditarCatalogoAsientos() {
         initComponents();
         //Lista Doble Circular
         this.inicio=null;
@@ -40,6 +40,7 @@ public class CatalogoAsientos extends javax.swing.JFrame {
         txtNumeroAsiento.setText("");
         txtCostoAsiento.setText("");
     }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -65,10 +66,12 @@ public class CatalogoAsientos extends javax.swing.JFrame {
         btnAgregar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
         btnRegresar = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        txtConsultarAsiento = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        CatalogoAsientos.setText("Catálogo de Asientos");
+        CatalogoAsientos.setText("Editar Catálogo de Asientos");
 
         CodigoArea.setText("Código de área:");
 
@@ -121,6 +124,8 @@ public class CatalogoAsientos extends javax.swing.JFrame {
             }
         });
 
+        jLabel4.setText("Consultar asiento:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -136,16 +141,17 @@ public class CatalogoAsientos extends javax.swing.JFrame {
                                     .addComponent(CodigoArea)
                                     .addComponent(jLabel1)
                                     .addComponent(jLabel2)
-                                    .addComponent(jLabel3))
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel4))
                                 .addGap(23, 23, 23)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(rbLIB)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(rbNOR)
-                                        .addComponent(rbPRE)
-                                        .addComponent(txtNumeroAsiento)
-                                        .addComponent(txtCostoAsiento, javax.swing.GroupLayout.DEFAULT_SIZE, 182, Short.MAX_VALUE))
-                                    .addComponent(rbOCU)))))
+                                    .addComponent(rbNOR)
+                                    .addComponent(rbPRE)
+                                    .addComponent(txtNumeroAsiento)
+                                    .addComponent(txtCostoAsiento, javax.swing.GroupLayout.DEFAULT_SIZE, 182, Short.MAX_VALUE)
+                                    .addComponent(rbOCU)
+                                    .addComponent(txtConsultarAsiento)))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(89, 89, 89)
                         .addComponent(btnAgregar)
@@ -158,9 +164,13 @@ public class CatalogoAsientos extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(42, 42, 42)
+                .addGap(24, 24, 24)
                 .addComponent(CatalogoAsientos)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(txtConsultarAsiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(8, 8, 8)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(CodigoArea)
                     .addComponent(rbPRE))
@@ -185,7 +195,7 @@ public class CatalogoAsientos extends javax.swing.JFrame {
                     .addComponent(btnAgregar)
                     .addComponent(btnCancelar)
                     .addComponent(btnRegresar))
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         pack();
@@ -253,20 +263,7 @@ public class CatalogoAsientos extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCancelarActionPerformed
     //REGRESAR
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
-        //this.dispose();
-        if(!esVaciaDC()){
-            String s="";
-            NodoCatalogoAsientos aux=inicio;
-            s=s+aux.getElemento().getNumeroAsiento()+"--"+aux.getElemento().getCodigoArea()+"--"+aux.getElemento().getCostoVenta()+"--"+aux.getElemento().getEstado()+"<==>";
-            aux=aux.getSiguiente();
-            while(aux!=inicio){
-                s=s+aux.getElemento().getNumeroAsiento()+"--"+aux.getElemento().getCodigoArea()+"--"+aux.getElemento().getCostoVenta()+"--"+aux.getElemento().getEstado()+"<==>";
-                aux=aux.getSiguiente();
-            }
-            JOptionPane.showMessageDialog(null,"La lista contiene: \n"+s);
-        } else {
-            JOptionPane.showMessageDialog(null,"No existen elementos para mostrar, lista vacia");
-        }
+        this.dispose();
     }//GEN-LAST:event_btnRegresarActionPerformed
 
     /**
@@ -313,12 +310,14 @@ public class CatalogoAsientos extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.ButtonGroup opcionesCodigoArea;
     private javax.swing.ButtonGroup opcionesEstado;
     private javax.swing.JRadioButton rbLIB;
     private javax.swing.JRadioButton rbNOR;
     private javax.swing.JRadioButton rbOCU;
     private javax.swing.JRadioButton rbPRE;
+    private javax.swing.JTextField txtConsultarAsiento;
     private javax.swing.JTextField txtCostoAsiento;
     private javax.swing.JTextField txtNumeroAsiento;
     // End of variables declaration//GEN-END:variables
