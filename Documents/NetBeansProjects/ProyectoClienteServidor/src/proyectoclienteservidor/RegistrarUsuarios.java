@@ -21,6 +21,7 @@ public class RegistrarUsuarios extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         setResizable(false);
         setTitle("Registro de Usuarios");
+        txtNombreUsuario.requestFocus();
       //  this.setSize(new Dimension(450, 360));
       //  this.setMinimumSize(new Dimension(450, 360));
     }
@@ -111,6 +112,7 @@ public class RegistrarUsuarios extends javax.swing.JFrame {
     private void initComponents() {
 
         panel1 = new java.awt.Panel();
+        jPasswordField1 = new javax.swing.JPasswordField();
         jLabel2 = new javax.swing.JLabel();
         txtNombreUsuario = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
@@ -120,7 +122,6 @@ public class RegistrarUsuarios extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         txtNicknameUsuario = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        txtContrasenaUsuario = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         rbActivo = new javax.swing.JRadioButton();
         rbInactivo = new javax.swing.JRadioButton();
@@ -129,6 +130,7 @@ public class RegistrarUsuarios extends javax.swing.JFrame {
         jButton11 = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
+        txtContrasenaUsuario = new javax.swing.JPasswordField();
 
         javax.swing.GroupLayout panel1Layout = new javax.swing.GroupLayout(panel1);
         panel1.setLayout(panel1Layout);
@@ -140,6 +142,8 @@ public class RegistrarUsuarios extends javax.swing.JFrame {
             panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 100, Short.MAX_VALUE)
         );
+
+        jPasswordField1.setText("jPasswordField1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setSize(new java.awt.Dimension(444, 326));
@@ -163,7 +167,6 @@ public class RegistrarUsuarios extends javax.swing.JFrame {
 
         jLabel6.setText("Contraseña:");
         getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 270, -1, -1));
-        getContentPane().add(txtContrasenaUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 270, 156, -1));
 
         jLabel7.setText("Estado:");
         getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 310, -1, -1));
@@ -211,11 +214,17 @@ public class RegistrarUsuarios extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 420, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(178, 178, 178)
+                .addComponent(txtContrasenaUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(87, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 340, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(228, Short.MAX_VALUE)
+                .addComponent(txtContrasenaUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(93, 93, 93))
         );
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 420, 340));
@@ -284,13 +293,14 @@ public class RegistrarUsuarios extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JToolBar jToolBar1;
     private java.awt.Panel panel1;
     private javax.swing.JRadioButton rbActivo;
     private javax.swing.JRadioButton rbInactivo;
     private javax.swing.JTextField txtApellido1Usuario;
     private javax.swing.JTextField txtApellido2Usuario;
-    private javax.swing.JTextField txtContrasenaUsuario;
+    private javax.swing.JPasswordField txtContrasenaUsuario;
     private javax.swing.JTextField txtNicknameUsuario;
     private javax.swing.JTextField txtNombreUsuario;
     // End of variables declaration//GEN-END:variables

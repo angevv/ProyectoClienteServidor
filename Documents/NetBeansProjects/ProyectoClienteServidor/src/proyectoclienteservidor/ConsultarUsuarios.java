@@ -184,11 +184,11 @@ public class ConsultarUsuarios extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         txtNicknameUsuario = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        txtContrasenaUsuario = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         rbActivo = new javax.swing.JRadioButton();
         rbInactivo = new javax.swing.JRadioButton();
         jLabel9 = new javax.swing.JLabel();
+        txtContrasenaUsuario = new javax.swing.JPasswordField();
         jToolBar1 = new javax.swing.JToolBar();
         jButton6 = new javax.swing.JButton();
         jButton9 = new javax.swing.JButton();
@@ -212,11 +212,10 @@ public class ConsultarUsuarios extends javax.swing.JFrame {
 
         jLabel5.setText("Usuario:");
         jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 170, -1, -1));
-        jPanel2.add(txtNicknameUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 170, 156, -1));
+        jPanel2.add(txtNicknameUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 170, 150, -1));
 
         jLabel6.setText("Contraseña:");
         jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 200, -1, -1));
-        jPanel2.add(txtContrasenaUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 200, 156, -1));
 
         jLabel7.setText("Estado:");
         jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(31, 236, -1, -1));
@@ -230,6 +229,7 @@ public class ConsultarUsuarios extends javax.swing.JFrame {
         jLabel9.setFont(new java.awt.Font("Trebuchet MS", 1, 24)); // NOI18N
         jLabel9.setText("USUARIOS");
         jPanel2.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 10, -1, -1));
+        jPanel2.add(txtContrasenaUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 200, 150, 20));
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 420, 300));
 
@@ -355,7 +355,7 @@ public class ConsultarUsuarios extends javax.swing.JFrame {
     private javax.swing.JRadioButton rbActivo;
     private javax.swing.JRadioButton rbInactivo;
     private javax.swing.JTextField txtBuscar;
-    private javax.swing.JTextField txtContrasenaUsuario;
+    private javax.swing.JPasswordField txtContrasenaUsuario;
     private javax.swing.JTextField txtNicknameUsuario;
     private javax.swing.JTextField txtNombreCompletoUsuario;
     // End of variables declaration//GEN-END:variables
