@@ -40,12 +40,44 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MenuCatalogoEventosActionPerformed"/>
               </Events>
             </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="EditarCatalogoEventos">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="   Editar eventos"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="EditarCatalogoEventosActionPerformed"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="InactivarCatalogoEventos">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="   Inactivar eventos"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="InactivarCatalogoEventosActionPerformed"/>
+              </Events>
+            </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="MenuCatalogoAsientos">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Asientos"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MenuCatalogoAsientosActionPerformed"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="EditarCatalogoAsientos">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="   Editar asientos"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="EditarCatalogoAsientosActionPerformed"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="InactivarCatalogoAsientos">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="   Inactivar asientos"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="InactivarCatalogoAsientosActionPerformed"/>
               </Events>
             </MenuItem>
           </SubComponents>

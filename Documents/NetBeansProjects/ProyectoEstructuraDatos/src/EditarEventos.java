@@ -10,16 +10,16 @@ import javax.swing.JOptionPane;
  *
  * @author andrescedeno
  */
-public class CatalogoEventos extends javax.swing.JFrame {
+public class EditarEventos extends javax.swing.JFrame {
 
     /**
      * Creates new form CatalogoEventos
      */
-    public CatalogoEventos() {
+    public EditarEventos() {
         initComponents();
         setLocationRelativeTo(null);
         setResizable(false);
-        setTitle("Catalogo de Eventos");
+        setTitle("Editar Eventos");
         //Lista Simple Circular
         this.inicio=null;
         this.fin=null;
@@ -56,31 +56,42 @@ public class CatalogoEventos extends javax.swing.JFrame {
     private void initComponents() {
 
         OpcionesLugarEvento = new javax.swing.ButtonGroup();
-        CatalogoEvento = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
         NombreEvento = new javax.swing.JLabel();
+        txtCiudad = new javax.swing.JTextField();
         fechaEvento = new javax.swing.JLabel();
+        txtDireccion = new javax.swing.JTextField();
         rbEstadio = new javax.swing.JRadioButton();
+        txtEstado = new javax.swing.JTextField();
         LugarEvento = new javax.swing.JLabel();
+        btnAgregar = new javax.swing.JButton();
         rbAnfiteatro = new javax.swing.JRadioButton();
+        btnCancelar = new javax.swing.JButton();
         rbTeatro = new javax.swing.JRadioButton();
+        btnRegresar = new javax.swing.JButton();
         txtNombreEvento = new javax.swing.JTextField();
         txtFechaEvento = new javax.swing.JTextField();
         Ciudad = new javax.swing.JLabel();
         Direccion = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
-        txtCiudad = new javax.swing.JTextField();
-        txtDireccion = new javax.swing.JTextField();
-        txtEstado = new javax.swing.JTextField();
-        btnAgregar = new javax.swing.JButton();
-        btnCancelar = new javax.swing.JButton();
-        btnRegresar = new javax.swing.JButton();
+        CatalogoEvento = new javax.swing.JLabel();
+        lblBuscarEditarNombreEvento = new javax.swing.JLabel();
+        txtBuscarEditarNombreEvento = new javax.swing.JTextField();
+        btnBuscarEditarNombreEvento = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        CatalogoEvento.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        CatalogoEvento.setText("CATÁLOGO DE EVENTOS");
+        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        jLabel1.setText("Estado:");
 
         NombreEvento.setText("Nombre:");
+
+        txtCiudad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCiudadActionPerformed(evt);
+            }
+        });
 
         fechaEvento.setText("Fecha:");
 
@@ -94,6 +105,13 @@ public class CatalogoEventos extends javax.swing.JFrame {
 
         LugarEvento.setText("Lugar:");
 
+        btnAgregar.setText("Agregar");
+        btnAgregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarActionPerformed(evt);
+            }
+        });
+
         OpcionesLugarEvento.add(rbAnfiteatro);
         rbAnfiteatro.setText("Anfiteatro");
         rbAnfiteatro.addActionListener(new java.awt.event.ActionListener() {
@@ -102,8 +120,22 @@ public class CatalogoEventos extends javax.swing.JFrame {
             }
         });
 
+        btnCancelar.setText("Cancelar");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
+
         OpcionesLugarEvento.add(rbTeatro);
         rbTeatro.setText("Teatro");
+
+        btnRegresar.setText("Regresar");
+        btnRegresar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegresarActionPerformed(evt);
+            }
+        });
 
         txtNombreEvento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -121,45 +153,28 @@ public class CatalogoEventos extends javax.swing.JFrame {
 
         Direccion.setText("Dirección:");
 
-        jLabel1.setText("Estado:");
+        CatalogoEvento.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        CatalogoEvento.setText("EDITAR EVENTOS");
 
-        txtCiudad.addActionListener(new java.awt.event.ActionListener() {
+        lblBuscarEditarNombreEvento.setText("Ingrese el nombre del evento que desea editar:");
+
+        btnBuscarEditarNombreEvento.setText("Buscar");
+        btnBuscarEditarNombreEvento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtCiudadActionPerformed(evt);
+                btnBuscarEditarNombreEventoActionPerformed(evt);
             }
         });
 
-        btnAgregar.setText("Agregar");
-        btnAgregar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAgregarActionPerformed(evt);
-            }
-        });
-
-        btnCancelar.setText("Cancelar");
-        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCancelarActionPerformed(evt);
-            }
-        });
-
-        btnRegresar.setText("Regresar");
-        btnRegresar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRegresarActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(37, 37, 37)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(CatalogoEvento)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(fechaEvento)
                             .addComponent(LugarEvento)
                             .addComponent(Ciudad)
@@ -167,65 +182,93 @@ public class CatalogoEventos extends javax.swing.JFrame {
                             .addComponent(Direccion)
                             .addComponent(jLabel1))
                         .addGap(44, 44, 44)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(txtFechaEvento)
                                 .addComponent(txtCiudad)
                                 .addComponent(txtDireccion)
                                 .addComponent(txtEstado)
                                 .addComponent(txtNombreEvento, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
+                            .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(rbEstadio)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(rbAnfiteatro)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(rbTeatro))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(50, 50, 50)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(57, 57, 57)
                         .addComponent(btnAgregar)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnCancelar)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnRegresar)))
-                .addContainerGap(59, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnRegresar))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(lblBuscarEditarNombreEvento)
+                        .addGap(55, 55, 55)
+                        .addComponent(txtBuscarEditarNombreEvento, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnBuscarEditarNombreEvento)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(26, 26, 26)
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(CatalogoEvento)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblBuscarEditarNombreEvento)
+                    .addComponent(txtBuscarEditarNombreEvento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnBuscarEditarNombreEvento))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(NombreEvento)
                     .addComponent(txtNombreEvento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtFechaEvento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(fechaEvento))
                 .addGap(11, 11, 11)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(LugarEvento)
                     .addComponent(rbEstadio)
                     .addComponent(rbAnfiteatro)
                     .addComponent(rbTeatro))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(txtCiudad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Ciudad))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Direccion)
                     .addComponent(txtDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(txtEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAgregar)
                     .addComponent(btnCancelar)
                     .addComponent(btnRegresar))
-                .addGap(23, 23, 23))
+                .addGap(30, 30, 30))
+        );
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(20, Short.MAX_VALUE))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         pack();
@@ -304,6 +347,23 @@ public class CatalogoEventos extends javax.swing.JFrame {
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
         this.dispose();
     }//GEN-LAST:event_btnRegresarActionPerformed
+    //BUSCAR
+    private void btnBuscarEditarNombreEventoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarEditarNombreEventoActionPerformed
+        // TODO add your handling code here:
+        if(!esVaciaSC()){
+           String s ="";
+           NodoCatalogoEvento aux=inicio;
+           s=s+aux.getElemento().getNombreEvento()+"--"+aux.getElemento().getFechaEvento()+"--"+aux.getElemento().getCiudad()+"--"+aux.getElemento().getDireccion()+"--"+aux.getElemento().getEstado()+"-->";
+           aux=aux.getSiguiente();
+           while(aux!=inicio){
+               s=s+aux.getElemento().getNombreEvento()+"--"+aux.getElemento().getFechaEvento()+"--"+aux.getElemento().getCiudad()+"--"+aux.getElemento().getDireccion()+"--"+aux.getElemento().getEstado()+"-->";
+               aux=aux.getSiguiente();
+           }
+           JOptionPane.showMessageDialog(null, "La lista contiene: \n"+s);
+       } else {
+           JOptionPane.showMessageDialog(null,"No se puede extraer, lista vacía");
+       }
+    }//GEN-LAST:event_btnBuscarEditarNombreEventoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -348,13 +408,17 @@ public class CatalogoEventos extends javax.swing.JFrame {
     private javax.swing.JLabel NombreEvento;
     private javax.swing.ButtonGroup OpcionesLugarEvento;
     private javax.swing.JButton btnAgregar;
+    private javax.swing.JButton btnBuscarEditarNombreEvento;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnRegresar;
     private javax.swing.JLabel fechaEvento;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel lblBuscarEditarNombreEvento;
     private javax.swing.JRadioButton rbAnfiteatro;
     private javax.swing.JRadioButton rbEstadio;
     private javax.swing.JRadioButton rbTeatro;
+    private javax.swing.JTextField txtBuscarEditarNombreEvento;
     private javax.swing.JTextField txtCiudad;
     private javax.swing.JTextField txtDireccion;
     private javax.swing.JTextField txtEstado;
