@@ -1,4 +1,5 @@
 
+import java.awt.Dimension;
 import static java.awt.Frame.MAXIMIZED_BOTH;
 import java.awt.Image;
 import javax.swing.ImageIcon;
@@ -162,8 +163,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     private void MenuConsultarUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuConsultarUsuariosActionPerformed
         // TODO add your handling code here:
-        new ConsultarUsuarios().setVisible(true);
-        
+      new ConsultarUsuarios().setVisible(true);
     }//GEN-LAST:event_MenuConsultarUsuariosActionPerformed
 
     /**

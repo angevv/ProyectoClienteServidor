@@ -27,18 +27,14 @@ public class Cola {
         }
     }
     
-   /* public void agregar(String nom){
+   public void agregar(String nom, String ap1, String ap2, String nickn, String contra, String estado){
         DatosRegistrarUsuario d = new DatosRegistrarUsuario();
         d.setNombre(nom);
-        d.setPrimerApellido(txtApellido1Usuario.getText());
-        d.setSegundoApellido(txtApellido2Usuario.getText());
-        d.setUsuario(txtNicknameUsuario.getText());
-        d.setPassword(txtContrasenaUsuario.getText());
-        if(rbActivo.isSelected()){
-            d.setEstado(rbActivo.getText());
-        }else{
-            d.setEstado(rbInactivo.getText());
-        }
+        d.setPrimerApellido(ap1);
+        d.setSegundoApellido(ap2);
+        d.setUsuario(nickn);
+        d.setPassword(contra);
+        d.setEstado(estado);
         NodoCUsuario nuevo = new NodoCUsuario();
         nuevo.setElemento(d);
         if(esVacia()){
@@ -50,5 +46,19 @@ public class Cola {
         }
         JOptionPane.showMessageDialog(null, "¡Datos agregados correctamente!",
                         "Registro exitoso", JOptionPane.INFORMATION_MESSAGE);
-    }*/
+    }
+   
+   public void mostrar(){
+        if(!esVacia()){
+            String s="";
+            NodoCUsuario aux=inicio;
+            while(aux!=null){
+                s=s+aux.getElemento().getNombre()+" - "+aux.getElemento().getPrimerApellido()+" - "+aux.getElemento().getSegundoApellido()+" - "+aux.getElemento().getUsuario()+" - "+aux.getElemento().getPassword()+" - "+aux.getElemento().getEstado()+" - "+"\n";
+                aux=aux.getSiguiente();
+            }
+            JOptionPane.showMessageDialog(null, "La cola contiene: \n"+s);
+        }else{
+            JOptionPane.showMessageDialog(null, "Cola vacia");
+        } 
+   }
 }
