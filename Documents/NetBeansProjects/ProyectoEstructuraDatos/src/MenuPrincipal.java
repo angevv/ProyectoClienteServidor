@@ -31,6 +31,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }
 
     Cola c = new Cola();
+    Arbol a = new Arbol();
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -53,6 +55,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         InactivarCatalogoAsientos = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         MenuVentas = new javax.swing.JMenuItem();
+        MenuConsultarVentas = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         MenuCajas = new javax.swing.JMenuItem();
 
@@ -145,6 +148,14 @@ public class MenuPrincipal extends javax.swing.JFrame {
         });
         jMenu3.add(MenuVentas);
 
+        MenuConsultarVentas.setText("Consultar Ventas");
+        MenuConsultarVentas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MenuConsultarVentasActionPerformed(evt);
+            }
+        });
+        jMenu3.add(MenuConsultarVentas);
+
         jMenuBar1.add(jMenu3);
 
         jMenu4.setText("Cajas");
@@ -190,7 +201,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     private void MenuVentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuVentasActionPerformed
         // TODO add your handling code here:
-        new Ventas().setVisible(true);
+        new ModuloVentas().setVisible(true);
     }//GEN-LAST:event_MenuVentasActionPerformed
 
     private void MenuCatalogoAsientosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuCatalogoAsientosActionPerformed
@@ -222,6 +233,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
         new InactivarAsientos().setVisible(true);
     }//GEN-LAST:event_InactivarCatalogoAsientosActionPerformed
+
+    private void MenuConsultarVentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuConsultarVentasActionPerformed
+        // TODO add your handling code here:
+        new ConsultarVentas().setVisible(true);
+    }//GEN-LAST:event_MenuConsultarVentasActionPerformed
 
     /**
      * @param args the command line arguments
@@ -267,6 +283,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem MenuCatalogoAsientos;
     private javax.swing.JMenuItem MenuCatalogoEventos;
     private javax.swing.JMenuItem MenuConsultarUsuarios;
+    private javax.swing.JMenuItem MenuConsultarVentas;
     private javax.swing.JMenuItem MenuRegistroUsuarios;
     private javax.swing.JMenuItem MenuVentas;
     private javax.swing.JMenu jMenu1;
