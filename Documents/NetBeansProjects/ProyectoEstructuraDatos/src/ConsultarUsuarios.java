@@ -1,39 +1,28 @@
 
-import java.awt.Dimension;
 import javax.swing.JOptionPane;
 
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
-
-/**
- *
- * @author Angel
- */
 public class ConsultarUsuarios extends javax.swing.JFrame {
 
-    /**
-     * Creates new form RegistrarUsuarios
-     */
     public ConsultarUsuarios() {
         initComponents();
         setLocationRelativeTo(null);
         setResizable(false);
         setTitle("Gestión de Usuarios");
-        //this.setSize(new Dimension(560, 390));
-        //this.setMinimumSize(new Dimension(560, 390));
+        mp.c.cargarUsuario();
     }
-    
-     public void limpiar() {
+
+    //Cola
+    MenuPrincipal mp = new MenuPrincipal();
+
+    public void limpiar() {
         txtNombreUsuario.setText("");
         txtApellido1Usuario.setText("");
         txtApellido2Usuario.setText("");
-        txtBuscar.setText("");
         txtContrasenaUsuario.setText("");;
         buttonGroup1.clearSelection();
         txtNombreUsuario.requestFocus();
     }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -53,7 +42,7 @@ public class ConsultarUsuarios extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         rbActivo = new javax.swing.JRadioButton();
         rbInactivo = new javax.swing.JRadioButton();
-        btnActualizar = new javax.swing.JButton();
+        btnInactivar = new javax.swing.JButton();
         btnRegresar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         txtContrasenaUsuario = new javax.swing.JPasswordField();
@@ -62,7 +51,7 @@ public class ConsultarUsuarios extends javax.swing.JFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        jLabel5.setText("Ingrese el nickname del usuario que desea inactivar:");
+        jLabel5.setText("Ingrese el nickname del usuario que desea buscar:");
 
         btnBuscar.setText("Buscar");
         btnBuscar.addActionListener(new java.awt.event.ActionListener() {
@@ -87,10 +76,10 @@ public class ConsultarUsuarios extends javax.swing.JFrame {
         buttonGroup1.add(rbInactivo);
         rbInactivo.setText("Inactivo");
 
-        btnActualizar.setText("Inactivar");
-        btnActualizar.addActionListener(new java.awt.event.ActionListener() {
+        btnInactivar.setText("Inactivar");
+        btnInactivar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnActualizarActionPerformed(evt);
+                btnInactivarActionPerformed(evt);
             }
         });
 
@@ -102,7 +91,7 @@ public class ConsultarUsuarios extends javax.swing.JFrame {
         });
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel1.setText("INACTIVAR USUARIOS");
+        jLabel1.setText("CONSULTAR USUARIOS");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -120,21 +109,13 @@ public class ConsultarUsuarios extends javax.swing.JFrame {
                                 .addComponent(rbInactivo, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(rbActivo, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnInactivar, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(15, 15, 15)
                         .addComponent(btnRegresar, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap())
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addGap(64, 64, 64)
-                                .addComponent(txtNombreUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addGap(28, 28, 28)
-                                .addComponent(txtApellido1Usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel5)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -143,12 +124,23 @@ public class ConsultarUsuarios extends javax.swing.JFrame {
                                 .addComponent(btnBuscar))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel6))
-                                .addGap(15, 15, 15)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtApellido2Usuario)
-                                    .addComponent(txtContrasenaUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, 156, Short.MAX_VALUE))))
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                            .addComponent(jLabel6)
+                                            .addGap(51, 51, 51))
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                            .addComponent(jLabel4)
+                                            .addGap(25, 25, 25)))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel3)
+                                        .addGap(38, 38, 38))
+                                    .addComponent(jLabel2))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtNombreUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtApellido1Usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(txtApellido2Usuario)
+                                        .addComponent(txtContrasenaUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, 156, Short.MAX_VALUE)))))
                         .addGap(8, 8, 8))))
         );
         jPanel1Layout.setVerticalGroup(
@@ -157,7 +149,7 @@ public class ConsultarUsuarios extends javax.swing.JFrame {
                 .addGap(19, 19, 19)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btnActualizar)
+                        .addComponent(btnInactivar)
                         .addComponent(btnRegresar))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1)
@@ -166,18 +158,18 @@ public class ConsultarUsuarios extends javax.swing.JFrame {
                             .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnBuscar)
                             .addComponent(jLabel5))
-                        .addGap(21, 21, 21)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(19, 19, 19)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
                             .addComponent(txtNombreUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(11, 11, 11)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
                             .addComponent(txtApellido1Usuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(11, 11, 11)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4)
-                            .addComponent(txtApellido2Usuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(13, 13, 13)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtApellido2Usuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4))
                         .addGap(9, 9, 9)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel6)
@@ -197,50 +189,28 @@ public class ConsultarUsuarios extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(25, 25, 25)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(25, 25, 25)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
+    private void btnInactivarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInactivarActionPerformed
         // TODO add your handling code here:
-       /* if(!esVacia()){
-            NodoCUsuario aux=inicio;
-            while(aux!=null && txtBuscar.getText()!=aux.getElemento().getUsuario()){
-                aux=aux.getSiguiente();
-            }
-            aux.getElemento().setNombre(txtNombreUsuario.getText());
-            aux.getElemento().setPrimerApellido(txtApellido1Usuario.getText());
-            aux.getElemento().setSegundoApellido(txtApellido2Usuario.getText());
-            aux.getElemento().setPassword(txtContrasenaUsuario.getText());
-            if(rbActivo.isSelected()){
-                aux.getElemento().setEstado(rbActivo.getText());
-            }else{
-               aux.getElemento().setEstado(rbInactivo.getText());
-            }
-            
-            txtNombreUsuario.setText(aux.getElemento().getNombre());
-            txtApellido1Usuario.setText(aux.getElemento().getPrimerApellido());
-            txtApellido2Usuario.setText(aux.getElemento().getSegundoApellido());
-            txtContrasenaUsuario.setText(aux.getElemento().getPassword());
-            if(aux.getElemento().getEstado()=="Activo"){
-                rbActivo.setSelected(true);
-            }else{
-                rbInactivo.setSelected(true);
-            }
-        }
-        JOptionPane.showMessageDialog(null, "¡Datos actualizados correctamente!",
-                        "Actualización exitosa", JOptionPane.INFORMATION_MESSAGE);
-        limpiar();*/
-    }//GEN-LAST:event_btnActualizarActionPerformed
+        inactivar();
+        JOptionPane.showMessageDialog(null, "¡El usuario se ha inactivado!",
+                "Usuario Inactivado", JOptionPane.INFORMATION_MESSAGE);
+        txtBuscar.setText("");
+        limpiar();
+        txtBuscar.requestFocus();
+    }//GEN-LAST:event_btnInactivarActionPerformed
 
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
         // TODO add your handling code here:
@@ -249,39 +219,54 @@ public class ConsultarUsuarios extends javax.swing.JFrame {
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         // TODO add your handling code here:
-        Cola c = new Cola();
-        c.mostrar();
-        /*if(!esVacia()){
-            String s="";
-            NodoCUsuario aux=inicio;
-            while(aux!=null){
-                s=s+aux.getElemento().getUsuario()+"\n";
-                aux=aux.getSiguiente();
+        limpiar();
+        txtBuscar.requestFocus();
+        mostrar();
+    }//GEN-LAST:event_btnBuscarActionPerformed
+
+    public void mostrar() {
+        if (!mp.c.esVacia()) {
+            NodoCUsuario aux = mp.c.inicio;
+            while (aux != null && txtBuscar.getText().compareTo(aux.getElemento().getUsuario()) != 0) {
+                aux = aux.getSiguiente();
             }
-            JOptionPane.showMessageDialog(null, "La cola contiene: \n"+s);
-        }else{
-            JOptionPane.showMessageDialog(null, "Cola vacia");
-        } */
-       /* if(!esVacia()){
-            NodoCUsuario aux=inicio;
-            while(aux!=null && txtBuscar.getText().compareTo(aux.getElemento().getUsuario())!=0){
-                aux=aux.getSiguiente();
+            if (txtBuscar.getText().equals(aux.getElemento().getUsuario())) {
+                txtNombreUsuario.setText(aux.getElemento().getNombre());
+                txtApellido1Usuario.setText(aux.getElemento().getPrimerApellido());
+                txtApellido2Usuario.setText(aux.getElemento().getSegundoApellido());
+                txtContrasenaUsuario.setText(aux.getElemento().getPassword());
+                if (aux.getElemento().getEstado().equals("Activo")) {
+                    rbActivo.setSelected(true);
+                } else {
+                    rbInactivo.setSelected(true);
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "¡Usuario no encontrado!",
+                        "Error en la búsqueda", JOptionPane.INFORMATION_MESSAGE);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "¡Usuario no encontrado!",
+                    "Error en la búsqueda", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }
+
+    public void inactivar() {
+        if (!mp.c.esVacia()) {
+            NodoCUsuario aux = mp.c.inicio;
+            while (aux != null && txtBuscar.getText().compareTo(aux.getElemento().getUsuario()) != 0) {
+                aux = aux.getSiguiente();
             }
             txtNombreUsuario.setText(aux.getElemento().getNombre());
             txtApellido1Usuario.setText(aux.getElemento().getPrimerApellido());
             txtApellido2Usuario.setText(aux.getElemento().getSegundoApellido());
             txtContrasenaUsuario.setText(aux.getElemento().getPassword());
-            if(aux.getElemento().getEstado()=="Activo"){
-                rbActivo.setSelected(true);
-            }else{
-                rbInactivo.setSelected(true);
-            }
-        }else{
+            aux.getElemento().setEstado("Inactivo");
+            mp.c.actualizarArchivo(txtBuscar.getText());
+        } else {
             JOptionPane.showMessageDialog(null, "¡Usuario no encontrado!",
-                        "Error en actualización", JOptionPane.INFORMATION_MESSAGE);
-        limpiar();
-        } */
-    }//GEN-LAST:event_btnBuscarActionPerformed
+                    "Error en la búsqueda", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -316,8 +301,8 @@ public class ConsultarUsuarios extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnActualizar;
     private javax.swing.JButton btnBuscar;
+    private javax.swing.JButton btnInactivar;
     private javax.swing.JButton btnRegresar;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel jLabel1;

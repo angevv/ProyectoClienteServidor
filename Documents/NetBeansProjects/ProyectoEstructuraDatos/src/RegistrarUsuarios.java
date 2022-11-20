@@ -1,66 +1,19 @@
 
-import java.awt.Dimension;
 import javax.swing.JOptionPane;
 
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
-
-/**
- *
- * @author Angel
- */
 public class RegistrarUsuarios extends javax.swing.JFrame {
 
-    /**
-     * Creates new form RegistrarUsuarios
-     */
     public RegistrarUsuarios() {
         initComponents();
         setLocationRelativeTo(null);
         setResizable(false);
         setTitle("Gestión de Usuarios");
-       /* this.setSize(new Dimension(470, 390));
-        this.setMinimumSize(new Dimension(470, 390));*/
-        //Cola
-       // this.inicio=null;
-       // this.fin=null;
-        //public jPanel1;
-       /* btnBuscar.setEnabled(false);
-        txtBuscar.setEnabled(false);
-        jLabel8.setEnabled(false);
-        jLabel10.setEnabled(false);
-        jLabel11.setEnabled(false);
-        jLabel12.setEnabled(false);
-        jLabel13.setEnabled(false);
-        jLabel14.setEnabled(false);
-        jLabel15.setEnabled(false);
-        txtNombreUsuario2.setEnabled(false);
-        txtApellido1Usuario1.setEnabled(false);
-        txtApellido2Usuario1.setEnabled(false);
-        txtContrasenaUsuario1.setEnabled(false);
-        rbActivo1.setEnabled(false);
-        rbInactivo1.setEnabled(false);
-        btnActualizar.setEnabled(false);*/
-       /* jPanel2.setVisible(false);
-       this.setSize(new Dimension(470, 390));
-       this.setMinimumSize(new Dimension(470, 390));*/
+        mp.c.cargarUsuario();
     }
     
     //Cola 
-    Cola c = new Cola();
-   /* private NodoCUsuario inicio;
-    private NodoCUsuario fin;
-    
-    public boolean esVacia(){
-        if(inicio==null){
-            return true;
-        }else{
-            return false;
-        }
-    }*/
-    
+    MenuPrincipal mp = new MenuPrincipal();
+
      public void limpiar() {
         txtNombreUsuario.setText("");
         txtApellido1Usuario.setText("");
@@ -241,7 +194,7 @@ public class RegistrarUsuarios extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(18, Short.MAX_VALUE)
+                .addContainerGap(25, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(25, 25, 25))
         );
@@ -251,35 +204,18 @@ public class RegistrarUsuarios extends javax.swing.JFrame {
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         // TODO add your handling code here:
-       // c.agregar(txtNombreUsuario.getText(), txtApellido1Usuario.getText(), txtApellido2Usuario.getText(), txtNicknameUsuario.getText(),txtContrasenaUsuario.getText(),rbActivo.getText());
-       /* DatosRegistrarUsuario d = new DatosRegistrarUsuario();
-        d.setNombre(txtNombreUsuario.getText());
-        d.setPrimerApellido(txtApellido1Usuario.getText());
-        d.setSegundoApellido(txtApellido2Usuario.getText());
-        d.setUsuario(txtNicknameUsuario.getText());
-        d.setPassword(txtContrasenaUsuario.getText());*/
         if(rbActivo.isSelected()){
-            c.agregar(txtNombreUsuario.getText(), txtApellido1Usuario.getText(), txtApellido2Usuario.getText(), txtNicknameUsuario.getText(),txtContrasenaUsuario.getText(),rbActivo.getText());
+            mp.c.agregar(txtNombreUsuario.getText(), txtApellido1Usuario.getText(), txtApellido2Usuario.getText(), txtNicknameUsuario.getText(),txtContrasenaUsuario.getText(),rbActivo.getText());
         }else{
-            c.agregar(txtNombreUsuario.getText(), txtApellido1Usuario.getText(), txtApellido2Usuario.getText(), txtNicknameUsuario.getText(),txtContrasenaUsuario.getText(),rbInactivo.getText());
-        }
-       /* NodoCUsuario nuevo = new NodoCUsuario();
-        nuevo.setElemento(d);
-        if(esVacia()){
-            inicio=nuevo;
-            fin=nuevo;
-        }else{
-            fin.setSiguiente(nuevo);
-            fin=nuevo;
+           mp.c.agregar(txtNombreUsuario.getText(), txtApellido1Usuario.getText(), txtApellido2Usuario.getText(), txtNicknameUsuario.getText(),txtContrasenaUsuario.getText(),rbInactivo.getText());
         }
         JOptionPane.showMessageDialog(null, "¡Datos agregados correctamente!",
-                        "Registro exitoso", JOptionPane.INFORMATION_MESSAGE);*/
+                "Registro exitoso", JOptionPane.INFORMATION_MESSAGE);
         limpiar();
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         // TODO add your handling code here:
-        c.mostrar();
         JOptionPane.showMessageDialog(null, "¡Datos no guardados!",
                         "Registro cancelado", JOptionPane.INFORMATION_MESSAGE);
         limpiar();
@@ -287,9 +223,11 @@ public class RegistrarUsuarios extends javax.swing.JFrame {
 
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
         // TODO add your handling code here:
+        mp.c.guardarArchivo();
         this.dispose();
     }//GEN-LAST:event_btnRegresarActionPerformed
 
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
