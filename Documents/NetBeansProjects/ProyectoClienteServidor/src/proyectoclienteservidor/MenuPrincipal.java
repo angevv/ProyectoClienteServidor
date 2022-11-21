@@ -127,6 +127,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jMenu3.setText("Facturación");
 
         MenuFacturacion.setText("Registrar Factura");
+        MenuFacturacion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MenuFacturacionActionPerformed(evt);
+            }
+        });
         jMenu3.add(MenuFacturacion);
 
         jMenuBar1.add(jMenu3);
@@ -195,6 +200,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
         new Clientes().setVisible(true);
     }//GEN-LAST:event_MenuCatalogoClientesActionPerformed
+
+    private void MenuFacturacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuFacturacionActionPerformed
+        // TODO add your handling code here:
+        new Facturacion().setVisible(true);
+    }//GEN-LAST:event_MenuFacturacionActionPerformed
 
     /**
      * @param args the command line arguments
