@@ -126,7 +126,7 @@ public class Facturacion extends javax.swing.JFrame {
         jToolBar1.setRollover(true);
 
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/add.png"))); // NOI18N
-        jButton2.setToolTipText("Agrega un cliente");
+        jButton2.setToolTipText("Agrega una factura");
         jButton2.setFocusable(false);
         jButton2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -138,7 +138,7 @@ public class Facturacion extends javax.swing.JFrame {
         jToolBar1.add(jButton2);
 
         jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/edit.png"))); // NOI18N
-        jButton5.setToolTipText("Modifica los datos de un cliente");
+        jButton5.setToolTipText("Modifica los datos de una factura");
         jButton5.setFocusable(false);
         jButton5.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton5.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -150,7 +150,7 @@ public class Facturacion extends javax.swing.JFrame {
         jToolBar1.add(jButton5);
 
         jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/icons8_Trash_24px.png"))); // NOI18N
-        jButton6.setToolTipText("Consulta un cliente");
+        jButton6.setToolTipText("Elimina una factura");
         jButton6.setFocusable(false);
         jButton6.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton6.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
