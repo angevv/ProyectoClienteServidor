@@ -32,6 +32,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     Cola c = new Cola();
     Arbol a = new Arbol();
+    ListaDobleCircular ldc = new ListaDobleCircular();
+    ListaSimpleCircular lsc = new ListaSimpleCircular();
     
     /**
      * This method is called from within the constructor to initialize the form.

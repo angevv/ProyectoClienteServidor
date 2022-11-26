@@ -69,15 +69,14 @@ public class InactivarEventos extends javax.swing.JFrame {
         rbEstadio = new javax.swing.JRadioButton();
         txtEstado = new javax.swing.JTextField();
         LugarEvento = new javax.swing.JLabel();
-        btnAgregar = new javax.swing.JButton();
         rbAnfiteatro = new javax.swing.JRadioButton();
-        btnCancelar = new javax.swing.JButton();
         rbTeatro = new javax.swing.JRadioButton();
         btnRegresar = new javax.swing.JButton();
         txtNombreEvento = new javax.swing.JTextField();
         lblBuscarInactivarNombreEvento = new javax.swing.JLabel();
         txtBuscarNombreInactivarEvento = new javax.swing.JTextField();
         tbnBuscarInactivarNombreEvento = new javax.swing.JButton();
+        btnInactivarEventos = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -118,25 +117,11 @@ public class InactivarEventos extends javax.swing.JFrame {
 
         LugarEvento.setText("Lugar:");
 
-        btnAgregar.setText("Agregar");
-        btnAgregar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAgregarActionPerformed(evt);
-            }
-        });
-
         OpcionesLugarEvento.add(rbAnfiteatro);
         rbAnfiteatro.setText("Anfiteatro");
         rbAnfiteatro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 rbAnfiteatroActionPerformed(evt);
-            }
-        });
-
-        btnCancelar.setText("Cancelar");
-        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCancelarActionPerformed(evt);
             }
         });
 
@@ -165,6 +150,13 @@ public class InactivarEventos extends javax.swing.JFrame {
             }
         });
 
+        btnInactivarEventos.setText("Inactivar");
+        btnInactivarEventos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnInactivarEventosActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -173,13 +165,6 @@ public class InactivarEventos extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(CatalogoEvento)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(50, 50, 50)
-                        .addComponent(btnAgregar)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnCancelar)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnRegresar))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(fechaEvento)
@@ -190,6 +175,18 @@ public class InactivarEventos extends javax.swing.JFrame {
                             .addComponent(NombreEvento))
                         .addGap(44, 44, 44)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                        .addComponent(btnInactivarEventos)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(btnRegresar))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                        .addComponent(lblBuscarInactivarNombreEvento)
+                                        .addGap(39, 39, 39)
+                                        .addComponent(txtBuscarNombreInactivarEvento, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(tbnBuscarInactivarNombreEvento))
                             .addComponent(txtNombreEvento, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(rbEstadio)
@@ -200,13 +197,7 @@ public class InactivarEventos extends javax.swing.JFrame {
                             .addComponent(txtCiudad, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtFechaEvento, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(lblBuscarInactivarNombreEvento)
-                        .addGap(39, 39, 39)
-                        .addComponent(txtBuscarNombreInactivarEvento, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(tbnBuscarInactivarNombreEvento)))
+                            .addComponent(txtFechaEvento, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(17, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -214,7 +205,7 @@ public class InactivarEventos extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(30, 30, 30)
                 .addComponent(CatalogoEvento)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                .addGap(32, 32, 32)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblBuscarInactivarNombreEvento)
                     .addComponent(txtBuscarNombreInactivarEvento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -247,10 +238,9 @@ public class InactivarEventos extends javax.swing.JFrame {
                     .addComponent(txtEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(23, 23, 23)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAgregar)
-                    .addComponent(btnCancelar)
-                    .addComponent(btnRegresar))
-                .addContainerGap())
+                    .addComponent(btnRegresar)
+                    .addComponent(btnInactivarEventos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -260,7 +250,7 @@ public class InactivarEventos extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -292,57 +282,8 @@ public class InactivarEventos extends javax.swing.JFrame {
     private void rbEstadioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbEstadioActionPerformed
         
     }//GEN-LAST:event_rbEstadioActionPerformed
-    //AGREGAR
-    private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
-        DatosCatalogoEvento d = new DatosCatalogoEvento();
-        d.setNombreEvento(txtNombreEvento.getText());
-        d.setFechaEvento(txtFechaEvento.getText());
-        d.setCiudad(txtCiudad.getText());
-        d.setDireccion(txtDireccion.getText());
-        d.setEstado(txtEstado.getText());
-        if(rbEstadio.isSelected()){
-            d.setLugar(rbEstadio.getText());
-        }
-        if(rbAnfiteatro.isSelected()){
-            d.setLugar(rbAnfiteatro.getText());
-        }
-        if(rbTeatro.isSelected()){
-            d.setLugar(rbTeatro.getText());
-        }
-        
-        NodoCatalogoEvento nuevo = new NodoCatalogoEvento();
-        nuevo.setElemento(d);
-        if(esVaciaSC()){
-           inicio=nuevo;
-           fin=nuevo;
-           fin.setSiguiente(inicio); 
-        } else if (d.getNombreEvento().compareTo(inicio.getElemento().getNombreEvento())<0){ 
-           nuevo.setSiguiente(inicio); 
-           inicio=nuevo;
-           fin.setSiguiente(inicio);
-       } else if (d.getNombreEvento().compareTo(fin.getElemento().getNombreEvento())>=0){ 
-           fin.setSiguiente(nuevo);
-           fin = nuevo;
-           fin.setSiguiente(inicio); 
-       } else { 
-           NodoCatalogoEvento aux=inicio;
-           while(aux.getSiguiente().getElemento().getNombreEvento().compareTo(d.getNombreEvento())<0){
-               aux=aux.getSiguiente();
-           }
-           nuevo.setSiguiente(aux.getSiguiente()); 
-           aux.setSiguiente(nuevo); 
-       }
-        JOptionPane.showMessageDialog(null, "¡Datos agregados correctamente!",
-                        "Registro exitoso", JOptionPane.INFORMATION_MESSAGE);
-        limpiar();
-    }//GEN-LAST:event_btnAgregarActionPerformed
-    //CANCELAR
-    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        JOptionPane.showMessageDialog(null, "¡Datos no guardados!",
-                "Registro cancelado", JOptionPane.INFORMATION_MESSAGE);
-        limpiar();
-    }//GEN-LAST:event_btnCancelarActionPerformed
-    //REGRESAR
+
+   //REGRESAR
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
         this.dispose();
     }//GEN-LAST:event_btnRegresarActionPerformed
@@ -363,6 +304,10 @@ public class InactivarEventos extends javax.swing.JFrame {
            JOptionPane.showMessageDialog(null,"No se puede extraer, lista vacía");
        }
     }//GEN-LAST:event_tbnBuscarInactivarNombreEventoActionPerformed
+
+    private void btnInactivarEventosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInactivarEventosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnInactivarEventosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -406,8 +351,7 @@ public class InactivarEventos extends javax.swing.JFrame {
     private javax.swing.JLabel LugarEvento;
     private javax.swing.JLabel NombreEvento;
     private javax.swing.ButtonGroup OpcionesLugarEvento;
-    private javax.swing.JButton btnAgregar;
-    private javax.swing.JButton btnCancelar;
+    private javax.swing.JButton btnInactivarEventos;
     private javax.swing.JButton btnRegresar;
     private javax.swing.JLabel fechaEvento;
     private javax.swing.JLabel jLabel1;
