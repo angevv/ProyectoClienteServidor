@@ -20,22 +20,12 @@ public class CatalogoEventos extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         setResizable(false);
         setTitle("Catalogo de Eventos");
-        //Lista Simple Circular
-        this.inicio=null;
-        this.fin=null;
+        menupr.lsc.cargarEventos();
+        
     }
     
     //Lista Simple Circular
-    private NodoCatalogoEvento inicio;
-    private NodoCatalogoEvento fin;
-    
-    public boolean esVaciaSC(){
-        if(inicio==null){
-            return true;
-        }else{
-            return false;
-        }
-    }
+    MenuPrincipal menupr = new MenuPrincipal();
     
     public void limpiar() {
         txtNombreEvento.setText("");
@@ -252,44 +242,17 @@ public class CatalogoEventos extends javax.swing.JFrame {
     }//GEN-LAST:event_rbEstadioActionPerformed
     //AGREGAR
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
-        DatosCatalogoEvento d = new DatosCatalogoEvento();
-        d.setNombreEvento(txtNombreEvento.getText());
-        d.setFechaEvento(txtFechaEvento.getText());
-        d.setCiudad(txtCiudad.getText());
-        d.setDireccion(txtDireccion.getText());
-        d.setEstado(txtEstado.getText());
-        if(rbEstadio.isSelected()){
-            d.setLugar(rbEstadio.getText());
-        }
-        if(rbAnfiteatro.isSelected()){
-            d.setLugar(rbAnfiteatro.getText());
-        }
-        if(rbTeatro.isSelected()){
-            d.setLugar(rbTeatro.getText());
-        }
-        
-        NodoCatalogoEvento nuevo = new NodoCatalogoEvento();
-        nuevo.setElemento(d);
-        if(esVaciaSC()){
-           inicio=nuevo;
-           fin=nuevo;
-           fin.setSiguiente(inicio); 
-        } else if (d.getNombreEvento().compareTo(inicio.getElemento().getNombreEvento())<0){ 
-           nuevo.setSiguiente(inicio); 
-           inicio=nuevo;
-           fin.setSiguiente(inicio);
-       } else if (d.getNombreEvento().compareTo(fin.getElemento().getNombreEvento())>=0){ 
-           fin.setSiguiente(nuevo);
-           fin = nuevo;
-           fin.setSiguiente(inicio); 
-       } else { 
-           NodoCatalogoEvento aux=inicio;
-           while(aux.getSiguiente().getElemento().getNombreEvento().compareTo(d.getNombreEvento())<0){
-               aux=aux.getSiguiente();
-           }
-           nuevo.setSiguiente(aux.getSiguiente()); 
-           aux.setSiguiente(nuevo); 
-       }
+//        String tipo = "";
+//        if(rbEstadio.isSelected()){
+//            tipo = activo;
+//            d.setLugar(rbEstadio.getText());
+//        }
+//        if(rbAnfiteatro.isSelected()){
+//            d.setLugar(rbAnfiteatro.getText());
+//        }
+//        if(rbTeatro.isSelected()){
+//            d.setLugar(rbTeatro.getText());
+//        }
         JOptionPane.showMessageDialog(null, "¡Datos agregados correctamente!",
                         "Registro exitoso", JOptionPane.INFORMATION_MESSAGE);
         limpiar();
@@ -302,6 +265,7 @@ public class CatalogoEventos extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCancelarActionPerformed
     //REGRESAR
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
+        menupr.lsc.guardarArchivo();
         this.dispose();
     }//GEN-LAST:event_btnRegresarActionPerformed
 
