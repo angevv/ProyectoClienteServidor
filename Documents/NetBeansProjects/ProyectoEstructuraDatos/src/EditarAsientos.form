@@ -64,35 +64,33 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="lblEditarsientos" min="-2" max="-2" attributes="0"/>
                       <Group type="102" alignment="0" attributes="0">
+                          <Component id="lblBuscarEditarNumeroAsiento" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="78" max="-2" attributes="0"/>
+                          <Component id="txtBuscarNumeroAsiento" min="-2" pref="145" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Component id="btnBuscarNumeroAsiento" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="CodigoArea" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="txtCostoAsiento" min="-2" pref="182" max="-2" attributes="0"/>
                               <Component id="rbLIB" min="-2" max="-2" attributes="0"/>
-                              <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="rbPRE" min="-2" max="-2" attributes="0"/>
-                                  <Component id="txtNumeroAsiento" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="txtCostoAsiento" alignment="0" min="-2" pref="182" max="-2" attributes="0"/>
-                              </Group>
+                              <Component id="rbPRE" min="-2" max="-2" attributes="0"/>
                               <Component id="rbOCU" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="rbNOR" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="btnEditarAsientos" min="-2" pref="79" max="-2" attributes="0"/>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <Component id="btnInactivarAsientos" min="-2" pref="81" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
                                   <Component id="btnRegresar" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                      </Group>
-                      <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Group type="102" alignment="0" attributes="0">
-                          <Component id="lblBuscarEditarNombreAsiento" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="78" max="-2" attributes="0"/>
-                          <Component id="txtBuscarNombreAsiento" min="-2" pref="145" max="-2" attributes="0"/>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="btnBuscarNombreAsiento" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
@@ -104,11 +102,11 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="lblEditarsientos" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="8" max="32767" attributes="0"/>
+                  <EmptySpace pref="16" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="lblBuscarEditarNombreAsiento" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="txtBuscarNombreAsiento" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="btnBuscarNombreAsiento" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblBuscarEditarNumeroAsiento" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtBuscarNumeroAsiento" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnBuscarNumeroAsiento" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
@@ -117,29 +115,25 @@
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="rbNOR" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="txtNumeroAsiento" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="txtCostoAsiento" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="rbLIB" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="rbLIB" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="rbOCU" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="btnEditarAsientos" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="btnRegresar" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnInactivarAsientos" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -181,7 +175,7 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="14" style="1"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="EDITAR ASIENTOS"/>
+            <Property name="text" type="java.lang.String" value="EDITAR O INACTIVAR ASIENTOS"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="CodigoArea">
@@ -216,26 +210,19 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rbNORActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel1">
+        <Component class="javax.swing.JLabel" name="lblBuscarEditarNumeroAsiento">
           <Properties>
-            <Property name="text" type="java.lang.String" value="N&#xfa;mero de asiento:"/>
+            <Property name="text" type="java.lang.String" value="Ingrese el numero del asiento que desea editar:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtNumeroAsiento">
+        <Component class="javax.swing.JTextField" name="txtBuscarNumeroAsiento">
         </Component>
-        <Component class="javax.swing.JLabel" name="lblBuscarEditarNombreAsiento">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Ingrese el nombre del asiento que desea editar:"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JTextField" name="txtBuscarNombreAsiento">
-        </Component>
-        <Component class="javax.swing.JButton" name="btnBuscarNombreAsiento">
+        <Component class="javax.swing.JButton" name="btnBuscarNumeroAsiento">
           <Properties>
             <Property name="text" type="java.lang.String" value="Buscar"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnBuscarNombreAsientoActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnBuscarNumeroAsientoActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnEditarAsientos">
@@ -244,6 +231,14 @@
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEditarAsientosActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="btnInactivarAsientos">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Inactivar"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnInactivarAsientosActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>

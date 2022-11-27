@@ -20,27 +20,14 @@ public class EditarAsientos extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         setResizable(false);
         setTitle("Editar Asientos");
-        //Lista Doble Circular
-        this.inicio=null;
-        this.fin=null;
+        menup.ldc.cargarCatalogoAsientos();
     }
     
-    //Lista Doble Circular
-    private NodoCatalogoAsientos inicio;
-    private NodoCatalogoAsientos fin;
-    
-    public boolean esVaciaDC(){
-        if(inicio==null){
-            return true;
-        } else{
-            return false;
-        }
-    }
+    MenuPrincipal menup = new MenuPrincipal();
     
     public void limpiar() {
         opcionesCodigoArea.clearSelection();
-        opcionesEstado.clearSelection();
-        txtNumeroAsiento.setText("");
+        opcionesEstado.clearSelection(); 
         txtCostoAsiento.setText("");
     }
     /**
@@ -65,12 +52,11 @@ public class EditarAsientos extends javax.swing.JFrame {
         rbPRE = new javax.swing.JRadioButton();
         btnRegresar = new javax.swing.JButton();
         rbNOR = new javax.swing.JRadioButton();
-        jLabel1 = new javax.swing.JLabel();
-        txtNumeroAsiento = new javax.swing.JTextField();
-        lblBuscarEditarNombreAsiento = new javax.swing.JLabel();
-        txtBuscarNombreAsiento = new javax.swing.JTextField();
-        btnBuscarNombreAsiento = new javax.swing.JButton();
+        lblBuscarEditarNumeroAsiento = new javax.swing.JLabel();
+        txtBuscarNumeroAsiento = new javax.swing.JTextField();
+        btnBuscarNumeroAsiento = new javax.swing.JButton();
         btnEditarAsientos = new javax.swing.JButton();
+        btnInactivarAsientos = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -92,7 +78,7 @@ public class EditarAsientos extends javax.swing.JFrame {
         });
 
         lblEditarsientos.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        lblEditarsientos.setText("EDITAR ASIENTOS");
+        lblEditarsientos.setText("EDITAR O INACTIVAR ASIENTOS");
 
         CodigoArea.setText("Código de área:");
 
@@ -114,14 +100,12 @@ public class EditarAsientos extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setText("Número de asiento:");
+        lblBuscarEditarNumeroAsiento.setText("Ingrese el numero del asiento que desea editar:");
 
-        lblBuscarEditarNombreAsiento.setText("Ingrese el nombre del asiento que desea editar:");
-
-        btnBuscarNombreAsiento.setText("Buscar");
-        btnBuscarNombreAsiento.addActionListener(new java.awt.event.ActionListener() {
+        btnBuscarNumeroAsiento.setText("Buscar");
+        btnBuscarNumeroAsiento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBuscarNombreAsientoActionPerformed(evt);
+                btnBuscarNumeroAsientoActionPerformed(evt);
             }
         });
 
@@ -129,6 +113,13 @@ public class EditarAsientos extends javax.swing.JFrame {
         btnEditarAsientos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEditarAsientosActionPerformed(evt);
+            }
+        });
+
+        btnInactivarAsientos.setText("Inactivar");
+        btnInactivarAsientos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnInactivarAsientosActionPerformed(evt);
             }
         });
 
@@ -141,30 +132,29 @@ public class EditarAsientos extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblEditarsientos)
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(lblBuscarEditarNumeroAsiento)
+                        .addGap(78, 78, 78)
+                        .addComponent(txtBuscarNumeroAsiento, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnBuscarNumeroAsiento))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(CodigoArea)
-                            .addComponent(jLabel3))
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel2))
                         .addGap(40, 40, 40)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtCostoAsiento, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(rbLIB)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(rbPRE)
-                                .addComponent(txtNumeroAsiento)
-                                .addComponent(txtCostoAsiento, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(rbPRE)
                             .addComponent(rbOCU)
                             .addComponent(rbNOR)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(btnEditarAsientos, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btnRegresar))))
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(lblBuscarEditarNombreAsiento)
-                        .addGap(78, 78, 78)
-                        .addComponent(txtBuscarNombreAsiento, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnBuscarNombreAsiento)))
+                                .addComponent(btnInactivarAsientos, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnRegresar)))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -172,36 +162,33 @@ public class EditarAsientos extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lblEditarsientos)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblBuscarEditarNombreAsiento)
-                    .addComponent(txtBuscarNombreAsiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnBuscarNombreAsiento))
+                    .addComponent(lblBuscarEditarNumeroAsiento)
+                    .addComponent(txtBuscarNumeroAsiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnBuscarNumeroAsiento))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(rbPRE)
                     .addComponent(CodigoArea))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(rbNOR)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(txtNumeroAsiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(14, 14, 14)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(txtCostoAsiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(27, 27, 27)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(rbLIB)
-                    .addComponent(jLabel3))
+                    .addComponent(jLabel3)
+                    .addComponent(rbLIB))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(rbOCU)
-                .addGap(28, 28, 28)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnEditarAsientos)
-                    .addComponent(btnRegresar))
-                .addGap(31, 31, 31))
+                    .addComponent(btnRegresar)
+                    .addComponent(btnInactivarAsientos))
+                .addGap(55, 55, 55))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -238,30 +225,152 @@ public class EditarAsientos extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnRegresarActionPerformed
     //BUSCAR
-    private void btnBuscarNombreAsientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarNombreAsientoActionPerformed
-        // TODO add your handling code here:
-         if(!esVaciaDC()){
-            String s="";
-            NodoCatalogoAsientos aux=inicio;
-            s=s+aux.getElemento().getCodigoArea()+"--"+aux.getElemento().getNumeroAsiento()+"--"+aux.getElemento().getCostoVenta()+"--"+aux.getElemento().getEstado()+"<==>";
-            aux=aux.getSiguiente();
-            while(aux!=inicio){
-                s=s+aux.getElemento().getCodigoArea()+"--"+aux.getElemento().getNumeroAsiento()+"--"+aux.getElemento().getCostoVenta()+"--"+aux.getElemento().getEstado()+"<==>";
-                aux=aux.getSiguiente();
-            }
-            JOptionPane.showMessageDialog(null,"La lista contiene: \n"+s);
-        } else {
-            JOptionPane.showMessageDialog(null,"No existen elementos para mostrar, lista vacia");
-        }
-    }//GEN-LAST:event_btnBuscarNombreAsientoActionPerformed
+    private void btnBuscarNumeroAsientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarNumeroAsientoActionPerformed
+        limpiar();
+        txtBuscarNumeroAsiento.requestFocus();
+        mostrarLDC();
+    }//GEN-LAST:event_btnBuscarNumeroAsientoActionPerformed
 
     private void btnEditarAsientosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarAsientosActionPerformed
-        // TODO add your handling code here:
+        
+        JOptionPane.showMessageDialog(null, "¡El asiento se ha editado!",
+                "Usuario Inactivado", JOptionPane.INFORMATION_MESSAGE);
+        txtBuscarNumeroAsiento.setText("");
+        limpiar();
+        txtBuscarNumeroAsiento.requestFocus();
     }//GEN-LAST:event_btnEditarAsientosActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+    private void btnInactivarAsientosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInactivarAsientosActionPerformed
+        try{
+        if(!menup.ldc.esVaciaDC()){
+            int numeroA = Integer.parseInt(txtBuscarNumeroAsiento.getText());
+           if(menup.ldc.inicio.getElemento().getNumeroAsiento() == numeroA ){
+              menup.ldc.inicio=menup.ldc.inicio.getSiguiente();
+              menup.ldc.fin.setSiguiente(menup.ldc.inicio);
+              menup.ldc.inicio.setAnterior(menup.ldc.fin);
+              JOptionPane.showMessageDialog(null,"¡El asiento fue inactivado!","Asiento inactivado",
+                JOptionPane.QUESTION_MESSAGE);
+           }else{
+              NodoCatalogoAsientos anterior;
+              NodoCatalogoAsientos auxiliar;
+              anterior=menup.ldc.inicio;
+              auxiliar=menup.ldc.inicio.getSiguiente();
+              while((auxiliar!=menup.ldc.inicio)&&
+                 (auxiliar.getElemento().getNumeroAsiento() != numeroA)){
+                 anterior=anterior.getSiguiente();
+                 auxiliar=auxiliar.getSiguiente();
+              }
+              if(auxiliar!=menup.ldc.inicio){
+                 anterior.setSiguiente(auxiliar.getSiguiente());
+                 menup.ldc.fin.setSiguiente(menup.ldc.inicio);
+                 menup.ldc.inicio.setAnterior(menup.ldc.fin);
+              }
+           }
+        }
+      }catch(Exception ex){
+         JOptionPane.showMessageDialog(null,"¡Ocurrió un error al inactivar asiento!",
+             "Error al extraer",JOptionPane.ERROR_MESSAGE);
+      }
+    }//GEN-LAST:event_btnInactivarAsientosActionPerformed
+    
+    public boolean existe() {
+        int numeroA = Integer.parseInt(txtBuscarNumeroAsiento.getText());
+        if (!menup.ldc.esVaciaDC()) {
+            if (menup.ldc.inicio.getElemento().getNumeroAsiento() == numeroA ){
+                return true;
+            }
+            else{
+                NodoCatalogoAsientos anterior, aux;
+                anterior = menup.ldc.inicio;
+                aux = menup.ldc.inicio.getSiguiente();
+                
+                while (aux != menup.ldc.inicio && 
+                        aux.getElemento().getNumeroAsiento() != numeroA){
+                    aux = aux.getSiguiente();
+                    anterior = anterior.getSiguiente();
+                }
+                if (aux != menup.ldc.inicio){
+                    return true;
+                }
+            }
+            return false;
+        } else {
+            return false;
+
+        }
+    }
+    
+    public void mostrarLDC() {
+        if (!menup.ldc.esVaciaDC()) {
+            NodoCatalogoAsientos aux = menup.ldc.inicio;
+            String numeroAsiento = String.valueOf(aux.getElemento().getNumeroAsiento());
+            if (existe()) {
+                while (aux != menup.ldc.inicio && txtBuscarNumeroAsiento.getText().compareTo(numeroAsiento) != 0) {
+                    aux = aux.getSiguiente();
+                }
+                if (txtBuscarNumeroAsiento.getText().equals(aux.getElemento().getNumeroAsiento())) {
+                    String costoA = String.valueOf(aux.getElemento().getCostoVenta());
+                    txtCostoAsiento.setText(costoA);
+                    if (aux.getElemento().getEstado().equals("LIB")) {
+                        rbLIB.setSelected(true);
+                    } else {
+                        rbOCU.setSelected(true);
+                    }
+                    if (aux.getElemento().getCodigoArea().equals("PRE")) {
+                        rbPRE.setSelected(true);
+                    } else {
+                        rbNOR.setSelected(true);
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "¡Asiento no encontrado!",
+                            "Error en la búsqueda", JOptionPane.INFORMATION_MESSAGE);
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "¡Asiento no encontrado!",
+                        "Error en la búsqueda", JOptionPane.INFORMATION_MESSAGE);
+            }
+        }
+    }
+    
+    public void editar() {
+        if (!menup.ldc.esVaciaDC()) {
+            NodoCatalogoAsientos aux = menup.ldc.inicio;
+            int buscarA = Integer.parseInt(txtBuscarNumeroAsiento.getText());
+            if (existe()) {
+                while (aux != menup.ldc.inicio && buscarA != aux.getElemento().getNumeroAsiento()) {
+                    aux = aux.getSiguiente();
+                }
+                if (buscarA == aux.getElemento().getNumeroAsiento()) {
+                    float costoAsiento = Float.parseFloat(txtCostoAsiento.getText());
+                    aux.getElemento().setCostoVenta(costoAsiento);
+                    String codigoA = "";
+                    if (rbPRE.isSelected()) {
+                        aux.getElemento().setCodigoArea(rbPRE.getText());
+                        codigoA = rbPRE.getText();
+                    } else {
+                        aux.getElemento().setCodigoArea(rbNOR.getText());
+                        codigoA = rbNOR.getText();
+                    }
+                    String estado = "";
+                    if (rbLIB.isSelected()) {
+                        aux.getElemento().setEstado(rbLIB.getText());
+                        estado = rbLIB.getText();
+                    } else {
+                        aux.getElemento().setEstado(rbOCU.getText());
+                        estado = rbOCU.getText();
+                    }
+                    menup.ldc.actualizarArchivo(buscarA, codigoA, estado);
+                } else {
+                    JOptionPane.showMessageDialog(null, "¡Asiento no encontrado!",
+                            "Error en la búsqueda", JOptionPane.INFORMATION_MESSAGE);
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "¡Asiento no encontrado!",
+                        "Error en la búsqueda", JOptionPane.INFORMATION_MESSAGE);
+            }
+        }
+    }
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -296,14 +405,14 @@ public class EditarAsientos extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel CodigoArea;
-    private javax.swing.JButton btnBuscarNombreAsiento;
+    private javax.swing.JButton btnBuscarNumeroAsiento;
     private javax.swing.JButton btnEditarAsientos;
+    private javax.swing.JButton btnInactivarAsientos;
     private javax.swing.JButton btnRegresar;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JLabel lblBuscarEditarNombreAsiento;
+    private javax.swing.JLabel lblBuscarEditarNumeroAsiento;
     private javax.swing.JLabel lblEditarsientos;
     private javax.swing.ButtonGroup opcionesCodigoArea;
     private javax.swing.ButtonGroup opcionesEstado;
@@ -311,8 +420,7 @@ public class EditarAsientos extends javax.swing.JFrame {
     private javax.swing.JRadioButton rbNOR;
     private javax.swing.JRadioButton rbOCU;
     private javax.swing.JRadioButton rbPRE;
-    private javax.swing.JTextField txtBuscarNombreAsiento;
+    private javax.swing.JTextField txtBuscarNumeroAsiento;
     private javax.swing.JTextField txtCostoAsiento;
-    private javax.swing.JTextField txtNumeroAsiento;
     // End of variables declaration//GEN-END:variables
 }

@@ -15,8 +15,8 @@ import javax.swing.JOptionPane;
  */
 public class ListaDobleCircular {
     
-    private NodoCatalogoAsientos inicio;
-    private NodoCatalogoAsientos fin;
+    public NodoCatalogoAsientos inicio;
+    public NodoCatalogoAsientos fin;
     
     public ListaDobleCircular(){
         this.inicio=null;
@@ -31,7 +31,7 @@ public class ListaDobleCircular {
         }
     }
     
-    public void agregar(String codArea, int numAsiento, Float costVenta, String estado){
+    public void agregar(String codArea, int numAsiento, float costVenta, String estado){
         DatosCatalogoAsientos d = new DatosCatalogoAsientos();
         d.setCodigoArea(codArea);
         d.setNumeroAsiento(numAsiento);
@@ -115,7 +115,7 @@ public class ListaDobleCircular {
         
     }
     
-     public void actualizarArchivo(String buscar) {
+    public void actualizarArchivo(int buscar, String codigo, String estado) {
         try {
             DatosCatalogoAsientos ca = new DatosCatalogoAsientos();
             DataInputStream entrada = new DataInputStream(new FileInputStream(
@@ -128,12 +128,11 @@ public class ListaDobleCircular {
                     ca.setNumeroAsiento(entrada.readInt());
                     ca.setCostoVenta(entrada.readFloat());
                     ca.setEstado(entrada.readUTF());
-                    if (ca.getCodigoArea().equals(buscar)) {
-                        ca.setCodigoArea(ca.getCodigoArea());
+                    if (ca.getNumeroAsiento() == buscar) {
+                        ca.setCodigoArea(codigo);
                         ca.setNumeroAsiento(ca.getNumeroAsiento());
                         ca.setCostoVenta(ca.getCostoVenta());
-                        ca.setEstado(ca.getEstado());
-                        ca.setEstado("OCU");
+                        ca.setEstado(estado);
                     }
                     salida.writeUTF(ca.getCodigoArea());
                     salida.writeInt(ca.getNumeroAsiento());
@@ -154,7 +153,7 @@ public class ListaDobleCircular {
         }
     }
      
-       public void mover() {
+    public void mover() {
         try {
             DatosCatalogoAsientos ca = new DatosCatalogoAsientos();
             DataInputStream entrada = new DataInputStream(new FileInputStream(

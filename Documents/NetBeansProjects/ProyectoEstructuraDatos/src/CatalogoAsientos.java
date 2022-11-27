@@ -185,15 +185,23 @@ public class CatalogoAsientos extends javax.swing.JFrame {
     }//GEN-LAST:event_rbNORActionPerformed
     //AGREGAR
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
-//
-//        //codigoArea
-//        if(rbPRE.isSelected()){
-//            menup.ldc.agregar(txtNumeroAsiento.getText(), txtCostoAsiento.getText());
-//        }
-//        //estado
-//        if(rbLIB.isSelected()){
-//            //a.setEstado(rbLIB.getText());
-//        } 
+       int numA = Integer.parseInt(txtNumeroAsiento.getText());
+       float costoA = Float.parseFloat(txtCostoAsiento.getText());
+       String codigoArea = "";
+       if(rbPRE.isSelected()){
+           codigoArea = rbPRE.getText();
+       } else {
+           codigoArea = rbNOR.getText();
+       }
+       
+       String estado = "";
+       if(rbLIB.isSelected()){
+           codigoArea = rbLIB.getText();
+       } else {
+           codigoArea = rbOCU.getText();
+       }
+       menup.ldc.agregar(codigoArea, numA, costoA, estado);
+       
        JOptionPane.showMessageDialog(null, "¡Datos agregados correctamente!",
                 "Registro exitoso", JOptionPane.INFORMATION_MESSAGE);
         limpiar();
