@@ -78,6 +78,7 @@ public class EditarEventos extends javax.swing.JFrame {
         lblBuscarEditarNombreEvento = new javax.swing.JLabel();
         txtBuscarEditarNombreEvento = new javax.swing.JTextField();
         btnBuscarEditarNombreEvento = new javax.swing.JButton();
+        btnEditarEventos = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -165,6 +166,8 @@ public class EditarEventos extends javax.swing.JFrame {
             }
         });
 
+        btnEditarEventos.setText("Editar");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -201,7 +204,9 @@ public class EditarEventos extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnCancelar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnRegresar))
+                        .addComponent(btnRegresar, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnEditarEventos, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(lblBuscarEditarNombreEvento)
                         .addGap(55, 55, 55)
@@ -250,7 +255,8 @@ public class EditarEventos extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAgregar)
                     .addComponent(btnCancelar)
-                    .addComponent(btnRegresar))
+                    .addComponent(btnRegresar)
+                    .addComponent(btnEditarEventos))
                 .addGap(30, 30, 30))
         );
 
@@ -410,6 +416,7 @@ public class EditarEventos extends javax.swing.JFrame {
     private javax.swing.JButton btnAgregar;
     private javax.swing.JButton btnBuscarEditarNombreEvento;
     private javax.swing.JButton btnCancelar;
+    private javax.swing.JButton btnEditarEventos;
     private javax.swing.JButton btnRegresar;
     private javax.swing.JLabel fechaEvento;
     private javax.swing.JLabel jLabel1;
