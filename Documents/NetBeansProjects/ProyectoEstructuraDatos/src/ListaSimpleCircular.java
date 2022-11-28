@@ -18,26 +18,57 @@ import javax.swing.JOptionPane;
  * @author Kou
  */
 public class ListaSimpleCircular {
-    private NodoCatalogoEvento inicio;
+
+    public NodoCatalogoEvento inicio;
     private NodoCatalogoEvento fin;
-    
-    public ListaSimpleCircular(){
-        this.inicio=null;
-        this.fin=null;
+
+    public ListaSimpleCircular() {
+        this.inicio = null;
+        this.fin = null;
     }
-    
-    public boolean esVaciaSC(){
-        if(inicio==null){
+
+    public boolean esVaciaSC() {
+        if (inicio == null) {
             return true;
-        }else{
+        } else {
             return false;
         }
     }
-    
-    public void agregar(String nombre, String fecha, String ciudad, String direccion, String estado){
+
+    public boolean existe(String lugar, String nombre, String fecha) {
+        if (!esVaciaSC()) {
+            NodoCatalogoEvento aux = inicio;
+            if (!aux.getElemento().getNombreEvento().equals(nombre)) {
+                if (aux.getElemento().getLugar().equals(lugar) || aux.getElemento().getFechaEvento().equals(fecha)) {
+                    return false;
+                } else {
+                    return true;
+                }
+            } else if (aux.getElemento().getNombreEvento().equals(nombre)) {
+                return false;
+            } 
+            aux = aux.getSiguiente();
+            while (aux != inicio) {
+                if (!aux.getElemento().getNombreEvento().equals(nombre)) {
+                    if (aux.getElemento().getLugar().equals(lugar) || aux.getElemento().getFechaEvento().equals(fecha)) {
+                        return false;
+                    } else {
+                        return true;
+                    }
+                } else if (aux.getElemento().getNombreEvento().equals(nombre)) {
+                    return false;
+                }
+                aux = aux.getSiguiente();
+            }
+        }
+        return true;
+    }
+
+    public void agregar(String nombre, String fecha, String lugar,String ciudad, String direccion, String estado){
         DatosCatalogoEvento d = new DatosCatalogoEvento();
         d.setNombreEvento(nombre);
         d.setFechaEvento(fecha);
+        d.setLugar(lugar);
         d.setCiudad(ciudad);
         d.setDireccion(direccion);
         d.setEstado(estado);
@@ -49,7 +80,7 @@ public class ListaSimpleCircular {
            inicio=nuevo;
            fin=nuevo;
            fin.setSiguiente(inicio); 
-        } else if (d.getNombreEvento().compareTo(inicio.getElemento().getNombreEvento())<0){ 
+        } else if (d.getNombreEvento().compareTo(inicio.getElemento().getNombreEvento())<0 ){ 
            nuevo.setSiguiente(inicio); 
            inicio=nuevo;
            fin.setSiguiente(inicio);
@@ -72,9 +103,17 @@ public class ListaSimpleCircular {
             DataOutputStream salida = new DataOutputStream(new FileOutputStream("CatalogoEventos.dat", false));
             if(!esVaciaSC()){
                 NodoCatalogoEvento aux=inicio;
-                while(aux!=null){
+                salida.writeUTF(aux.getElemento().getNombreEvento());
+                salida.writeUTF(aux.getElemento().getFechaEvento());
+                salida.writeUTF(aux.getElemento().getLugar());
+                salida.writeUTF(aux.getElemento().getCiudad());
+                salida.writeUTF(aux.getElemento().getDireccion());
+                salida.writeUTF(aux.getElemento().getEstado());
+                aux=aux.getSiguiente();
+                while(aux!=inicio){
                     salida.writeUTF(aux.getElemento().getNombreEvento());
                     salida.writeUTF(aux.getElemento().getFechaEvento());
+                    salida.writeUTF(aux.getElemento().getLugar());
                     salida.writeUTF(aux.getElemento().getCiudad());
                     salida.writeUTF(aux.getElemento().getDireccion());
                     salida.writeUTF(aux.getElemento().getEstado());
@@ -100,11 +139,12 @@ public class ListaSimpleCircular {
                     DatosCatalogoEvento ce = new DatosCatalogoEvento();
                     ce.setNombreEvento(entrada.readUTF());
                     ce.setFechaEvento(entrada.readUTF());
+                    ce.setLugar(entrada.readUTF());
                     ce.setCiudad(entrada.readUTF());
                     ce.setDireccion(entrada.readUTF());
                     ce.setEstado(entrada.readUTF());
                     
-                    agregar(ce.getNombreEvento(),ce.getFechaEvento(),ce.getCiudad(),ce.getDireccion(),ce.getEstado());
+                    agregar(ce.getNombreEvento(),ce.getFechaEvento(),ce.getLugar(),ce.getCiudad(),ce.getDireccion(),ce.getEstado());
                 }
             } catch (EOFException eeof) {
                 entrada.close();
