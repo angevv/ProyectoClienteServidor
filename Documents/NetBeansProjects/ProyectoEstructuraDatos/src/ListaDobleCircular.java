@@ -73,7 +73,12 @@ public class ListaDobleCircular {
             DataOutputStream salida = new DataOutputStream(new FileOutputStream("CatalogoAsientos.dat", false));
             if(!esVaciaDC()){
                 NodoCatalogoAsientos aux=inicio;
-                while(aux!=null){
+                salida.writeUTF(aux.getElemento().getCodigoArea());
+                salida.writeInt(aux.getElemento().getNumeroAsiento());
+                salida.writeFloat(aux.getElemento().getCostoVenta());
+                salida.writeUTF(aux.getElemento().getEstado());
+                aux=aux.getSiguiente();
+                while(aux!=inicio){
                     salida.writeUTF(aux.getElemento().getCodigoArea());
                     salida.writeInt(aux.getElemento().getNumeroAsiento());
                     salida.writeFloat(aux.getElemento().getCostoVenta());
@@ -115,7 +120,7 @@ public class ListaDobleCircular {
         
     }
     
-    public void actualizarArchivo(int buscar, String codigo, String estado) {
+    public void actualizarArchivo(int buscar, String codigo, String estado, float costoA) {
         try {
             DatosCatalogoAsientos ca = new DatosCatalogoAsientos();
             DataInputStream entrada = new DataInputStream(new FileInputStream(
@@ -131,7 +136,7 @@ public class ListaDobleCircular {
                     if (ca.getNumeroAsiento() == buscar) {
                         ca.setCodigoArea(codigo);
                         ca.setNumeroAsiento(ca.getNumeroAsiento());
-                        ca.setCostoVenta(ca.getCostoVenta());
+                        ca.setCostoVenta(costoA);
                         ca.setEstado(estado);
                     }
                     salida.writeUTF(ca.getCodigoArea());
@@ -153,13 +158,45 @@ public class ListaDobleCircular {
         }
     }
      
+      public void eliminar(int buscar) {
+        try {
+            DatosCatalogoAsientos ca = new DatosCatalogoAsientos();
+            DataInputStream entrada = new DataInputStream(new FileInputStream("CatalogoAsientos.dat"));
+            DataOutputStream salida = new DataOutputStream(new FileOutputStream("temporalAsientos.dat"));
+            try {
+                while (true) {
+                    ca.setCodigoArea(entrada.readUTF());
+                    ca.setNumeroAsiento(entrada.readInt());
+                    ca.setCostoVenta(entrada.readFloat());
+                    ca.setEstado(entrada.readUTF());
+                    if (ca.getNumeroAsiento() != buscar) {
+                        salida.writeUTF(ca.getCodigoArea());
+                        salida.writeInt(ca.getNumeroAsiento());
+                        salida.writeFloat(ca.getCostoVenta());
+                        salida.writeUTF(ca.getEstado());  
+                    }
+                }
+            } catch (EOFException eofe) {
+                entrada.close();
+                salida.close();
+                mover();
+            }
+        } catch (FileNotFoundException fnfe) {
+            JOptionPane.showMessageDialog(null, "¡Archivo no encontrado, revise!",
+                    "Archivo no encontrado", JOptionPane.ERROR_MESSAGE);
+        } catch (IOException ioe) {
+            JOptionPane.showMessageDialog(null, "¡Error desconocido, revise!",
+                    "Error desconocido", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
     public void mover() {
         try {
             DatosCatalogoAsientos ca = new DatosCatalogoAsientos();
             DataInputStream entrada = new DataInputStream(new FileInputStream(
                     "temporalAsientos.dat"));
             DataOutputStream salida = new DataOutputStream(new FileOutputStream(
-                    "temporalAsientos.dat"));
+                    "CatalogoAsientos.dat"));
             try {
                 while (true) {
                     ca.setCodigoArea(entrada.readUTF());

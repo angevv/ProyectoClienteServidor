@@ -55,7 +55,7 @@ public class CatalogoAsientos extends javax.swing.JFrame {
         btnCancelar = new javax.swing.JButton();
         btnRegresar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         CatalogoAsientos.setText("Catálogo de Asientos");
 
@@ -196,9 +196,9 @@ public class CatalogoAsientos extends javax.swing.JFrame {
        
        String estado = "";
        if(rbLIB.isSelected()){
-           codigoArea = rbLIB.getText();
+           estado = rbLIB.getText();
        } else {
-           codigoArea = rbOCU.getText();
+           estado = rbOCU.getText();
        }
        menup.ldc.agregar(codigoArea, numA, costoA, estado);
        

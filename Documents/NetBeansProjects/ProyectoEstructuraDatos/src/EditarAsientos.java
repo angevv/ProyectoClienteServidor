@@ -58,7 +58,7 @@ public class EditarAsientos extends javax.swing.JFrame {
         btnEditarAsientos = new javax.swing.JButton();
         btnInactivarAsientos = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -198,7 +198,7 @@ public class EditarAsientos extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -232,7 +232,7 @@ public class EditarAsientos extends javax.swing.JFrame {
     }//GEN-LAST:event_btnBuscarNumeroAsientoActionPerformed
 
     private void btnEditarAsientosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarAsientosActionPerformed
-        
+        editar();
         JOptionPane.showMessageDialog(null, "¡El asiento se ha editado!",
                 "Usuario Inactivado", JOptionPane.INFORMATION_MESSAGE);
         txtBuscarNumeroAsiento.setText("");
@@ -241,133 +241,157 @@ public class EditarAsientos extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEditarAsientosActionPerformed
 
     private void btnInactivarAsientosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInactivarAsientosActionPerformed
-        try{
-        if(!menup.ldc.esVaciaDC()){
-            int numeroA = Integer.parseInt(txtBuscarNumeroAsiento.getText());
-           if(menup.ldc.inicio.getElemento().getNumeroAsiento() == numeroA ){
-              menup.ldc.inicio=menup.ldc.inicio.getSiguiente();
-              menup.ldc.fin.setSiguiente(menup.ldc.inicio);
-              menup.ldc.inicio.setAnterior(menup.ldc.fin);
-              JOptionPane.showMessageDialog(null,"¡El asiento fue inactivado!","Asiento inactivado",
-                JOptionPane.QUESTION_MESSAGE);
-           }else{
-              NodoCatalogoAsientos anterior;
-              NodoCatalogoAsientos auxiliar;
-              anterior=menup.ldc.inicio;
-              auxiliar=menup.ldc.inicio.getSiguiente();
-              while((auxiliar!=menup.ldc.inicio)&&
-                 (auxiliar.getElemento().getNumeroAsiento() != numeroA)){
-                 anterior=anterior.getSiguiente();
-                 auxiliar=auxiliar.getSiguiente();
-              }
-              if(auxiliar!=menup.ldc.inicio){
-                 anterior.setSiguiente(auxiliar.getSiguiente());
-                 menup.ldc.fin.setSiguiente(menup.ldc.inicio);
-                 menup.ldc.inicio.setAnterior(menup.ldc.fin);
-              }
-           }
-        }
-      }catch(Exception ex){
-         JOptionPane.showMessageDialog(null,"¡Ocurrió un error al inactivar asiento!",
-             "Error al extraer",JOptionPane.ERROR_MESSAGE);
-      }
+        int numeroA = Integer.parseInt(txtBuscarNumeroAsiento.getText());
+        inactivar(numeroA);
+        menup.ldc.eliminar(numeroA);
+        JOptionPane.showMessageDialog(null, "¡El asiento fue inactivado!", "Asiento inactivado",
+                            JOptionPane.INFORMATION_MESSAGE);
+        limpiar();
     }//GEN-LAST:event_btnInactivarAsientosActionPerformed
     
-    public boolean existe() {
-        int numeroA = Integer.parseInt(txtBuscarNumeroAsiento.getText());
-        if (!menup.ldc.esVaciaDC()) {
-            if (menup.ldc.inicio.getElemento().getNumeroAsiento() == numeroA ){
-                return true;
-            }
-            else{
-                NodoCatalogoAsientos anterior, aux;
-                anterior = menup.ldc.inicio;
-                aux = menup.ldc.inicio.getSiguiente();
-                
-                while (aux != menup.ldc.inicio && 
-                        aux.getElemento().getNumeroAsiento() != numeroA){
-                    aux = aux.getSiguiente();
-                    anterior = anterior.getSiguiente();
+    public void inactivar(int numeroA) {
+        try {
+            if (!menup.ldc.esVaciaDC()) {
+                if (menup.ldc.inicio.getElemento().getNumeroAsiento() == numeroA) {
+                    menup.ldc.inicio = menup.ldc.inicio.getSiguiente();
+                    menup.ldc.fin.setSiguiente(menup.ldc.inicio);
+                    menup.ldc.inicio.setAnterior(menup.ldc.fin);
+                } else {
+                    NodoCatalogoAsientos anterior;
+                    NodoCatalogoAsientos auxiliar;
+                    anterior = menup.ldc.inicio;
+                    auxiliar = menup.ldc.inicio.getSiguiente();
+                    while ((auxiliar != menup.ldc.inicio)
+                            && (auxiliar.getElemento().getNumeroAsiento() != numeroA)) {
+                        anterior = anterior.getSiguiente();
+                        auxiliar = auxiliar.getSiguiente();
+                    }
+                    if (auxiliar != menup.ldc.inicio) {
+                        anterior.setSiguiente(auxiliar.getSiguiente());
+                        menup.ldc.fin.setSiguiente(menup.ldc.inicio);
+                        menup.ldc.inicio.setAnterior(menup.ldc.fin);
+                    }
                 }
-                if (aux != menup.ldc.inicio){
-                    return true;
-                }
+                limpiar();
             }
-            return false;
-        } else {
-            return false;
-
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "¡Ocurrió un error al inactivar asiento!",
+                    "Error al extraer", JOptionPane.ERROR_MESSAGE);
         }
     }
     
     public void mostrarLDC() {
+        int comprobar=0;
         if (!menup.ldc.esVaciaDC()) {
+            int buscar = Integer.parseInt(txtBuscarNumeroAsiento.getText());
             NodoCatalogoAsientos aux = menup.ldc.inicio;
-            String numeroAsiento = String.valueOf(aux.getElemento().getNumeroAsiento());
-            if (existe()) {
-                while (aux != menup.ldc.inicio && txtBuscarNumeroAsiento.getText().compareTo(numeroAsiento) != 0) {
-                    aux = aux.getSiguiente();
-                }
-                if (txtBuscarNumeroAsiento.getText().equals(aux.getElemento().getNumeroAsiento())) {
-                    String costoA = String.valueOf(aux.getElemento().getCostoVenta());
-                    txtCostoAsiento.setText(costoA);
-                    if (aux.getElemento().getEstado().equals("LIB")) {
-                        rbLIB.setSelected(true);
-                    } else {
-                        rbOCU.setSelected(true);
-                    }
-                    if (aux.getElemento().getCodigoArea().equals("PRE")) {
-                        rbPRE.setSelected(true);
-                    } else {
-                        rbNOR.setSelected(true);
-                    }
+            if (aux.getElemento().getNumeroAsiento() == buscar) {
+               String costoA = String.valueOf(aux.getElemento().getCostoVenta());
+                txtCostoAsiento.setText(costoA);
+                if (aux.getElemento().getEstado().equals("LIB")) {
+                    rbLIB.setSelected(true);
                 } else {
-                    JOptionPane.showMessageDialog(null, "¡Asiento no encontrado!",
-                            "Error en la búsqueda", JOptionPane.INFORMATION_MESSAGE);
+                    rbOCU.setSelected(true);
                 }
-            } else {
+                if (aux.getElemento().getCodigoArea().equals("PRE")) {
+                    rbPRE.setSelected(true);
+                } else {
+                    rbNOR.setSelected(true);
+                }
+                comprobar = 1;
+            }
+            aux = aux.getSiguiente();
+            while (aux != menup.ldc.inicio) {
+                if (aux.getElemento().getNumeroAsiento() == buscar) {
+                    String costoA = String.valueOf(aux.getElemento().getCostoVenta());
+                txtCostoAsiento.setText(costoA);
+                if (aux.getElemento().getEstado().equals("LIB")) {
+                    rbLIB.setSelected(true);
+                } else {
+                    rbOCU.setSelected(true);
+                }
+                if (aux.getElemento().getCodigoArea().equals("PRE")) {
+                    rbPRE.setSelected(true);
+                } else {
+                    rbNOR.setSelected(true);
+                }
+                    comprobar = 1;
+                }
+                aux = aux.getSiguiente();
+            }
+
+            if (comprobar == 0) {
                 JOptionPane.showMessageDialog(null, "¡Asiento no encontrado!",
                         "Error en la búsqueda", JOptionPane.INFORMATION_MESSAGE);
             }
+        } else {
+            JOptionPane.showMessageDialog(null, "¡No se han registrado asientos!",
+                        "Error en la búsqueda", JOptionPane.INFORMATION_MESSAGE);
         }
     }
-    
+
     public void editar() {
+        int comprobar=0;
         if (!menup.ldc.esVaciaDC()) {
+            int buscar = Integer.parseInt(txtBuscarNumeroAsiento.getText());
             NodoCatalogoAsientos aux = menup.ldc.inicio;
-            int buscarA = Integer.parseInt(txtBuscarNumeroAsiento.getText());
-            if (existe()) {
-                while (aux != menup.ldc.inicio && buscarA != aux.getElemento().getNumeroAsiento()) {
-                    aux = aux.getSiguiente();
-                }
-                if (buscarA == aux.getElemento().getNumeroAsiento()) {
-                    float costoAsiento = Float.parseFloat(txtCostoAsiento.getText());
-                    aux.getElemento().setCostoVenta(costoAsiento);
-                    String codigoA = "";
-                    if (rbPRE.isSelected()) {
-                        aux.getElemento().setCodigoArea(rbPRE.getText());
-                        codigoA = rbPRE.getText();
-                    } else {
-                        aux.getElemento().setCodigoArea(rbNOR.getText());
-                        codigoA = rbNOR.getText();
-                    }
-                    String estado = "";
-                    if (rbLIB.isSelected()) {
-                        aux.getElemento().setEstado(rbLIB.getText());
-                        estado = rbLIB.getText();
-                    } else {
-                        aux.getElemento().setEstado(rbOCU.getText());
-                        estado = rbOCU.getText();
-                    }
-                    menup.ldc.actualizarArchivo(buscarA, codigoA, estado);
+            if (aux.getElemento().getNumeroAsiento() == buscar) {
+               float costoAsiento = Float.parseFloat(txtCostoAsiento.getText());
+                aux.getElemento().setCostoVenta(costoAsiento);
+                String codigoA = "";
+                if (rbPRE.isSelected()) {
+                    aux.getElemento().setCodigoArea(rbPRE.getText());
+                    codigoA = rbPRE.getText();
                 } else {
-                    JOptionPane.showMessageDialog(null, "¡Asiento no encontrado!",
-                            "Error en la búsqueda", JOptionPane.INFORMATION_MESSAGE);
+                    aux.getElemento().setCodigoArea(rbNOR.getText());
+                    codigoA = rbNOR.getText();
                 }
-            } else {
+                String estado = "";
+                if (rbLIB.isSelected()) {
+                    aux.getElemento().setEstado(rbLIB.getText());
+                    estado = rbLIB.getText();
+                } else {
+                    aux.getElemento().setEstado(rbOCU.getText());
+                    estado = rbOCU.getText();
+                }
+                menup.ldc.actualizarArchivo(buscar, codigoA, estado,costoAsiento);
+                comprobar = 1;
+            }
+            aux = aux.getSiguiente();
+            while (aux != menup.ldc.inicio) {
+                if (aux.getElemento().getNumeroAsiento() == buscar) {
+                    float costoAsiento = Float.parseFloat(txtCostoAsiento.getText());
+                     aux.getElemento().setCostoVenta(costoAsiento);
+                     String codigoA = "";
+                     if (rbPRE.isSelected()) {
+                         aux.getElemento().setCodigoArea(rbPRE.getText());
+                         codigoA = rbPRE.getText();
+                     } else {
+                         aux.getElemento().setCodigoArea(rbNOR.getText());
+                         codigoA = rbNOR.getText();
+                     }
+                     String estado = "";
+                     if (rbLIB.isSelected()) {
+                         aux.getElemento().setEstado(rbLIB.getText());
+                         estado = rbLIB.getText();
+                     } else {
+                         aux.getElemento().setEstado(rbOCU.getText());
+                         estado = rbOCU.getText();
+                     }
+                     
+                    comprobar = 1;
+                    menup.ldc.actualizarArchivo(buscar, codigoA, estado, costoAsiento);
+                }
+                aux = aux.getSiguiente();
+            }
+
+            if (comprobar == 0) {
                 JOptionPane.showMessageDialog(null, "¡Asiento no encontrado!",
                         "Error en la búsqueda", JOptionPane.INFORMATION_MESSAGE);
             }
+        } else {
+            JOptionPane.showMessageDialog(null, "¡No se han registrado asientos!",
+                        "Error en la búsqueda", JOptionPane.INFORMATION_MESSAGE);
         }
     }
     
