@@ -35,7 +35,7 @@ public class ListaSimpleCircular {
         }
     }
 
-    public boolean existe(String lugar, String nombre, String fecha) {
+   /* public boolean noExiste(String lugar, String nombre, String fecha) {
         if (!esVaciaSC()) {
             NodoCatalogoEvento aux = inicio;
             if (!aux.getElemento().getNombreEvento().equals(nombre)) {
@@ -62,7 +62,7 @@ public class ListaSimpleCircular {
             }
         }
         return true;
-    }
+    }*/
 
     public void agregar(String nombre, String fecha, String lugar,String ciudad, String direccion, String estado){
         DatosCatalogoEvento d = new DatosCatalogoEvento();

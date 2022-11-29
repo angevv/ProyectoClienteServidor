@@ -25,6 +25,10 @@ public class CatalogoEventos extends javax.swing.JFrame {
 
     //Lista Simple Circular
     MenuPrincipal menupr = new MenuPrincipal();
+    
+        private int verificarNombre=0;
+         private int verificarFecha=0;
+        private int verificarLugar=0;
 
     public void limpiar() {
         txtNombreEvento.setText("");
@@ -32,7 +36,7 @@ public class CatalogoEventos extends javax.swing.JFrame {
         OpcionesLugarEvento.clearSelection();
         txtCiudad.setText("");
         txtDireccion.setText("");
-        txtEstado.setText("");
+        buttonGroup1.clearSelection();
         txtNombreEvento.requestFocus();
     }
 
@@ -46,6 +50,10 @@ public class CatalogoEventos extends javax.swing.JFrame {
     private void initComponents() {
 
         OpcionesLugarEvento = new javax.swing.ButtonGroup();
+        buttonGroup1 = new javax.swing.ButtonGroup();
+        buttonGroup2 = new javax.swing.ButtonGroup();
+        buttonGroup3 = new javax.swing.ButtonGroup();
+        buttonGroup4 = new javax.swing.ButtonGroup();
         CatalogoEvento = new javax.swing.JLabel();
         NombreEvento = new javax.swing.JLabel();
         fechaEvento = new javax.swing.JLabel();
@@ -60,10 +68,11 @@ public class CatalogoEventos extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         txtCiudad = new javax.swing.JTextField();
         txtDireccion = new javax.swing.JTextField();
-        txtEstado = new javax.swing.JTextField();
         btnAgregar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
         btnRegresar = new javax.swing.JButton();
+        rbActivo = new javax.swing.JRadioButton();
+        rbInactivo = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -140,6 +149,12 @@ public class CatalogoEventos extends javax.swing.JFrame {
             }
         });
 
+        buttonGroup1.add(rbActivo);
+        rbActivo.setText("Activo");
+
+        buttonGroup1.add(rbInactivo);
+        rbInactivo.setText("Inactivo");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -162,14 +177,17 @@ public class CatalogoEventos extends javax.swing.JFrame {
                                 .addComponent(txtFechaEvento)
                                 .addComponent(txtCiudad)
                                 .addComponent(txtDireccion)
-                                .addComponent(txtEstado)
                                 .addComponent(txtNombreEvento, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(rbEstadio)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(rbAnfiteatro)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(rbTeatro))))
+                                .addComponent(rbTeatro))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(rbActivo, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(rbInactivo, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(50, 50, 50)
                         .addComponent(btnAgregar)
@@ -209,13 +227,14 @@ public class CatalogoEventos extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(txtEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(rbActivo)
+                    .addComponent(rbInactivo))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAgregar)
                     .addComponent(btnCancelar)
                     .addComponent(btnRegresar))
-                .addGap(23, 23, 23))
+                .addContainerGap())
         );
 
         pack();
@@ -242,7 +261,10 @@ public class CatalogoEventos extends javax.swing.JFrame {
     }//GEN-LAST:event_rbEstadioActionPerformed
     //AGREGAR
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
-       // int verificar=0;
+        verificarNombre=0;
+        verificarLugar=0;
+        verificarFecha=0;
+        
         String lugar = "";
         if (rbEstadio.isSelected()) {
             lugar = rbEstadio.getText();
@@ -251,15 +273,76 @@ public class CatalogoEventos extends javax.swing.JFrame {
         } else {
             lugar = rbTeatro.getText();
         }
+        
+        String estado="";
+        if(rbActivo.isSelected()){
+            estado=rbActivo.getText();
+        }else{
+            estado=rbInactivo.getText();
+        }
+        
+        if(!menupr.lsc.esVaciaSC()){
+           NodoCatalogoEvento aux=menupr.lsc.inicio;
+           if(!aux.getElemento().getNombreEvento().equals(txtNombreEvento.getText())){
+               verificarNombre=1;
+           }
+           if(!aux.getElemento().getFechaEvento().equals(txtFechaEvento.getText())){
+               verificarFecha=1;
+           }
+           if(!aux.getElemento().getLugar().equals(lugar)){
+               verificarLugar=1;
+           }
+           if(verificarNombre==1 && verificarFecha==1 && verificarLugar==1){
+               menupr.lsc.agregar(txtNombreEvento.getText(), txtFechaEvento.getText(), lugar, txtCiudad.getText(), txtDireccion.getText(), estado);
+                JOptionPane.showMessageDialog(null, "¡Datos agregados correctamente!",
+                        "Registro exitoso", JOptionPane.INFORMATION_MESSAGE);
+           }
+           aux=aux.getSiguiente();
+           while(aux!=menupr.lsc.inicio){
 
-        if (menupr.lsc.existe(lugar, txtNombreEvento.getText(), txtFechaEvento.getText())) {
+                if(!aux.getElemento().getNombreEvento().equals(txtNombreEvento.getText())){
+                   verificarNombre=1;
+                }else{
+                    verificarNombre=0;
+                }
+                if(!aux.getElemento().getFechaEvento().equals(txtFechaEvento.getText())){
+                    verificarFecha=1;
+                }else{
+                    verificarLugar=0;
+                }
+                if(!aux.getElemento().getLugar().equals(lugar)){
+                    verificarLugar=1;
+                }else{
+                     verificarFecha=0;
+                }
+                aux=aux.getSiguiente();
+           }
+           if(verificarNombre==0){
+               JOptionPane.showMessageDialog(null, "¡El evento ya está registrado!",
+                    "Registro Fallido", JOptionPane.INFORMATION_MESSAGE);
+           }
+           if(verificarFecha==0 && verificarLugar==0){
+               JOptionPane.showMessageDialog(null, "¡El lugar ya tiene un evento registrado en la misma fecha!",
+                    "Registro Fallido", JOptionPane.INFORMATION_MESSAGE);
+           }
+           if(verificarNombre==1 && verificarFecha==1 && verificarLugar==1){
+               menupr.lsc.agregar(txtNombreEvento.getText(), txtFechaEvento.getText(), lugar, txtCiudad.getText(), txtDireccion.getText(), estado);
+                JOptionPane.showMessageDialog(null, "¡Datos agregados correctamente!",
+                        "Registro exitoso", JOptionPane.INFORMATION_MESSAGE);
+           }
+        }else{
+             menupr.lsc.agregar(txtNombreEvento.getText(), txtFechaEvento.getText(), lugar, txtCiudad.getText(), txtDireccion.getText(), estado);
+                JOptionPane.showMessageDialog(null, "¡Datos agregados correctamente!",
+                        "Registro exitoso", JOptionPane.INFORMATION_MESSAGE);
+        }
+       /* if (menupr.lsc.noExiste(lugar, txtNombreEvento.getText(), txtFechaEvento.getText())) {
             menupr.lsc.agregar(txtNombreEvento.getText(), txtFechaEvento.getText(), lugar, txtCiudad.getText(), txtDireccion.getText(), txtEstado.getText());
             JOptionPane.showMessageDialog(null, "¡Datos agregados correctamente!",
                     "Registro exitoso", JOptionPane.INFORMATION_MESSAGE);
         } else {
             JOptionPane.showMessageDialog(null, "¡Datos ya existen!",
                     "Registro Fallido", JOptionPane.INFORMATION_MESSAGE);
-        }
+        }*/
        /* if(!menupr.lsc.esVaciaSC()){
             NodoCatalogoEvento aux=menupr.lsc.inicio;
              if(!aux.getElemento().getNombreEvento().equals(txtNombreEvento.getText())){
@@ -316,6 +399,7 @@ public class CatalogoEventos extends javax.swing.JFrame {
                         "Registro exitoso", JOptionPane.INFORMATION_MESSAGE);
             }
             aux = aux.getSiguiente();
+            
             while (aux != menupr.lsc.inicio) {
                 if (!aux.getElemento().getNombreEvento().equals(txtNombreEvento.getText())) {
                     verificarN = 1;
@@ -332,8 +416,11 @@ public class CatalogoEventos extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null, "¡Datos agregados correctamente!",
                             "Registro exitoso", JOptionPane.INFORMATION_MESSAGE);
                 }
+                
                 aux = aux.getSiguiente();
             }
+        
+            
         } else {
             menupr.lsc.agregar(txtNombreEvento.getText(), txtFechaEvento.getText(), lugar, txtCiudad.getText(), txtDireccion.getText(), txtEstado.getText());
             JOptionPane.showMessageDialog(null, "¡Datos agregados correctamente!",
@@ -421,14 +508,19 @@ public class CatalogoEventos extends javax.swing.JFrame {
     private javax.swing.JButton btnAgregar;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnRegresar;
+    private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.ButtonGroup buttonGroup2;
+    private javax.swing.ButtonGroup buttonGroup3;
+    private javax.swing.ButtonGroup buttonGroup4;
     private javax.swing.JLabel fechaEvento;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JRadioButton rbActivo;
     private javax.swing.JRadioButton rbAnfiteatro;
     private javax.swing.JRadioButton rbEstadio;
+    private javax.swing.JRadioButton rbInactivo;
     private javax.swing.JRadioButton rbTeatro;
     private javax.swing.JTextField txtCiudad;
     private javax.swing.JTextField txtDireccion;
-    private javax.swing.JTextField txtEstado;
     private javax.swing.JTextField txtFechaEvento;
     private javax.swing.JTextField txtNombreEvento;
     // End of variables declaration//GEN-END:variables

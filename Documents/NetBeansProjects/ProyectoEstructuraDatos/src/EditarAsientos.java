@@ -1,4 +1,9 @@
 
+import java.io.DataInputStream;
+import java.io.EOFException;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import javax.swing.JOptionPane;
 
 /*
@@ -21,6 +26,7 @@ public class EditarAsientos extends javax.swing.JFrame {
         setResizable(false);
         setTitle("Editar Asientos");
         menup.ldc.cargarCatalogoAsientos();
+        llenarComboBox();
     }
     
     MenuPrincipal menup = new MenuPrincipal();
@@ -30,6 +36,34 @@ public class EditarAsientos extends javax.swing.JFrame {
         opcionesEstado.clearSelection(); 
         txtCostoAsiento.setText("");
     }
+    
+    public void llenarComboBox() {
+        try {
+            DataInputStream entrada = new DataInputStream(new FileInputStream(
+                    "CatalogoEventos.dat"));
+            try {
+                DatosCatalogoEvento du = new DatosCatalogoEvento();
+                while (true) {
+                    du.setNombreEvento(entrada.readUTF());
+                    du.setFechaEvento(entrada.readUTF());
+                    du.setLugar(entrada.readUTF());
+                    du.setCiudad(entrada.readUTF());
+                    du.setDireccion(entrada.readUTF());
+                    du.setEstado(entrada.readUTF());
+                    cbEventos.addItem(du.getNombreEvento());
+                }
+            } catch (EOFException eeof) {
+                entrada.close();
+            }
+        } catch (FileNotFoundException fnfe) {
+            JOptionPane.showMessageDialog(null, "¡Archivo no encontrado!", "Archivo no encontrado",
+                    JOptionPane.ERROR_MESSAGE);
+        } catch (IOException eioe) {
+            JOptionPane.showMessageDialog(null, "¡Error en el dispositivo de almacenamiento!",
+                    "Error en el dispositivo", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+   
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -41,6 +75,8 @@ public class EditarAsientos extends javax.swing.JFrame {
 
         opcionesCodigoArea = new javax.swing.ButtonGroup();
         opcionesEstado = new javax.swing.ButtonGroup();
+        CodigoArea1 = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox<>();
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         txtCostoAsiento = new javax.swing.JTextField();
@@ -57,6 +93,13 @@ public class EditarAsientos extends javax.swing.JFrame {
         btnBuscarNumeroAsiento = new javax.swing.JButton();
         btnEditarAsientos = new javax.swing.JButton();
         btnInactivarAsientos = new javax.swing.JButton();
+        rbInactivo = new javax.swing.JRadioButton();
+        CodigoArea2 = new javax.swing.JLabel();
+        cbEventos = new javax.swing.JComboBox<>();
+
+        CodigoArea1.setText("Evento:");
+
+        jComboBox1.setToolTipText("");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -123,6 +166,13 @@ public class EditarAsientos extends javax.swing.JFrame {
             }
         });
 
+        opcionesEstado.add(rbInactivo);
+        rbInactivo.setText("INAC");
+
+        CodigoArea2.setText("Evento:");
+
+        cbEventos.setToolTipText("");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -141,10 +191,10 @@ public class EditarAsientos extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(CodigoArea)
                             .addComponent(jLabel3)
-                            .addComponent(jLabel2))
+                            .addComponent(jLabel2)
+                            .addComponent(CodigoArea2))
                         .addGap(40, 40, 40)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtCostoAsiento, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(rbLIB)
                             .addComponent(rbPRE)
                             .addComponent(rbOCU)
@@ -154,20 +204,28 @@ public class EditarAsientos extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(btnInactivarAsientos, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnRegresar)))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(btnRegresar))
+                            .addComponent(rbInactivo, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(cbEventos, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(txtCostoAsiento, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 182, Short.MAX_VALUE)))))
+                .addContainerGap(12, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lblEditarsientos)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblBuscarEditarNumeroAsiento)
                     .addComponent(txtBuscarNumeroAsiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnBuscarNumeroAsiento))
-                .addGap(18, 18, 18)
+                .addGap(8, 8, 8)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(CodigoArea2)
+                    .addComponent(cbEventos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(rbPRE)
                     .addComponent(CodigoArea))
@@ -183,12 +241,14 @@ public class EditarAsientos extends javax.swing.JFrame {
                     .addComponent(rbLIB))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(rbOCU)
+                .addGap(4, 4, 4)
+                .addComponent(rbInactivo)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnEditarAsientos)
                     .addComponent(btnRegresar)
                     .addComponent(btnInactivarAsientos))
-                .addGap(55, 55, 55))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -198,7 +258,7 @@ public class EditarAsientos extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -234,7 +294,7 @@ public class EditarAsientos extends javax.swing.JFrame {
     private void btnEditarAsientosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarAsientosActionPerformed
         editar();
         JOptionPane.showMessageDialog(null, "¡El asiento se ha editado!",
-                "Usuario Inactivado", JOptionPane.INFORMATION_MESSAGE);
+                "Asiento Editado", JOptionPane.INFORMATION_MESSAGE);
         txtBuscarNumeroAsiento.setText("");
         limpiar();
         txtBuscarNumeroAsiento.requestFocus();
@@ -243,40 +303,27 @@ public class EditarAsientos extends javax.swing.JFrame {
     private void btnInactivarAsientosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInactivarAsientosActionPerformed
         int numeroA = Integer.parseInt(txtBuscarNumeroAsiento.getText());
         inactivar(numeroA);
-        menup.ldc.eliminar(numeroA);
         JOptionPane.showMessageDialog(null, "¡El asiento fue inactivado!", "Asiento inactivado",
                             JOptionPane.INFORMATION_MESSAGE);
         limpiar();
     }//GEN-LAST:event_btnInactivarAsientosActionPerformed
     
     public void inactivar(int numeroA) {
-        try {
-            if (!menup.ldc.esVaciaDC()) {
-                if (menup.ldc.inicio.getElemento().getNumeroAsiento() == numeroA) {
-                    menup.ldc.inicio = menup.ldc.inicio.getSiguiente();
-                    menup.ldc.fin.setSiguiente(menup.ldc.inicio);
-                    menup.ldc.inicio.setAnterior(menup.ldc.fin);
-                } else {
-                    NodoCatalogoAsientos anterior;
-                    NodoCatalogoAsientos auxiliar;
-                    anterior = menup.ldc.inicio;
-                    auxiliar = menup.ldc.inicio.getSiguiente();
-                    while ((auxiliar != menup.ldc.inicio)
-                            && (auxiliar.getElemento().getNumeroAsiento() != numeroA)) {
-                        anterior = anterior.getSiguiente();
-                        auxiliar = auxiliar.getSiguiente();
-                    }
-                    if (auxiliar != menup.ldc.inicio) {
-                        anterior.setSiguiente(auxiliar.getSiguiente());
-                        menup.ldc.fin.setSiguiente(menup.ldc.inicio);
-                        menup.ldc.inicio.setAnterior(menup.ldc.fin);
-                    }
-                }
-                limpiar();
+       if(!menup.ldc.esVaciaDC()){
+            NodoCatalogoAsientos aux=menup.ldc.inicio;
+            if(numeroA==aux.getElemento().getNumeroAsiento()){
+                aux.getElemento().setEstado("Inactivo");
+                menup.ldc.inactivar(numeroA);
             }
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, "¡Ocurrió un error al inactivar asiento!",
-                    "Error al extraer", JOptionPane.ERROR_MESSAGE);
+            aux=aux.getSiguiente();
+            while(aux!=menup.ldc.inicio){
+                 if(numeroA==aux.getElemento().getNumeroAsiento()){
+                    aux.getElemento().setEstado("Inactivo");
+                    menup.ldc.inactivar(numeroA);
+                 }
+                  aux=aux.getSiguiente();
+            }
+           
         }
     }
     
@@ -286,12 +333,15 @@ public class EditarAsientos extends javax.swing.JFrame {
             int buscar = Integer.parseInt(txtBuscarNumeroAsiento.getText());
             NodoCatalogoAsientos aux = menup.ldc.inicio;
             if (aux.getElemento().getNumeroAsiento() == buscar) {
+               cbEventos.setSelectedItem(aux.getElemento().getNombreEvento());
                String costoA = String.valueOf(aux.getElemento().getCostoVenta());
                 txtCostoAsiento.setText(costoA);
                 if (aux.getElemento().getEstado().equals("LIB")) {
                     rbLIB.setSelected(true);
-                } else {
+                } else if (aux.getElemento().getEstado().equals("OCU")){
                     rbOCU.setSelected(true);
+                }else{
+                    rbInactivo.setSelected(true);
                 }
                 if (aux.getElemento().getCodigoArea().equals("PRE")) {
                     rbPRE.setSelected(true);
@@ -303,12 +353,15 @@ public class EditarAsientos extends javax.swing.JFrame {
             aux = aux.getSiguiente();
             while (aux != menup.ldc.inicio) {
                 if (aux.getElemento().getNumeroAsiento() == buscar) {
+                    cbEventos.setSelectedItem(aux.getElemento().getNombreEvento());
                     String costoA = String.valueOf(aux.getElemento().getCostoVenta());
                 txtCostoAsiento.setText(costoA);
                 if (aux.getElemento().getEstado().equals("LIB")) {
                     rbLIB.setSelected(true);
-                } else {
+                } else if (aux.getElemento().getEstado().equals("OCU")){
                     rbOCU.setSelected(true);
+                }else{
+                    rbInactivo.setSelected(true);
                 }
                 if (aux.getElemento().getCodigoArea().equals("PRE")) {
                     rbPRE.setSelected(true);
@@ -338,6 +391,8 @@ public class EditarAsientos extends javax.swing.JFrame {
             if (aux.getElemento().getNumeroAsiento() == buscar) {
                float costoAsiento = Float.parseFloat(txtCostoAsiento.getText());
                 aux.getElemento().setCostoVenta(costoAsiento);
+               String nomEvento = cbEventos.getSelectedItem().toString();
+               aux.getElemento().setNombreEvento(nomEvento);
                 String codigoA = "";
                 if (rbPRE.isSelected()) {
                     aux.getElemento().setCodigoArea(rbPRE.getText());
@@ -350,11 +405,14 @@ public class EditarAsientos extends javax.swing.JFrame {
                 if (rbLIB.isSelected()) {
                     aux.getElemento().setEstado(rbLIB.getText());
                     estado = rbLIB.getText();
-                } else {
+                } else if (rbOCU.isSelected()){
                     aux.getElemento().setEstado(rbOCU.getText());
                     estado = rbOCU.getText();
+                }else{
+                    aux.getElemento().setEstado(rbInactivo.getText());
+                    estado = rbInactivo.getText();
                 }
-                menup.ldc.actualizarArchivo(buscar, codigoA, estado,costoAsiento);
+                menup.ldc.actualizarArchivo(buscar, nomEvento, codigoA, estado,costoAsiento);
                 comprobar = 1;
             }
             aux = aux.getSiguiente();
@@ -362,6 +420,8 @@ public class EditarAsientos extends javax.swing.JFrame {
                 if (aux.getElemento().getNumeroAsiento() == buscar) {
                     float costoAsiento = Float.parseFloat(txtCostoAsiento.getText());
                      aux.getElemento().setCostoVenta(costoAsiento);
+                     String nomEvento = cbEventos.getSelectedItem().toString();
+                      aux.getElemento().setNombreEvento(nomEvento);
                      String codigoA = "";
                      if (rbPRE.isSelected()) {
                          aux.getElemento().setCodigoArea(rbPRE.getText());
@@ -370,17 +430,20 @@ public class EditarAsientos extends javax.swing.JFrame {
                          aux.getElemento().setCodigoArea(rbNOR.getText());
                          codigoA = rbNOR.getText();
                      }
-                     String estado = "";
-                     if (rbLIB.isSelected()) {
-                         aux.getElemento().setEstado(rbLIB.getText());
-                         estado = rbLIB.getText();
-                     } else {
-                         aux.getElemento().setEstado(rbOCU.getText());
-                         estado = rbOCU.getText();
-                     }
+                    String estado = "";
+                    if (rbLIB.isSelected()) {
+                        aux.getElemento().setCodigoArea(rbLIB.getText());
+                        estado = rbLIB.getText();
+                    } else if (rbOCU.isSelected()) {
+                        aux.getElemento().setCodigoArea(rbOCU.getText());
+                        estado = rbOCU.getText();
+                    } else {
+                        aux.getElemento().setCodigoArea(rbInactivo.getText());
+                        estado = rbInactivo.getText();
+                    }
                      
                     comprobar = 1;
-                    menup.ldc.actualizarArchivo(buscar, codigoA, estado, costoAsiento);
+                    menup.ldc.actualizarArchivo(buscar, nomEvento,codigoA, estado, costoAsiento);
                 }
                 aux = aux.getSiguiente();
             }
@@ -429,10 +492,14 @@ public class EditarAsientos extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel CodigoArea;
+    private javax.swing.JLabel CodigoArea1;
+    private javax.swing.JLabel CodigoArea2;
     private javax.swing.JButton btnBuscarNumeroAsiento;
     private javax.swing.JButton btnEditarAsientos;
     private javax.swing.JButton btnInactivarAsientos;
     private javax.swing.JButton btnRegresar;
+    private javax.swing.JComboBox<String> cbEventos;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
@@ -440,6 +507,7 @@ public class EditarAsientos extends javax.swing.JFrame {
     private javax.swing.JLabel lblEditarsientos;
     private javax.swing.ButtonGroup opcionesCodigoArea;
     private javax.swing.ButtonGroup opcionesEstado;
+    private javax.swing.JRadioButton rbInactivo;
     private javax.swing.JRadioButton rbLIB;
     private javax.swing.JRadioButton rbNOR;
     private javax.swing.JRadioButton rbOCU;

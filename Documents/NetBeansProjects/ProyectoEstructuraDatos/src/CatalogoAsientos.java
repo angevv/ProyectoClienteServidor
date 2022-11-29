@@ -1,4 +1,9 @@
 
+import java.io.DataInputStream;
+import java.io.EOFException;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import javax.swing.JOptionPane;
 
 /*
@@ -21,6 +26,7 @@ public class CatalogoAsientos extends javax.swing.JFrame {
         setResizable(false);
         setTitle("Catalogo de Asientos");
         menup.ldc.cargarCatalogoAsientos();
+        llenarComboBox();
         
     }
     
@@ -32,6 +38,33 @@ public class CatalogoAsientos extends javax.swing.JFrame {
         opcionesEstado.clearSelection();
         txtNumeroAsiento.setText("");
         txtCostoAsiento.setText("");
+    }
+    
+    public void llenarComboBox() {
+        try {
+            DataInputStream entrada = new DataInputStream(new FileInputStream(
+                    "CatalogoEventos.dat"));
+            try {
+                DatosCatalogoEvento du = new DatosCatalogoEvento();
+                while (true) {
+                    du.setNombreEvento(entrada.readUTF());
+                    du.setFechaEvento(entrada.readUTF());
+                    du.setLugar(entrada.readUTF());
+                    du.setCiudad(entrada.readUTF());
+                    du.setDireccion(entrada.readUTF());
+                    du.setEstado(entrada.readUTF());
+                    cbEventos.addItem(du.getNombreEvento());
+                }
+            } catch (EOFException eeof) {
+                entrada.close();
+            }
+        } catch (FileNotFoundException fnfe) {
+            JOptionPane.showMessageDialog(null, "¡Archivo no encontrado!", "Archivo no encontrado",
+                    JOptionPane.ERROR_MESSAGE);
+        } catch (IOException eioe) {
+            JOptionPane.showMessageDialog(null, "¡Error en el dispositivo de almacenamiento!",
+                    "Error en el dispositivo", JOptionPane.ERROR_MESSAGE);
+        }
     }
    
     @SuppressWarnings("unchecked")
@@ -54,6 +87,9 @@ public class CatalogoAsientos extends javax.swing.JFrame {
         btnAgregar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
         btnRegresar = new javax.swing.JButton();
+        CodigoArea1 = new javax.swing.JLabel();
+        cbEventos = new javax.swing.JComboBox<>();
+        rbInactivo = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -80,6 +116,11 @@ public class CatalogoAsientos extends javax.swing.JFrame {
 
         opcionesEstado.add(rbLIB);
         rbLIB.setText("LIB");
+        rbLIB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbLIBActionPerformed(evt);
+            }
+        });
 
         opcionesEstado.add(rbOCU);
         rbOCU.setText("OCU");
@@ -110,45 +151,58 @@ public class CatalogoAsientos extends javax.swing.JFrame {
             }
         });
 
+        CodigoArea1.setText("Evento:");
+
+        cbEventos.setToolTipText("");
+
+        opcionesEstado.add(rbInactivo);
+        rbInactivo.setText("INAC");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(32, 32, 32)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(CatalogoAsientos)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(32, 32, 32)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(CatalogoAsientos)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(CodigoArea)
-                                    .addComponent(jLabel1)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel3))
-                                .addGap(23, 23, 23)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(rbLIB)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(rbNOR)
-                                        .addComponent(rbPRE)
-                                        .addComponent(txtNumeroAsiento)
-                                        .addComponent(txtCostoAsiento, javax.swing.GroupLayout.DEFAULT_SIZE, 182, Short.MAX_VALUE))
-                                    .addComponent(rbOCU)))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(89, 89, 89)
-                        .addComponent(btnAgregar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnCancelar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnRegresar)))
-                .addContainerGap(59, Short.MAX_VALUE))
+                            .addComponent(CodigoArea)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3)
+                            .addComponent(CodigoArea1))
+                        .addGap(23, 23, 23)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(rbInactivo, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(rbLIB)
+                                .addComponent(rbNOR)
+                                .addComponent(rbPRE)
+                                .addComponent(txtNumeroAsiento)
+                                .addComponent(txtCostoAsiento, javax.swing.GroupLayout.DEFAULT_SIZE, 182, Short.MAX_VALUE)
+                                .addComponent(rbOCU)
+                                .addComponent(cbEventos, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(86, Short.MAX_VALUE)
+                .addComponent(btnAgregar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnCancelar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnRegresar)
+                .addGap(62, 62, 62))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(42, 42, 42)
                 .addComponent(CatalogoAsientos)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(CodigoArea1)
+                    .addComponent(cbEventos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(CodigoArea)
@@ -169,12 +223,14 @@ public class CatalogoAsientos extends javax.swing.JFrame {
                     .addComponent(rbLIB))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(rbOCU)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(rbInactivo)
+                .addGap(11, 11, 11)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAgregar)
                     .addComponent(btnCancelar)
                     .addComponent(btnRegresar))
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addGap(21, 21, 21))
         );
 
         pack();
@@ -194,13 +250,17 @@ public class CatalogoAsientos extends javax.swing.JFrame {
            codigoArea = rbNOR.getText();
        }
        
+       String nomEvento = cbEventos.getSelectedItem().toString();
+       
        String estado = "";
        if(rbLIB.isSelected()){
            estado = rbLIB.getText();
-       } else {
+       } else if(rbOCU.isSelected()){
            estado = rbOCU.getText();
+       }else{
+           estado = rbInactivo.getText();
        }
-       menup.ldc.agregar(codigoArea, numA, costoA, estado);
+       menup.ldc.agregar(nomEvento,codigoArea, numA, costoA, estado);
        
        JOptionPane.showMessageDialog(null, "¡Datos agregados correctamente!",
                 "Registro exitoso", JOptionPane.INFORMATION_MESSAGE);
@@ -222,6 +282,10 @@ public class CatalogoAsientos extends javax.swing.JFrame {
         menup.ldc.guardarArchivo();
         this.dispose();
     }//GEN-LAST:event_btnRegresarActionPerformed
+
+    private void rbLIBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbLIBActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rbLIBActionPerformed
 
     /**
      * @param args the command line arguments
@@ -261,14 +325,17 @@ public class CatalogoAsientos extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel CatalogoAsientos;
     private javax.swing.JLabel CodigoArea;
+    private javax.swing.JLabel CodigoArea1;
     private javax.swing.JButton btnAgregar;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnRegresar;
+    private javax.swing.JComboBox<String> cbEventos;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.ButtonGroup opcionesCodigoArea;
     private javax.swing.ButtonGroup opcionesEstado;
+    private javax.swing.JRadioButton rbInactivo;
     private javax.swing.JRadioButton rbLIB;
     private javax.swing.JRadioButton rbNOR;
     private javax.swing.JRadioButton rbOCU;

@@ -31,8 +31,9 @@ public class ListaDobleCircular {
         }
     }
     
-    public void agregar(String codArea, int numAsiento, float costVenta, String estado){
+    public void agregar(String nEvento, String codArea, int numAsiento, float costVenta, String estado){
         DatosCatalogoAsientos d = new DatosCatalogoAsientos();
+        d.setNombreEvento(nEvento);
         d.setCodigoArea(codArea);
         d.setNumeroAsiento(numAsiento);
         d.setCostoVenta(costVenta);
@@ -73,12 +74,14 @@ public class ListaDobleCircular {
             DataOutputStream salida = new DataOutputStream(new FileOutputStream("CatalogoAsientos.dat", false));
             if(!esVaciaDC()){
                 NodoCatalogoAsientos aux=inicio;
+                salida.writeUTF(aux.getElemento().getNombreEvento());
                 salida.writeUTF(aux.getElemento().getCodigoArea());
                 salida.writeInt(aux.getElemento().getNumeroAsiento());
                 salida.writeFloat(aux.getElemento().getCostoVenta());
                 salida.writeUTF(aux.getElemento().getEstado());
                 aux=aux.getSiguiente();
                 while(aux!=inicio){
+                    salida.writeUTF(aux.getElemento().getNombreEvento());
                     salida.writeUTF(aux.getElemento().getCodigoArea());
                     salida.writeInt(aux.getElemento().getNumeroAsiento());
                     salida.writeFloat(aux.getElemento().getCostoVenta());
@@ -103,12 +106,13 @@ public class ListaDobleCircular {
             try {
                 while (true) {
                     DatosCatalogoAsientos ca = new DatosCatalogoAsientos();
+                    ca.setNombreEvento(entrada.readUTF());
                     ca.setCodigoArea(entrada.readUTF());
                     ca.setNumeroAsiento(entrada.readInt());
                     ca.setCostoVenta(entrada.readFloat());
                     ca.setEstado(entrada.readUTF());
                     
-                    agregar(ca.getCodigoArea(),ca.getNumeroAsiento(),ca.getCostoVenta(),ca.getEstado());
+                    agregar(ca.getNombreEvento(),ca.getCodigoArea(),ca.getNumeroAsiento(),ca.getCostoVenta(),ca.getEstado());
                 }
             } catch (EOFException eeof) {
                 entrada.close();
@@ -120,7 +124,7 @@ public class ListaDobleCircular {
         
     }
     
-    public void actualizarArchivo(int buscar, String codigo, String estado, float costoA) {
+    public void actualizarArchivo(int buscar, String nEvento,String codigo, String estado, float costoA) {
         try {
             DatosCatalogoAsientos ca = new DatosCatalogoAsientos();
             DataInputStream entrada = new DataInputStream(new FileInputStream(
@@ -129,16 +133,19 @@ public class ListaDobleCircular {
                     "temporalAsientos.dat"));
             try {
                 while (true) {
+                    ca.setNombreEvento(entrada.readUTF());
                     ca.setCodigoArea(entrada.readUTF());
                     ca.setNumeroAsiento(entrada.readInt());
                     ca.setCostoVenta(entrada.readFloat());
                     ca.setEstado(entrada.readUTF());
                     if (ca.getNumeroAsiento() == buscar) {
+                        ca.setNombreEvento(nEvento);
                         ca.setCodigoArea(codigo);
                         ca.setNumeroAsiento(ca.getNumeroAsiento());
                         ca.setCostoVenta(costoA);
                         ca.setEstado(estado);
                     }
+                    salida.writeUTF(ca.getNombreEvento());
                     salida.writeUTF(ca.getCodigoArea());
                     salida.writeInt(ca.getNumeroAsiento());
                     salida.writeFloat(ca.getCostoVenta());
@@ -158,23 +165,30 @@ public class ListaDobleCircular {
         }
     }
      
-      public void eliminar(int buscar) {
+      public void inactivar(int buscar) {
         try {
             DatosCatalogoAsientos ca = new DatosCatalogoAsientos();
             DataInputStream entrada = new DataInputStream(new FileInputStream("CatalogoAsientos.dat"));
             DataOutputStream salida = new DataOutputStream(new FileOutputStream("temporalAsientos.dat"));
             try {
                 while (true) {
+                    ca.setNombreEvento(entrada.readUTF());
                     ca.setCodigoArea(entrada.readUTF());
                     ca.setNumeroAsiento(entrada.readInt());
                     ca.setCostoVenta(entrada.readFloat());
                     ca.setEstado(entrada.readUTF());
-                    if (ca.getNumeroAsiento() != buscar) {
-                        salida.writeUTF(ca.getCodigoArea());
-                        salida.writeInt(ca.getNumeroAsiento());
-                        salida.writeFloat(ca.getCostoVenta());
-                        salida.writeUTF(ca.getEstado());  
+                    if (ca.getNumeroAsiento() == buscar) {
+                        ca.setNombreEvento(ca.getNombreEvento());
+                        ca.setCodigoArea(ca.getCodigoArea());
+                        ca.setNumeroAsiento(ca.getNumeroAsiento());
+                        ca.setCostoVenta(ca.getCostoVenta());
+                        ca.setEstado("Inactivo");
                     }
+                    salida.writeUTF(ca.getNombreEvento());
+                    salida.writeUTF(ca.getCodigoArea());
+                    salida.writeInt(ca.getNumeroAsiento());
+                    salida.writeFloat(ca.getCostoVenta());
+                    salida.writeUTF(ca.getEstado());   
                 }
             } catch (EOFException eofe) {
                 entrada.close();
@@ -199,10 +213,12 @@ public class ListaDobleCircular {
                     "CatalogoAsientos.dat"));
             try {
                 while (true) {
+                    ca.setNombreEvento(entrada.readUTF());
                     ca.setCodigoArea(entrada.readUTF());
                     ca.setNumeroAsiento(entrada.readInt());
                     ca.setCostoVenta(entrada.readFloat());
                     ca.setEstado(entrada.readUTF());
+                    salida.writeUTF(ca.getNombreEvento());
                     salida.writeUTF(ca.getCodigoArea());
                     salida.writeInt(ca.getNumeroAsiento());
                     salida.writeFloat(ca.getCostoVenta());

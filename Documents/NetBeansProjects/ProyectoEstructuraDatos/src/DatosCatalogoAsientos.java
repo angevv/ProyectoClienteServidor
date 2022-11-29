@@ -5,17 +5,29 @@
  * @author andrescedno
  */
 public class DatosCatalogoAsientos {
+    private String nombreEvento;
     private String codigoArea;
     private int numeroAsiento;
     private float costoVenta;
     private String estado;
     
     public DatosCatalogoAsientos(){
+        this.nombreEvento="";
         this.codigoArea="";
         this.numeroAsiento=0;
         this.costoVenta=0;
         this.estado="";
     }
+
+    public String getNombreEvento() {
+        return nombreEvento;
+    }
+
+    public void setNombreEvento(String nombreEvento) {
+        this.nombreEvento = nombreEvento;
+    }
+    
+    
 
     public String getCodigoArea() {
         return codigoArea;
