@@ -17,7 +17,7 @@ import javax.swing.JOptionPane;
 
 public class Servicios extends javax.swing.JFrame implements Catalogos {
 
-    private ArrayList<DatosServicios> servicios = new ArrayList<DatosServicios>();
+    public ArrayList<DatosServicios> servicios = new ArrayList<DatosServicios>();
     
     /**
      * Creates new form Servicios

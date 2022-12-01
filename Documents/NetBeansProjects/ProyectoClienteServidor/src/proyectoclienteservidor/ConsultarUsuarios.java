@@ -26,8 +26,11 @@ public class ConsultarUsuarios extends javax.swing.JFrame {
         setTitle("Consulta Usuarios");
         this.setSize(new Dimension(450, 360));
         this.setMinimumSize(new Dimension(450, 360));
+        c.cargarClientes();
     }
 
+    Clientes c = new Clientes();
+    
     public void limpiar(){
         txtNombreCompletoUsuario.setText("");
         txtNicknameUsuario.setText("");
@@ -165,6 +168,13 @@ public class ConsultarUsuarios extends javax.swing.JFrame {
         }
     }
 
+    public boolean buscar(String usuario) {
+        for(DatosClientes cliente : c.clientes){
+             if(cliente.getCliente().equals(usuario))
+                 return true;
+         }       
+         return false;
+    }
    
     /**
      * This method is called from within the constructor to initialize the form.
@@ -296,7 +306,14 @@ public class ConsultarUsuarios extends javax.swing.JFrame {
                 "Error al Inactivar Usuario", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        inactivar();
+        boolean existe = buscar(txtNombreCompletoUsuario.getText());
+        if(existe){
+            JOptionPane.showMessageDialog(null, "¡El usuario tiene un plan activo en los catálogos, no se puede inactivar!",
+                "Error al Inactivar Usuario", JOptionPane.ERROR_MESSAGE);
+            return;
+        }else{
+            inactivar();
+        }
     }//GEN-LAST:event_jButton9ActionPerformed
 
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed

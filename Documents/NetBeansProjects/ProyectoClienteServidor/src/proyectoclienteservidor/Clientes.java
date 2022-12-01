@@ -17,7 +17,7 @@ import javax.swing.JOptionPane;
 
 public class Clientes extends javax.swing.JFrame implements Catalogos {
 
-    private ArrayList<DatosClientes> clientes = new ArrayList<DatosClientes>();
+    public ArrayList<DatosClientes> clientes = new ArrayList<DatosClientes>();
     
     
     public Clientes() {

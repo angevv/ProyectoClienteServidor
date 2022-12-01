@@ -30,7 +30,7 @@ public class Proveedores extends javax.swing.JFrame implements Catalogos {
         setResizable(false);
         cargarProveedores();
     }
-
+    
     public ArrayList<DatosProveedores> getProveedores() {
         return proveedores;
     }
@@ -271,7 +271,7 @@ public class Proveedores extends javax.swing.JFrame implements Catalogos {
                     "Error al inactivar", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        inactivar();
+        inactivar();     
     }//GEN-LAST:event_jButton9ActionPerformed
 
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
@@ -280,6 +280,7 @@ public class Proveedores extends javax.swing.JFrame implements Catalogos {
         this.dispose();
     }//GEN-LAST:event_jButton11ActionPerformed
 
+    
     @Override
     public void agregar() {
         
