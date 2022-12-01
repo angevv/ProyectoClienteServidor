@@ -4,6 +4,13 @@
  */
 package proyectoclienteservidor;
 
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.EOFException;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -18,7 +25,12 @@ public class Facturacion extends javax.swing.JFrame {
      */
     public Facturacion() {
         initComponents();
+        setTitle("Gestión de Facturas");
+        llenarComboBox1();
+        llenarComboBox2();
     }
+    
+    private int encontrado;
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -187,10 +199,6 @@ public class Facturacion extends javax.swing.JFrame {
             }
         });
 
-        cbServicio.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        cbNombre.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -344,12 +352,13 @@ public class Facturacion extends javax.swing.JFrame {
     fila[0] = f.getNumeroFactura();
     fila[1] = f.getFecha();
     fila[2] = f.getHora();
-    fila[3] = f.getServicio();
-    fila[4] = f.getNombre();
+    fila[3] = f.getDescipcionServicios();
+    fila[4] = f.getCliente();
     fila[5] = f.getCantidad();
     fila[6] = f.getPrecio();
     fila[7] = String.valueOf(f.getPrecio()*f.getCantidad());
     modelo.addRow(fila);
+    guardarArchivo(Integer.parseInt(txtNumeroFactura.getText()), txtFechaFactura.getText(),txtHoraFactura.getText(),cbServicio.getSelectedItem().toString(),cbNombre.getSelectedItem().toString(), Integer.parseInt(txtCantidad.getText()),Double.parseDouble(txtPrecio.getText()),Double.parseDouble(lblTotal.getText()));
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
@@ -395,6 +404,131 @@ public class Facturacion extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtHoraFacturaActionPerformed
 
+    public void llenarComboBox1() {
+        try {
+            DataInputStream entrada = new DataInputStream(new FileInputStream(
+                    "servicios.dat"));
+            try {
+                DatosProveedores du = new DatosProveedores();
+                while (true) {
+                    DatosServicios ds = new DatosServicios();
+                    ds.setIdentificacion(entrada.readInt());
+                    ds.setCosto(entrada.readDouble());
+                    ds.setDescripcion(entrada.readUTF());
+                    ds.setDuracion(entrada.readInt());
+                    ds.setEstado(entrada.readByte());
+                    cbServicio.addItem(ds.getDescripcion());
+                }
+            } catch (EOFException eeof) {
+                entrada.close();
+            }
+        } catch (FileNotFoundException fnfe) {
+            JOptionPane.showMessageDialog(null, "¡Archivo no encontrado!", "Archivo no encontrado",
+                    JOptionPane.ERROR_MESSAGE);
+        } catch (IOException eioe) {
+            JOptionPane.showMessageDialog(null, "¡Error en el dispositivo de almacenamiento!",
+                    "Error en el dispositivo", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
+    public void llenarComboBox2() {
+        try {
+            DataInputStream entrada = new DataInputStream(new FileInputStream(
+                    "clientes.dat"));
+            try {
+                DatosProveedores du = new DatosProveedores();
+                while (true) {
+                    DatosClientes dc = new DatosClientes();
+                    dc.setIdentificacion(entrada.readInt());
+                    dc.setCliente(entrada.readUTF());
+                    dc.setCiudad(entrada.readUTF());
+                    dc.setDireccion(entrada.readUTF());
+                    dc.setTelefono(entrada.readUTF());
+                    dc.setCorreoElectronico(entrada.readUTF());
+                    dc.setEstado(entrada.readByte());
+                    cbNombre.addItem(dc.getCliente());
+                }
+            } catch (EOFException eeof) {
+                entrada.close();
+            }
+        } catch (FileNotFoundException fnfe) {
+            JOptionPane.showMessageDialog(null, "¡Archivo no encontrado!", "Archivo no encontrado",
+                    JOptionPane.ERROR_MESSAGE);
+        } catch (IOException eioe) {
+            JOptionPane.showMessageDialog(null, "¡Error en el dispositivo de almacenamiento!",
+                    "Error en el dispositivo", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
+    public void guardarArchivo(int numFactura, String fecha, String hora, String descripcion, String cliente, int cant, double precio, double cantidad) {
+        encontrado = 0;
+        try {
+            Factura f = new Factura();
+            f.setNumeroFactura(numFactura);
+            f.setFecha(fecha);
+            f.setHora(hora);
+            f.setDescipcionServicios(descripcion);
+            f.setCliente(cliente);
+            f.setCantidad(cant);
+            f.setPrecio(precio);
+            f.setTotal(cantidad);
+            encontrado = buscar(f.getNumeroFactura(), encontrado);
+            if (encontrado == 0) {
+                DataOutputStream salida = new DataOutputStream(new FileOutputStream("facturas.dat", true));
+                salida.writeInt(f.getNumeroFactura());
+                salida.writeUTF(f.getFecha());
+                salida.writeUTF(f.getHora());
+                salida.writeUTF(f.getDescipcionServicios());
+                salida.writeUTF(f.getCliente());
+                salida.writeInt(f.getCantidad());
+                salida.writeDouble(f.getPrecio());
+                salida.writeDouble(f.getTotal());
+                JOptionPane.showMessageDialog(null, "¡Datos agregados correctamente!",
+                        "Datos Agregados", JOptionPane.INFORMATION_MESSAGE);
+                //limpiar();
+                salida.close();
+            } else {
+                JOptionPane.showMessageDialog(null, "¡Ya existe un registro con ese usuario!",
+                        "Datos Existentes", JOptionPane.ERROR_MESSAGE);
+            }
+        } catch (IOException ex01) {
+            JOptionPane.showMessageDialog(null, "¡Ocurrió un error al guardar!",
+                    "Error al guardar", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
+    public int buscar(int numF, int encontrado) {
+        try {
+            DataInputStream entrada = new DataInputStream(new FileInputStream("facturas.dat"));
+            try {
+               Factura f = new Factura();
+                while ((true) && (encontrado == 0)) {
+                    f.setNumeroFactura(entrada.readInt());
+                    f.setFecha(entrada.readUTF());
+                    f.setHora(entrada.readUTF());
+                    f.setDescipcionServicios(entrada.readUTF());
+                    f.setCliente(entrada.readUTF());
+                    f.setCantidad(entrada.readInt());
+                    f.setPrecio(entrada.readDouble());
+                    f.setTotal(entrada.readDouble());
+                    if (f.getNumeroFactura()==numF) {
+                        encontrado = 1;
+                    }
+                }
+            } catch (EOFException eeof) {
+                entrada.close();
+            }
+        } catch (FileNotFoundException fnfe) {
+            JOptionPane.showMessageDialog(null, "¡Archivo no encontrado!", "Archivo no encontrado",
+                    JOptionPane.ERROR_MESSAGE);
+        } catch (IOException eioe) {
+            JOptionPane.showMessageDialog(null, "¡Error en el dispositivo de almacenamiento!",
+                    "Error en el dispositivo", JOptionPane.ERROR_MESSAGE);
+        }
+        return encontrado;
+    }
+
+    
     /**
      * @param args the command line arguments
      */
