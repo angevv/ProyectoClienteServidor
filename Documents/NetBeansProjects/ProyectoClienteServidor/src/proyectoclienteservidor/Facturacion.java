@@ -26,11 +26,22 @@ public class Facturacion extends javax.swing.JFrame {
     public Facturacion() {
         initComponents();
         setTitle("Gestión de Facturas");
+        modelFacturas.addColumn("Número");
+        modelFacturas.addColumn("Fecha");
+        modelFacturas.addColumn("Hora");
+        modelFacturas.addColumn("Servicio");
+        modelFacturas.addColumn("Cliente");
+        modelFacturas.addColumn("Cantidad");
+        modelFacturas.addColumn("Costo");
+        modelFacturas.addColumn("Total");
         llenarComboBox1();
         llenarComboBox2();
+        llenarTabla();
     }
-    
+
     private int encontrado;
+    public DefaultTableModel modelFacturas = new DefaultTableModel();
+    Servicios s = new Servicios();
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -56,9 +67,9 @@ public class Facturacion extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaFactura = new javax.swing.JTable();
         jToolBar1 = new javax.swing.JToolBar();
-        jButton2 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
+        btnGuardar = new javax.swing.JButton();
+        btnEditar = new javax.swing.JButton();
+        btnCancelar = new javax.swing.JButton();
         jButton11 = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
@@ -110,6 +121,7 @@ public class Facturacion extends javax.swing.JFrame {
             }
         });
 
+        txtPrecio.setEditable(false);
         txtPrecio.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         txtPrecio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -125,7 +137,7 @@ public class Facturacion extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Número", "Fecha", "Hora", "Servicio", "Cliente", "Cantidad", "Precio", "Total"
+                "Número", "Fecha", "Hora", "Servicio", "Cliente", "Cantidad", "Costo", "Total"
             }
         ));
         tablaFactura.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -137,41 +149,41 @@ public class Facturacion extends javax.swing.JFrame {
 
         jToolBar1.setRollover(true);
 
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/add.png"))); // NOI18N
-        jButton2.setToolTipText("Agrega una factura");
-        jButton2.setFocusable(false);
-        jButton2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/add.png"))); // NOI18N
+        btnGuardar.setToolTipText("Agrega una factura");
+        btnGuardar.setFocusable(false);
+        btnGuardar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnGuardar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnGuardarActionPerformed(evt);
             }
         });
-        jToolBar1.add(jButton2);
+        jToolBar1.add(btnGuardar);
 
-        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/edit.png"))); // NOI18N
-        jButton5.setToolTipText("Modifica los datos de una factura");
-        jButton5.setFocusable(false);
-        jButton5.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton5.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        btnEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/edit.png"))); // NOI18N
+        btnEditar.setToolTipText("Modifica los datos de una factura");
+        btnEditar.setFocusable(false);
+        btnEditar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnEditar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                btnEditarActionPerformed(evt);
             }
         });
-        jToolBar1.add(jButton5);
+        jToolBar1.add(btnEditar);
 
-        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/icons8_Trash_24px.png"))); // NOI18N
-        jButton6.setToolTipText("Elimina una factura");
-        jButton6.setFocusable(false);
-        jButton6.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton6.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
+        btnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/icons8_Trash_24px.png"))); // NOI18N
+        btnCancelar.setToolTipText("Elimina una factura");
+        btnCancelar.setFocusable(false);
+        btnCancelar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnCancelar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
+                btnCancelarActionPerformed(evt);
             }
         });
-        jToolBar1.add(jButton6);
+        jToolBar1.add(btnCancelar);
 
         jButton11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/salir.png"))); // NOI18N
         jButton11.setToolTipText("Regresa al Menú Principal");
@@ -196,6 +208,12 @@ public class Facturacion extends javax.swing.JFrame {
         txtHoraFactura.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtHoraFacturaActionPerformed(evt);
+            }
+        });
+
+        cbServicio.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbServicioItemStateChanged(evt);
             }
         });
 
@@ -312,87 +330,75 @@ public class Facturacion extends javax.swing.JFrame {
     }//GEN-LAST:event_txtPrecioActionPerformed
 
     private void tablaFacturaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaFacturaMouseClicked
-         if (tablaFactura.getSelectedRow()>=0) 
-             {
-             int fila = tablaFactura.getSelectedRow();
-               String[] datosLeidos =              
-             {              
-               String.valueOf(tablaFactura.getValueAt(fila,0)),
-               String.valueOf(tablaFactura.getValueAt(fila,1)),
-               String.valueOf(tablaFactura.getValueAt(fila,2)),
-               String.valueOf(tablaFactura.getValueAt(fila,3)),
-               String.valueOf(tablaFactura.getValueAt(fila,4)),
-               String.valueOf(tablaFactura.getValueAt(fila,5)),
-               String.valueOf(tablaFactura.getValueAt(fila,6)),
-               String.valueOf(tablaFactura.getValueAt(fila,7))
-            };
-               txtNumeroFactura.setText(datosLeidos[0]);
-               txtFechaFactura.setText(datosLeidos[1]);
-               txtHoraFactura.setText(datosLeidos[2]);
-               cbServicio.setSelectedItem(datosLeidos[3]);
-               cbNombre.setSelectedItem(datosLeidos[4]);
-               txtCantidad.setText(datosLeidos[5]);
-               txtPrecio.setText(datosLeidos[6]);
-               lblTotal.setText(datosLeidos[7]);
-            }       
+        if (tablaFactura.getSelectedRow() >= 0) {
+            int fila = tablaFactura.getSelectedRow();
+            String[] datosLeidos
+                    = {
+                        String.valueOf(tablaFactura.getValueAt(fila, 0)),
+                        String.valueOf(tablaFactura.getValueAt(fila, 1)),
+                        String.valueOf(tablaFactura.getValueAt(fila, 2)),
+                        String.valueOf(tablaFactura.getValueAt(fila, 3)),
+                        String.valueOf(tablaFactura.getValueAt(fila, 4)),
+                        String.valueOf(tablaFactura.getValueAt(fila, 5)),
+                        String.valueOf(tablaFactura.getValueAt(fila, 6)),
+                        String.valueOf(tablaFactura.getValueAt(fila, 7))
+                    };
+            txtNumeroFactura.setText(datosLeidos[0]);
+            txtFechaFactura.setText(datosLeidos[1]);
+            txtHoraFactura.setText(datosLeidos[2]);
+            cbServicio.setSelectedItem(datosLeidos[3]);
+            cbNombre.setSelectedItem(datosLeidos[4]);
+            txtCantidad.setText(datosLeidos[5]);
+            txtPrecio.setText(datosLeidos[6]);
+            lblTotal.setText(datosLeidos[7]);
+        }
     }//GEN-LAST:event_tablaFacturaMouseClicked
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        Factura f = new Factura(Integer.parseInt(txtNumeroFactura.getText()),
-                                txtFechaFactura.getText(),
-                                txtHoraFactura.getText(),
-                                cbServicio.getSelectedItem().toString(),
-                                cbNombre.getSelectedItem().toString(),
-                                Integer.parseInt(txtCantidad.getText()),
-                                Double.parseDouble(txtPrecio.getText()),
-                                Double.parseDouble(lblTotal.getText())
-                                  );
-    DefaultTableModel modelo = (DefaultTableModel) tablaFactura.getModel();
-    Object [] fila = new Object[8];
-    fila[0] = f.getNumeroFactura();
-    fila[1] = f.getFecha();
-    fila[2] = f.getHora();
-    fila[3] = f.getDescipcionServicios();
-    fila[4] = f.getCliente();
-    fila[5] = f.getCantidad();
-    fila[6] = f.getPrecio();
-    fila[7] = String.valueOf(f.getPrecio()*f.getCantidad());
-    modelo.addRow(fila);
-    guardarArchivo(Integer.parseInt(txtNumeroFactura.getText()), txtFechaFactura.getText(),txtHoraFactura.getText(),cbServicio.getSelectedItem().toString(),cbNombre.getSelectedItem().toString(), Integer.parseInt(txtCantidad.getText()),Double.parseDouble(txtPrecio.getText()),Double.parseDouble(lblTotal.getText()));
-    }//GEN-LAST:event_jButton2ActionPerformed
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+        int cant = Integer.parseInt(txtCantidad.getText());  
+        double precio = Double.parseDouble(txtPrecio.getText());
+        double total = cant * precio;
+        String totalFinal = String.valueOf(total);
+        lblTotal.setText(totalFinal);
+        guardarArchivo(Integer.parseInt(txtNumeroFactura.getText()), txtFechaFactura.getText(), txtHoraFactura.getText(), cbServicio.getSelectedItem().toString(), cbNombre.getSelectedItem().toString(), Integer.parseInt(txtCantidad.getText()), Double.parseDouble(txtPrecio.getText()), Double.parseDouble(lblTotal.getText()));
+        for(int i=0; i < tablaFactura.getRowCount();i++){
+            modelFacturas.removeRow(i);
+            i=-1;
+        }
+        llenarTabla();
+    }//GEN-LAST:event_btnGuardarActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-         if (tablaFactura.getSelectedRow()>0) 
-             {
-              int fila = tablaFactura.getSelectedRow();
-              double total = Integer.parseInt(txtCantidad.getText())*
-                             Double.parseDouble(txtPrecio.getText());
-                   tablaFactura.setValueAt(txtNumeroFactura.getText(), fila, 0);
-                   tablaFactura.setValueAt(txtFechaFactura.getText(), fila, 1);
-                   tablaFactura.setValueAt(txtHoraFactura.getText(), fila, 2);
-                   tablaFactura.setValueAt(cbServicio.getSelectedItem().toString(), fila, 3);
-                   tablaFactura.setValueAt(cbNombre.getSelectedItem().toString(), fila, 4);
-                   tablaFactura.setValueAt(txtCantidad.getText(), fila, 5);
-                   tablaFactura.setValueAt(txtPrecio.getText(), fila, 6);
-                   tablaFactura.setValueAt(String.valueOf(total), fila, 7);
-             }
-    }//GEN-LAST:event_jButton5ActionPerformed
+    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
+        if (tablaFactura.getSelectedRow() > 0) {
+            int fila = tablaFactura.getSelectedRow();
+            double total = Integer.parseInt(txtCantidad.getText())
+                    * Double.parseDouble(txtPrecio.getText());
+            tablaFactura.setValueAt(txtNumeroFactura.getText(), fila, 0);
+            tablaFactura.setValueAt(txtFechaFactura.getText(), fila, 1);
+            tablaFactura.setValueAt(txtHoraFactura.getText(), fila, 2);
+            tablaFactura.setValueAt(cbServicio.getSelectedItem().toString(), fila, 3);
+            tablaFactura.setValueAt(cbNombre.getSelectedItem().toString(), fila, 4);
+            tablaFactura.setValueAt(txtCantidad.getText(), fila, 5);
+            tablaFactura.setValueAt(txtPrecio.getText(), fila, 6);
+            tablaFactura.setValueAt(String.valueOf(total), fila, 7);
+            //actualizarArchivo();
+        }
+    }//GEN-LAST:event_btnEditarActionPerformed
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         DefaultTableModel modelo = (DefaultTableModel) tablaFactura.getModel();
-          int fila = tablaFactura.getSelectedRow();
-          if (fila<0)
-    {
-          JOptionPane.showMessageDialog(null, "Debe seleccionar una fila de la tabla", null, fila, null);
-  }    
-         else
-             { 
-         int resp = JOptionPane.showConfirmDialog(null, "¿Está seguro?", "¡Alerta!", JOptionPane.YES_NO_OPTION);
-             if (JOptionPane.OK_OPTION==resp)
-              modelo.removeRow(fila);
-             }
-         
-    }//GEN-LAST:event_jButton6ActionPerformed
+        int fila = tablaFactura.getSelectedRow();
+        if (fila < 0) {
+            JOptionPane.showMessageDialog(null, "Debe seleccionar una fila de la tabla", null, fila, null);
+        } else {
+            int resp = JOptionPane.showConfirmDialog(null, "¿Está seguro que desea eliminar la factura?", "¡Eliminar Factura!", JOptionPane.YES_NO_OPTION);
+            if (JOptionPane.OK_OPTION == resp) {
+                modelo.removeRow(fila);
+                //borrarDeArchivo();
+            }
+        }
+
+    }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
         //SE GUARDA EN EL ARCHIVO CADA VEZ QUE SE VUELVE AL MENÚ PRINCIPAL
@@ -404,18 +410,39 @@ public class Facturacion extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtHoraFacturaActionPerformed
 
+    private void cbServicioItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbServicioItemStateChanged
+        // TODO add your handling code here:
+        mostrarPrecio();
+    }//GEN-LAST:event_cbServicioItemStateChanged
+
+    public void limpiar() {
+        txtNumeroFactura.setText("");
+        txtFechaFactura.setText("");
+        txtHoraFactura.setText("");
+        txtCantidad.setText("");
+        lblTotal.setText("0.00");
+    }
+    
+    public void mostrarPrecio(){
+        String servicio = String.valueOf(cbServicio.getSelectedItem());
+        Double costoServicio = buscar(servicio);
+        String costoS  = String.valueOf(costoServicio);
+        txtPrecio.setText(costoS);
+    }
+
     public void llenarComboBox1() {
         try {
             DataInputStream entrada = new DataInputStream(new FileInputStream(
                     "servicios.dat"));
             try {
-                DatosProveedores du = new DatosProveedores();
+                DatosServicios ds = new DatosServicios();
                 while (true) {
-                    DatosServicios ds = new DatosServicios();
                     ds.setIdentificacion(entrada.readInt());
                     ds.setCosto(entrada.readDouble());
                     ds.setDescripcion(entrada.readUTF());
                     ds.setDuracion(entrada.readInt());
+                    DatosProveedores proveedor = s.obtenerProveedor(entrada.readUTF());
+                    ds.setProveedor(proveedor);
                     ds.setEstado(entrada.readByte());
                     cbServicio.addItem(ds.getDescripcion());
                 }
@@ -430,15 +457,14 @@ public class Facturacion extends javax.swing.JFrame {
                     "Error en el dispositivo", JOptionPane.ERROR_MESSAGE);
         }
     }
-    
+
     public void llenarComboBox2() {
         try {
             DataInputStream entrada = new DataInputStream(new FileInputStream(
                     "clientes.dat"));
             try {
-                DatosProveedores du = new DatosProveedores();
+                DatosClientes dc = new DatosClientes();
                 while (true) {
-                    DatosClientes dc = new DatosClientes();
                     dc.setIdentificacion(entrada.readInt());
                     dc.setCliente(entrada.readUTF());
                     dc.setCiudad(entrada.readUTF());
@@ -460,6 +486,14 @@ public class Facturacion extends javax.swing.JFrame {
         }
     }
     
+    public Double buscar(String descripcion){
+        for(DatosServicios servicio : s.servicios){
+             if(servicio.getDescripcion().equals(descripcion))
+                 return servicio.getCosto();
+        }       
+        return 0.00;
+    }
+
     public void guardarArchivo(int numFactura, String fecha, String hora, String descripcion, String cliente, int cant, double precio, double cantidad) {
         encontrado = 0;
         try {
@@ -485,7 +519,7 @@ public class Facturacion extends javax.swing.JFrame {
                 salida.writeDouble(f.getTotal());
                 JOptionPane.showMessageDialog(null, "¡Datos agregados correctamente!",
                         "Datos Agregados", JOptionPane.INFORMATION_MESSAGE);
-                //limpiar();
+                limpiar();
                 salida.close();
             } else {
                 JOptionPane.showMessageDialog(null, "¡Ya existe un registro con ese usuario!",
@@ -496,12 +530,12 @@ public class Facturacion extends javax.swing.JFrame {
                     "Error al guardar", JOptionPane.ERROR_MESSAGE);
         }
     }
-    
+
     public int buscar(int numF, int encontrado) {
         try {
             DataInputStream entrada = new DataInputStream(new FileInputStream("facturas.dat"));
             try {
-               Factura f = new Factura();
+                Factura f = new Factura();
                 while ((true) && (encontrado == 0)) {
                     f.setNumeroFactura(entrada.readInt());
                     f.setFecha(entrada.readUTF());
@@ -511,7 +545,7 @@ public class Facturacion extends javax.swing.JFrame {
                     f.setCantidad(entrada.readInt());
                     f.setPrecio(entrada.readDouble());
                     f.setTotal(entrada.readDouble());
-                    if (f.getNumeroFactura()==numF) {
+                    if (f.getNumeroFactura() == numF) {
                         encontrado = 1;
                     }
                 }
@@ -528,7 +562,35 @@ public class Facturacion extends javax.swing.JFrame {
         return encontrado;
     }
 
-    
+     public void llenarTabla() {
+        try {
+            DataInputStream entrada = new DataInputStream(new FileInputStream("facturas.dat"));
+            try {
+                Factura f = new Factura();
+                while (true) {
+                    f.setNumeroFactura(entrada.readInt());
+                    f.setFecha(entrada.readUTF());
+                    f.setHora(entrada.readUTF());
+                    f.setDescipcionServicios(entrada.readUTF());
+                    f.setCliente(entrada.readUTF());
+                    f.setCantidad(entrada.readInt());
+                    f.setPrecio(entrada.readDouble());
+                    f.setTotal(entrada.readDouble());
+                    modelFacturas.addRow(new Object[]{f.getNumeroFactura(), f.getFecha(),f.getHora(),f.getDescipcionServicios(),f.getCliente(),f.getCantidad(),f.getPrecio(),f.getTotal() });
+                    tablaFactura.setModel(modelFacturas);
+                }
+            } catch (EOFException eeof) {
+                entrada.close();
+            }
+        } catch (FileNotFoundException fnfe) {
+            JOptionPane.showMessageDialog(null, "¡Archivo no encontrado!", "Archivo no encontrado",
+                    JOptionPane.ERROR_MESSAGE);
+        } catch (IOException eioe) {
+            JOptionPane.showMessageDialog(null, "¡Error en el dispositivo de almacenamiento!",
+                    "Error en el dispositivo", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
     /**
      * @param args the command line arguments
      */
@@ -566,12 +628,12 @@ public class Facturacion extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCancelar;
+    private javax.swing.JButton btnEditar;
+    private javax.swing.JButton btnGuardar;
     private javax.swing.JComboBox<String> cbNombre;
     private javax.swing.JComboBox<String> cbServicio;
     private javax.swing.JButton jButton11;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
