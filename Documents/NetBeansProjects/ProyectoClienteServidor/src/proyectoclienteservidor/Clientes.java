@@ -6,20 +6,27 @@
 package proyectoclienteservidor;
 
 import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.EOFException;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 public class Clientes extends javax.swing.JFrame implements Catalogos {
 
+    private ArrayList<DatosClientes> clientes = new ArrayList<DatosClientes>();
+    
+    
     public Clientes() {
         initComponents();
         setTitle("Gestión de Clientes");
         setLocationRelativeTo(null);
         setResizable(false); 
         llenarComboBox();
+        cargarClientes();
     }
 
     public void llenarComboBox() {
@@ -343,36 +350,193 @@ public class Clientes extends javax.swing.JFrame implements Catalogos {
         this.dispose();
     }//GEN-LAST:event_jButton11ActionPerformed
 
-    @Override
     public void agregar() {
+        
+        int id = Integer.parseInt(jTextField1.getText());
+        String nombre =  jComboBox1.getSelectedItem().toString();
+        boolean existe = buscar(id, nombre);
+        
+        if (existe){
+            JOptionPane.showMessageDialog(null, "¡Datos ya existen!",
+                        "Datos ya existen", JOptionPane.ERROR_MESSAGE);
+            limpiar();
+            return;
+        }
+        
+        DatosClientes cliente = new DatosClientes();
+        cliente.setIdentificacion(id);
+        cliente.setCliente(nombre);
+        cliente.setCiudad(jTextField3.getText());
+        cliente.setDireccion(jTextField4.getText());
+        cliente.setTelefono(jTextField5.getText());
+        cliente.setCorreoElectronico(jTextField6.getText());
+
+        if (jCheckBox1.isSelected()) {
+            cliente.setEstado((byte) 1);
+        } else {
+            cliente.setEstado((byte) 0);
+        }
+
+        clientes.add(cliente);
+        limpiar();
+        JOptionPane.showMessageDialog(null, "¡Datos agregados correctamente!",
+                    "Datos agregados", JOptionPane.INFORMATION_MESSAGE);
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public void editar() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        int identificacion = Integer.parseInt(jTextField1.getText());
+        boolean noExiste = true;
+        for(DatosClientes cliente : clientes){
+            if(cliente.getIdentificacion() == identificacion){
+                noExiste = false;
+                cliente.setCliente(jComboBox1.getSelectedItem().toString());
+                cliente.setCiudad(jTextField3.getText());
+                cliente.setDireccion(jTextField4.getText());
+                cliente.setTelefono(jTextField5.getText());
+                cliente.setCorreoElectronico(jTextField6.getText());
+                if (jCheckBox1.isSelected()) {
+                    cliente.setEstado((byte) 1);
+                } else {
+                    cliente.setEstado((byte) 0);
+                }
+
+            }
+        }
+
+        if(noExiste){
+            limpiar();
+            JOptionPane.showMessageDialog(null, "¡No existe un cliente con la identificacion ingresada!",
+                "Error al editar", JOptionPane.ERROR_MESSAGE);
+        }else{
+            limpiar();
+            JOptionPane.showMessageDialog(null, "¡Datos editados correctamente!",
+                "Datos Editados", JOptionPane.INFORMATION_MESSAGE);                
+        }
     }
 
     @Override
     public void inactivar() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        int identificacion = Integer.parseInt(jTextField1.getText());
+        boolean noExiste = true;
+
+        for(DatosClientes cliente : clientes){
+            if(cliente.getIdentificacion() == identificacion){
+                noExiste = false;
+                cliente.setEstado((byte)0);
+                limpiar();
+                JOptionPane.showMessageDialog(null, "¡Cliente inactivado correctamente!",
+                "Inactivar cliente", JOptionPane.INFORMATION_MESSAGE); 
+                return;
+
+            }
+        }
+        if(noExiste){
+            limpiar();
+            JOptionPane.showMessageDialog(null, "¡No existe un cliente con la identificacion ingresada!",
+                "Error al inactivar", JOptionPane.ERROR_MESSAGE);
+        }
     }
     
     @Override
     public void consultar() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        int identificacion = Integer.parseInt(jTextField1.getText());
+        boolean noExiste = true;
+        limpiar();
+        for(DatosClientes cliente : clientes){
+            if(cliente.getIdentificacion() == identificacion){
+                noExiste = false;
+                jTextField1.setText(Integer.toString(identificacion));
+                jComboBox1.setSelectedItem(cliente.getCliente());
+                jTextField3.setText(cliente.getCiudad());
+                jTextField4.setText(cliente.getDireccion());
+                jTextField5.setText(cliente.getTelefono());
+                jTextField6.setText(cliente.getCorreoElectronico());
+                if (cliente.getEstado() == 0) {
+                        jCheckBox1.setSelected(false);
+                }else {
+                        jCheckBox1.setSelected(true);
+                }
+            }
+        }
+
+        if(noExiste){
+            limpiar();
+            JOptionPane.showMessageDialog(null, "¡No existe un cliente con la identificacion ingresada!",
+                "Error al consultar", JOptionPane.ERROR_MESSAGE);
+        }
     }
     
     @Override
-    public boolean buscar(int id, String nombreODescripcion) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean buscar(int id, String nombre) {
+        for(DatosClientes cliente : clientes){
+             if(cliente.getIdentificacion() == id || cliente.getCliente() == nombre)
+                 return true;
+         }       
+         return false;
     }
 
     @Override
     public void guardarArchivo() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            DataOutputStream salida = new DataOutputStream(new FileOutputStream("clientes.dat", false));
+            for(DatosClientes cliente : clientes){
+                salida.writeInt(cliente.getIdentificacion());
+                salida.writeUTF(cliente.getCliente());
+                salida.writeUTF(cliente.getCiudad());
+                salida.writeUTF(cliente.getDireccion());
+                salida.writeUTF(cliente.getTelefono());
+                salida.writeUTF(cliente.getCorreoElectronico());
+                salida.writeByte(cliente.getEstado());
+            }
+            salida.close();
+        } catch (FileNotFoundException ex) {
+            JOptionPane.showMessageDialog(null, "¡Ocurrió un error al guardar!",
+                    "Error al guardar", JOptionPane.ERROR_MESSAGE);
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(null, "¡Ocurrió un error al guardar!",
+                    "Error al guardar", JOptionPane.ERROR_MESSAGE);
+        }
     }
     
+    public void cargarClientes(){
+        try {
+            DataInputStream entrada = new DataInputStream(new FileInputStream(
+                    "clientes.dat"));
+            try {
+                while (true) {
+                    DatosClientes dc = new DatosClientes();
+                    dc.setIdentificacion(entrada.readInt());
+                    dc.setCliente(entrada.readUTF());
+                    dc.setCiudad(entrada.readUTF());
+                    dc.setDireccion(entrada.readUTF());
+                    dc.setTelefono(entrada.readUTF());
+                    dc.setCorreoElectronico(entrada.readUTF());
+                    dc.setEstado(entrada.readByte());
+                    
+                    clientes.add(dc);
+                }
+            } catch (EOFException eeof) {
+                entrada.close();
+            }
+        } catch (IOException eioe) {
+            JOptionPane.showMessageDialog(null, "¡Error en el dispositivo de almacenamiento!",
+                    "Error en el dispositivo", JOptionPane.ERROR_MESSAGE);
+        }
+        
+    }
+    
+    public void limpiar(){
+        jTextField1.setText("");
+        jTextField3.setText("");
+        jTextField4.setText("");
+        jTextField5.setText("");
+        jTextField6.setText("");
+        jCheckBox1.setSelected(false);
+        jComboBox1.setSelectedIndex(0);
+        jTextField1.requestFocus();
+    }
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -8,10 +8,10 @@ package proyectoclienteservidor;
 
 public class DatosClientes {
     
-    //SE DEBE EXTENDER DE LA CLASE USUARIO
     private int identificacion;
+    private String Cliente;
     private String ciudad;
-    private String dirección;
+    private String direccion;
     private String telefono;
     private String correoElectronico;
     private byte estado;
@@ -19,10 +19,11 @@ public class DatosClientes {
     public DatosClientes() {
     }
 
-    public DatosClientes(int identificacion, String ciudad, String dirección, String telefono, String correoElectronico, byte estado) {
+    public DatosClientes(int identificacion, String Cliente, String ciudad, String dirección, String telefono, String correoElectronico, byte estado) {
         this.identificacion = identificacion;
+        this.Cliente = Cliente;
         this.ciudad = ciudad;
-        this.dirección = dirección;
+        this.direccion = dirección;
         this.telefono = telefono;
         this.correoElectronico = correoElectronico;
         this.estado = estado;
@@ -32,12 +33,16 @@ public class DatosClientes {
         return identificacion;
     }
 
+    public String getCliente() {
+        return Cliente;
+    }
+
     public String getCiudad() {
         return ciudad;
     }
 
-    public String getDirección() {
-        return dirección;
+    public String getDireccion() {
+        return direccion;
     }
 
     public String getTelefono() {
@@ -56,12 +61,16 @@ public class DatosClientes {
         this.identificacion = identificacion;
     }
 
+    public void setCliente(String Cliente) {
+        this.Cliente = Cliente;
+    }
+
     public void setCiudad(String ciudad) {
         this.ciudad = ciudad;
     }
 
-    public void setDirección(String dirección) {
-        this.dirección = dirección;
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
     }
 
     public void setTelefono(String telefono) {
@@ -75,8 +84,6 @@ public class DatosClientes {
     public void setEstado(byte estado) {
         this.estado = estado;
     }
-    
-    
     
     
 }
