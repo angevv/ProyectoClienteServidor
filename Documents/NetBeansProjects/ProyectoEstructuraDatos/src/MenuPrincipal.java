@@ -29,7 +29,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         setIconImage(home);
         setResizable(false);
     }
-
+    //Estructuras
     Cola c = new Cola();
     Arbol a = new Arbol();
     ListaDobleCircular ldc = new ListaDobleCircular();
