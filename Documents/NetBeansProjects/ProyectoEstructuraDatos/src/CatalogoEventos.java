@@ -27,7 +27,7 @@ public class CatalogoEventos extends javax.swing.JFrame {
     MenuPrincipal menupr = new MenuPrincipal();
     
         private int verificarNombre=0;
-         private int verificarFecha=0;
+        private int verificarFecha=0;
         private int verificarLugar=0;
 
     public void limpiar() {
