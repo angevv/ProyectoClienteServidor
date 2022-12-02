@@ -156,7 +156,7 @@ public class ListaSimpleCircular {
         
     }
     
-     public void actualizarArchivo(String buscar) {
+     public void actualizarArchivo(String buscar,String fecha, String lugar,String ciudad, String direccion, String estado) {
         try {
             DatosCatalogoEvento ce = new DatosCatalogoEvento();
             DataInputStream entrada = new DataInputStream(new FileInputStream(
@@ -167,21 +167,68 @@ public class ListaSimpleCircular {
                 while (true) {
                     ce.setNombreEvento(entrada.readUTF());
                     ce.setFechaEvento(entrada.readUTF());
+                    ce.setLugar(entrada.readUTF());
+                    ce.setCiudad(entrada.readUTF());
+                    ce.setDireccion(entrada.readUTF());
+                    ce.setEstado(entrada.readUTF());
+                    if (ce.getNombreEvento().equals(buscar)) {
+                        ce.setNombreEvento(ce.getNombreEvento());
+                        ce.setFechaEvento(fecha);
+                        ce.setLugar(lugar);
+                        ce.setCiudad(ciudad);
+                        ce.setDireccion(direccion);
+                        ce.setEstado(estado);
+                    }
+                    salida.writeUTF(ce.getNombreEvento());
+                    salida.writeUTF(ce.getFechaEvento());
+                    salida.writeUTF(ce.getLugar());
+                    salida.writeUTF(ce.getCiudad());
+                    salida.writeUTF(ce.getDireccion());
+                    salida.writeUTF(ce.getEstado());   
+                }
+            } catch (EOFException eofe) {
+                entrada.close();
+                salida.close();
+                mover();
+            }
+        } catch (FileNotFoundException fnfe) {
+            JOptionPane.showMessageDialog(null, "¡Archivo no encontrado, revise!",
+                    "Archivo no encontrado", JOptionPane.ERROR_MESSAGE);
+        } catch (IOException ioe) {
+            JOptionPane.showMessageDialog(null, "¡Error desconocido, revise!",
+                    "Error desconocido", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+     
+     public void inactivar(String buscar) {
+        try {
+           DatosCatalogoEvento ce = new DatosCatalogoEvento();
+            DataInputStream entrada = new DataInputStream(new FileInputStream(
+                    "CatalogoEventos.dat"));
+            DataOutputStream salida = new DataOutputStream(new FileOutputStream(
+                    "temporalEventos.dat"));
+            try {
+                while (true) {
+                    ce.setNombreEvento(entrada.readUTF());
+                    ce.setFechaEvento(entrada.readUTF());
+                    ce.setLugar(entrada.readUTF());
                     ce.setCiudad(entrada.readUTF());
                     ce.setDireccion(entrada.readUTF());
                     ce.setEstado(entrada.readUTF());
                     if (ce.getNombreEvento().equals(buscar)) {
                         ce.setNombreEvento(ce.getNombreEvento());
                         ce.setFechaEvento(ce.getFechaEvento());
+                        ce.setLugar(ce.getLugar());
                         ce.setCiudad(ce.getCiudad());
-                        ce.setDireccion(ce.getEstado());
-                        ce.setEstado("Estadio");
+                        ce.setDireccion(ce.getDireccion());
+                        ce.setEstado("Inactivo");
                     }
                     salida.writeUTF(ce.getNombreEvento());
                     salida.writeUTF(ce.getFechaEvento());
+                    salida.writeUTF(ce.getLugar());
                     salida.writeUTF(ce.getCiudad());
                     salida.writeUTF(ce.getDireccion());
-                    salida.writeUTF(ce.getEstado());   
+                    salida.writeUTF(ce.getEstado());  
                 }
             } catch (EOFException eofe) {
                 entrada.close();
@@ -203,16 +250,18 @@ public class ListaSimpleCircular {
             DataInputStream entrada = new DataInputStream(new FileInputStream(
                     "temporalEventos.dat"));
             DataOutputStream salida = new DataOutputStream(new FileOutputStream(
-                    "temporalEventos.dat"));
+                    "CatalogoEventos.dat"));
             try {
                 while (true) {
                     ce.setNombreEvento(entrada.readUTF());
                     ce.setFechaEvento(entrada.readUTF());
+                    ce.setLugar(entrada.readUTF());
                     ce.setCiudad(entrada.readUTF());
                     ce.setDireccion(entrada.readUTF());
                     ce.setEstado(entrada.readUTF());
                     salida.writeUTF(ce.getNombreEvento());
                     salida.writeUTF(ce.getFechaEvento());
+                    salida.writeUTF(ce.getLugar());
                     salida.writeUTF(ce.getCiudad());
                     salida.writeUTF(ce.getDireccion());
                     salida.writeUTF(ce.getEstado());

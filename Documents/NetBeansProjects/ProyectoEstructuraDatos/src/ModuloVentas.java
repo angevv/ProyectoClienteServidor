@@ -1,4 +1,9 @@
 
+import java.io.DataInputStream;
+import java.io.EOFException;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import javax.swing.JOptionPane;
 
 public class ModuloVentas extends javax.swing.JFrame {
@@ -8,7 +13,6 @@ public class ModuloVentas extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         setResizable(false);
         setTitle("Gestión de Ventas");
-       
     }
     
     //Arbol
@@ -18,9 +22,36 @@ public class ModuloVentas extends javax.swing.JFrame {
         txtNumVenta.setText("");
         txtFecha.setText("");
         txtHora.setText("");
-        txtAsientosComprar.setText("");
         txtMontoPagar.setText("");
     }
+     
+    public void llenarComboBoxEvento() {
+        try {
+            DataInputStream entrada = new DataInputStream(new FileInputStream(
+                    "CatalogoEventos.dat"));
+            try {
+                DatosCatalogoEvento du = new DatosCatalogoEvento();
+                while (true) {
+                    du.setNombreEvento(entrada.readUTF());
+                    du.setFechaEvento(entrada.readUTF());
+                    du.setLugar(entrada.readUTF());
+                    du.setCiudad(entrada.readUTF());
+                    du.setDireccion(entrada.readUTF());
+                    du.setEstado(entrada.readUTF());
+                  //  cbEventos.addItem(du.getNombreEvento());
+                }
+            } catch (EOFException eeof) {
+                entrada.close();
+            }
+        } catch (FileNotFoundException fnfe) {
+            JOptionPane.showMessageDialog(null, "¡Archivo no encontrado!", "Archivo no encontrado",
+                    JOptionPane.ERROR_MESSAGE);
+        } catch (IOException eioe) {
+            JOptionPane.showMessageDialog(null, "¡Error en el dispositivo de almacenamiento!",
+                    "Error en el dispositivo", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -38,19 +69,19 @@ public class ModuloVentas extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         txtHora = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        txtAsientosComprar = new javax.swing.JPasswordField();
         cbEvento = new javax.swing.JComboBox<>();
         cbUsuarios = new javax.swing.JComboBox<>();
         jLabel8 = new javax.swing.JLabel();
         txtMontoPagar = new javax.swing.JPasswordField();
         jLabel7 = new javax.swing.JLabel();
         txtNumVenta = new javax.swing.JTextField();
+        cbAsientos = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        jLabel6.setText("Asientos a comprar:");
+        jLabel6.setText("Asiento a comprar:");
 
         btnComprar.setText("Comprar");
         btnComprar.addActionListener(new java.awt.event.ActionListener() {
@@ -83,10 +114,6 @@ public class ModuloVentas extends javax.swing.JFrame {
         jLabel4.setText("Hora de la compra:");
 
         jLabel5.setText("Usuario:");
-
-        cbEvento.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        cbUsuarios.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jLabel8.setText("Monto a pagar: ");
 
@@ -122,9 +149,8 @@ public class ModuloVentas extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtMontoPagar, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(txtAsientosComprar, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(cbUsuarios, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                            .addComponent(cbUsuarios, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cbAsientos, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(78, Short.MAX_VALUE)
@@ -160,10 +186,10 @@ public class ModuloVentas extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(cbUsuarios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(10, 10, 10)
+                .addGap(7, 7, 7)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(txtAsientosComprar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbAsientos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
@@ -188,7 +214,7 @@ public class ModuloVentas extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(25, Short.MAX_VALUE)
+                .addContainerGap(23, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(25, 25, 25))
         );
@@ -198,7 +224,7 @@ public class ModuloVentas extends javax.swing.JFrame {
 
     private void btnComprarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnComprarActionPerformed
         // TODO add your handling code here:
-       mp.a.inserta(txtNumVenta.getText(),cbEvento.getSelectedItem().toString(),txtFecha.getText(),txtHora.getText(),cbUsuarios.getSelectedItem().toString(),txtAsientosComprar.getText(),txtMontoPagar.getText());
+       //mp.a.inserta(txtNumVenta.getText(),cbEvento.getSelectedItem().toString(),txtFecha.getText(),txtHora.getText(),cbUsuarios.getSelectedItem().toString(),txtAsientosComprar.getText(),txtMontoPagar.getText());
     }//GEN-LAST:event_btnComprarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
@@ -252,6 +278,7 @@ public class ModuloVentas extends javax.swing.JFrame {
     private javax.swing.JButton btnComprar;
     private javax.swing.JButton btnRegresar;
     private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JComboBox<String> cbAsientos;
     private javax.swing.JComboBox<String> cbEvento;
     private javax.swing.JComboBox<String> cbUsuarios;
     private javax.swing.JLabel jLabel1;
@@ -263,7 +290,6 @@ public class ModuloVentas extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPasswordField txtAsientosComprar;
     private javax.swing.JTextField txtFecha;
     private javax.swing.JTextField txtHora;
     private javax.swing.JPasswordField txtMontoPagar;
