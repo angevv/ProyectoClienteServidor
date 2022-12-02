@@ -2,12 +2,56 @@
 
 <Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <NonVisualComponents>
+    <Component class="javax.swing.JButton" name="jButton1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="jButton1"/>
+      </Properties>
+    </Component>
     <Menu class="javax.swing.JMenuBar" name="jMenuBar1">
+      <Properties>
+        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+          <Border info="null"/>
+        </Property>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ff" green="ff" red="ff" type="rgb"/>
+        </Property>
+        <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[70, 70]"/>
+        </Property>
+        <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[70, 70]"/>
+        </Property>
+        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[70, 70]"/>
+        </Property>
+      </Properties>
       <SubComponents>
         <Menu class="javax.swing.JMenu" name="jMenu1">
           <Properties>
+            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+              <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+                <LineBorder/>
+              </Border>
+            </Property>
             <Property name="text" type="java.lang.String" value="Usuarios"/>
+            <Property name="alignmentX" type="float" value="0.8"/>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Dialog" size="14" style="1"/>
+            </Property>
+            <Property name="horizontalTextPosition" type="int" value="0"/>
+            <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
+              <Insets value="[0, 300, 0, 300]"/>
+            </Property>
+            <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+              <Dimension value="[90, 70]"/>
+            </Property>
+            <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+              <Dimension value="[93, 41]"/>
+            </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mouseMoved" listener="java.awt.event.MouseMotionListener" parameters="java.awt.event.MouseEvent" handler="jMenu1MouseMoved"/>
+          </Events>
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="MenuRegistroUsuarios">
               <Properties>
@@ -29,7 +73,27 @@
         </Menu>
         <Menu class="javax.swing.JMenu" name="jMenu2">
           <Properties>
+            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+              <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+                <LineBorder/>
+              </Border>
+            </Property>
             <Property name="text" type="java.lang.String" value="Cat&#xe1;logos"/>
+            <Property name="alignmentX" type="float" value="0.8"/>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Dialog" size="14" style="1"/>
+            </Property>
+            <Property name="horizontalAlignment" type="int" value="0"/>
+            <Property name="horizontalTextPosition" type="int" value="0"/>
+            <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
+              <Insets value="[0, 300, 0, 300]"/>
+            </Property>
+            <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+              <Dimension value="[90, 70]"/>
+            </Property>
+            <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+              <Dimension value="[100, 100]"/>
+            </Property>
           </Properties>
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="MenuCatalogoEventos">
@@ -68,7 +132,24 @@
         </Menu>
         <Menu class="javax.swing.JMenu" name="jMenu3">
           <Properties>
+            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+              <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+                <LineBorder/>
+              </Border>
+            </Property>
             <Property name="text" type="java.lang.String" value="Ventas"/>
+            <Property name="alignmentX" type="float" value="0.8"/>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Dialog" size="14" style="1"/>
+            </Property>
+            <Property name="horizontalAlignment" type="int" value="0"/>
+            <Property name="horizontalTextPosition" type="int" value="0"/>
+            <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
+              <Insets value="[0, 300, 0, 300]"/>
+            </Property>
+            <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+              <Dimension value="[70, 70]"/>
+            </Property>
           </Properties>
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="MenuVentas">
@@ -91,7 +172,24 @@
         </Menu>
         <Menu class="javax.swing.JMenu" name="jMenu4">
           <Properties>
+            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+              <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+                <LineBorder/>
+              </Border>
+            </Property>
             <Property name="text" type="java.lang.String" value="Cajas"/>
+            <Property name="alignmentX" type="float" value="0.8"/>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Dialog" size="14" style="1"/>
+            </Property>
+            <Property name="horizontalAlignment" type="int" value="0"/>
+            <Property name="horizontalTextPosition" type="int" value="0"/>
+            <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
+              <Insets value="[0, 300, 0, 300]"/>
+            </Property>
+            <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+              <Dimension value="[70, 70]"/>
+            </Property>
           </Properties>
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="MenuCajas">
@@ -101,11 +199,51 @@
             </MenuItem>
           </SubComponents>
         </Menu>
+        <Menu class="javax.swing.JMenu" name="jMenu5">
+          <Properties>
+            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+              <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+                <LineBorder/>
+              </Border>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Salir"/>
+            <Property name="alignmentX" type="float" value="0.8"/>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Dialog" size="14" style="1"/>
+            </Property>
+            <Property name="horizontalAlignment" type="int" value="0"/>
+            <Property name="horizontalTextPosition" type="int" value="0"/>
+            <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
+              <Insets value="[0, 300, 0, 300]"/>
+            </Property>
+            <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+              <Dimension value="[70, 70]"/>
+            </Property>
+          </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jMenu5MouseClicked"/>
+          </Events>
+        </Menu>
+        <Menu class="javax.swing.JMenu" name="jMenu6">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="MULTIFIESTAS"/>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Dialog" size="18" style="1"/>
+            </Property>
+            <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+              <Dimension value="[1000, 32767]"/>
+            </Property>
+            <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+              <Dimension value="[300, 29]"/>
+            </Property>
+          </Properties>
+        </Menu>
       </SubComponents>
     </Menu>
   </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="0"/>
+    <Property name="undecorated" type="boolean" value="true"/>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="menuBar" type="java.lang.String" value="jMenuBar1"/>
@@ -130,13 +268,40 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <EmptySpace min="0" pref="400" max="32767" attributes="0"/>
+          <Component id="jPanel" alignment="0" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <EmptySpace min="0" pref="279" max="32767" attributes="0"/>
+          <Component id="jPanel" alignment="0" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
   </Layout>
+  <SubComponents>
+    <Container class="javax.swing.JPanel" name="jPanel">
+
+      <Layout>
+        <DimensionLayout dim="0">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <EmptySpace min="0" pref="659" max="32767" attributes="0"/>
+          </Group>
+        </DimensionLayout>
+        <DimensionLayout dim="1">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <EmptySpace min="0" pref="232" max="32767" attributes="0"/>
+          </Group>
+        </DimensionLayout>
+      </Layout>
+    </Container>
+    <Component class="javax.swing.JTextField" name="jTextField1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="jTextField1"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="jLabel1"/>
+      </Properties>
+    </Component>
+  </SubComponents>
 </Form>

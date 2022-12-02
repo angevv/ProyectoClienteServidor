@@ -26,6 +26,7 @@ public class CatalogoAsientos extends javax.swing.JFrame {
         setResizable(false);
         setTitle("Catalogo de Asientos");
         menup.ldc.cargarCatalogoAsientos();
+        menup.lsc.cargarEventos();
         llenarComboBox();
         
     }
@@ -40,30 +41,15 @@ public class CatalogoAsientos extends javax.swing.JFrame {
         txtCostoAsiento.setText("");
     }
     
-    public void llenarComboBox() {
-        try {
-            DataInputStream entrada = new DataInputStream(new FileInputStream(
-                    "CatalogoEventos.dat"));
-            try {
-                DatosCatalogoEvento du = new DatosCatalogoEvento();
-                while (true) {
-                    du.setNombreEvento(entrada.readUTF());
-                    du.setFechaEvento(entrada.readUTF());
-                    du.setLugar(entrada.readUTF());
-                    du.setCiudad(entrada.readUTF());
-                    du.setDireccion(entrada.readUTF());
-                    du.setEstado(entrada.readUTF());
-                    cbEventos.addItem(du.getNombreEvento());
-                }
-            } catch (EOFException eeof) {
-                entrada.close();
+     public void llenarComboBox() {
+         if(!menup.lsc.esVaciaSC()){
+            NodoCatalogoEvento aux=menup.lsc.inicio;
+            cbEventos.addItem(aux.getElemento().getNombreEvento());
+            aux=aux.getSiguiente();
+            while(aux!=menup.lsc.inicio){
+                 cbEventos.addItem(aux.getElemento().getNombreEvento());
+                 aux=aux.getSiguiente();
             }
-        } catch (FileNotFoundException fnfe) {
-            JOptionPane.showMessageDialog(null, "¡Archivo no encontrado!", "Archivo no encontrado",
-                    JOptionPane.ERROR_MESSAGE);
-        } catch (IOException eioe) {
-            JOptionPane.showMessageDialog(null, "¡Error en el dispositivo de almacenamiento!",
-                    "Error en el dispositivo", JOptionPane.ERROR_MESSAGE);
         }
     }
    

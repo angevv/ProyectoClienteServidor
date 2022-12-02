@@ -26,6 +26,7 @@ public class EditarAsientos extends javax.swing.JFrame {
         setResizable(false);
         setTitle("Editar Asientos");
         menup.ldc.cargarCatalogoAsientos();
+        menup.lsc.cargarEventos();
         llenarComboBox();
     }
     
@@ -38,32 +39,16 @@ public class EditarAsientos extends javax.swing.JFrame {
     }
     
     public void llenarComboBox() {
-        try {
-            DataInputStream entrada = new DataInputStream(new FileInputStream(
-                    "CatalogoEventos.dat"));
-            try {
-                DatosCatalogoEvento du = new DatosCatalogoEvento();
-                while (true) {
-                    du.setNombreEvento(entrada.readUTF());
-                    du.setFechaEvento(entrada.readUTF());
-                    du.setLugar(entrada.readUTF());
-                    du.setCiudad(entrada.readUTF());
-                    du.setDireccion(entrada.readUTF());
-                    du.setEstado(entrada.readUTF());
-                    cbEventos.addItem(du.getNombreEvento());
-                }
-            } catch (EOFException eeof) {
-                entrada.close();
+         if(!menup.lsc.esVaciaSC()){
+            NodoCatalogoEvento aux=menup.lsc.inicio;
+            cbEventos.addItem(aux.getElemento().getNombreEvento());
+            aux=aux.getSiguiente();
+            while(aux!=menup.lsc.inicio){
+                 cbEventos.addItem(aux.getElemento().getNombreEvento());
+                 aux=aux.getSiguiente();
             }
-        } catch (FileNotFoundException fnfe) {
-            JOptionPane.showMessageDialog(null, "¡Archivo no encontrado!", "Archivo no encontrado",
-                    JOptionPane.ERROR_MESSAGE);
-        } catch (IOException eioe) {
-            JOptionPane.showMessageDialog(null, "¡Error en el dispositivo de almacenamiento!",
-                    "Error en el dispositivo", JOptionPane.ERROR_MESSAGE);
         }
     }
-   
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -239,11 +224,11 @@ public class EditarAsientos extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(rbLIB))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(rbOCU)
                 .addGap(4, 4, 4)
                 .addComponent(rbInactivo)
-                .addGap(18, 18, 18)
+                .addGap(22, 22, 22)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnEditarAsientos)
                     .addComponent(btnRegresar)
@@ -397,7 +382,7 @@ public class EditarAsientos extends javax.swing.JFrame {
                 if (rbPRE.isSelected()) {
                     aux.getElemento().setCodigoArea(rbPRE.getText());
                     codigoA = rbPRE.getText();
-                } else {
+                } else if(rbNOR.isSelected()){
                     aux.getElemento().setCodigoArea(rbNOR.getText());
                     codigoA = rbNOR.getText();
                 }
@@ -432,13 +417,13 @@ public class EditarAsientos extends javax.swing.JFrame {
                      }
                     String estado = "";
                     if (rbLIB.isSelected()) {
-                        aux.getElemento().setCodigoArea(rbLIB.getText());
+                        aux.getElemento().setEstado(rbLIB.getText());
                         estado = rbLIB.getText();
                     } else if (rbOCU.isSelected()) {
-                        aux.getElemento().setCodigoArea(rbOCU.getText());
+                        aux.getElemento().setEstado(rbOCU.getText());
                         estado = rbOCU.getText();
                     } else {
-                        aux.getElemento().setCodigoArea(rbInactivo.getText());
+                        aux.getElemento().setEstado(rbInactivo.getText());
                         estado = rbInactivo.getText();
                     }
                      

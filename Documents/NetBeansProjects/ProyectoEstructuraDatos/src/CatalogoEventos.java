@@ -302,18 +302,12 @@ public class CatalogoEventos extends javax.swing.JFrame {
 
                 if(!aux.getElemento().getNombreEvento().equals(txtNombreEvento.getText())){
                    verificarNombre=1;
-                }else{
-                    verificarNombre=0;
                 }
                 if(!aux.getElemento().getFechaEvento().equals(txtFechaEvento.getText())){
                     verificarFecha=1;
-                }else{
-                    verificarLugar=0;
                 }
                 if(!aux.getElemento().getLugar().equals(lugar)){
                     verificarLugar=1;
-                }else{
-                     verificarFecha=0;
                 }
                 aux=aux.getSiguiente();
            }
@@ -442,7 +436,7 @@ public class CatalogoEventos extends javax.swing.JFrame {
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         JOptionPane.showMessageDialog(null, "¡Datos no guardados!",
                 "Registro cancelado", JOptionPane.INFORMATION_MESSAGE);
-         if(!menupr.lsc.esVaciaSC()){
+        /* if(!menupr.lsc.esVaciaSC()){
             String s="";
             NodoCatalogoEvento aux=menupr.lsc.inicio;
             s=s+aux.getElemento().getNombreEvento()+" "+aux.getElemento().getFechaEvento()+" "+aux.getElemento().getLugar()+"-->";
@@ -454,7 +448,7 @@ public class CatalogoEventos extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "La lista contiene:\n"+s);
         }else{
             JOptionPane.showMessageDialog(null, "Lista vacia");
-        }
+        }*/
         limpiar();
     }//GEN-LAST:event_btnCancelarActionPerformed
     //REGRESAR

@@ -88,9 +88,9 @@
                           </Group>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="txtMontoPagar" min="-2" pref="156" max="-2" attributes="0"/>
                               <Component id="cbUsuarios" min="-2" pref="156" max="-2" attributes="0"/>
-                              <Component id="cbAsientos" min="-2" pref="156" max="-2" attributes="0"/>
+                              <Component id="cbAsiento" min="-2" pref="156" max="-2" attributes="0"/>
+                              <Component id="txtMontoPagar" min="-2" pref="156" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -140,7 +140,7 @@
                   <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="cbAsientos" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="cbAsiento" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -226,6 +226,10 @@
               <StringArray count="0"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="cbEventoItemStateChanged"/>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="cbEventoMouseClicked"/>
+          </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
           </AuxValues>
@@ -245,8 +249,6 @@
             <Property name="text" type="java.lang.String" value="Monto a pagar: "/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JPasswordField" name="txtMontoPagar">
-        </Component>
         <Component class="javax.swing.JLabel" name="jLabel7">
           <Properties>
             <Property name="text" type="java.lang.String" value="N&#xfa;mero de venta:"/>
@@ -254,15 +256,20 @@
         </Component>
         <Component class="javax.swing.JTextField" name="txtNumVenta">
         </Component>
-        <Component class="javax.swing.JComboBox" name="cbAsientos">
+        <Component class="javax.swing.JComboBox" name="cbAsiento">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
               <StringArray count="0"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="cbAsientoItemStateChanged"/>
+          </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
           </AuxValues>
+        </Component>
+        <Component class="javax.swing.JTextField" name="txtMontoPagar">
         </Component>
       </SubComponents>
     </Container>
