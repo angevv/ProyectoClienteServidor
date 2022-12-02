@@ -14,10 +14,6 @@ import java.io.IOException;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-/**
- *
- * @author Carlos
- */
 public class Facturacion extends javax.swing.JFrame {
 
     /**
@@ -355,33 +351,32 @@ public class Facturacion extends javax.swing.JFrame {
     }//GEN-LAST:event_tablaFacturaMouseClicked
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        int cant = Integer.parseInt(txtCantidad.getText());  
+        int cant = Integer.parseInt(txtCantidad.getText());
         double precio = Double.parseDouble(txtPrecio.getText());
         double total = cant * precio;
         String totalFinal = String.valueOf(total);
         lblTotal.setText(totalFinal);
         guardarArchivo(Integer.parseInt(txtNumeroFactura.getText()), txtFechaFactura.getText(), txtHoraFactura.getText(), cbServicio.getSelectedItem().toString(), cbNombre.getSelectedItem().toString(), Integer.parseInt(txtCantidad.getText()), Double.parseDouble(txtPrecio.getText()), Double.parseDouble(lblTotal.getText()));
-        for(int i=0; i < tablaFactura.getRowCount();i++){
+        for (int i = 0; i < tablaFactura.getRowCount(); i++) {
             modelFacturas.removeRow(i);
-            i=-1;
+            i = -1;
         }
         llenarTabla();
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-        if (tablaFactura.getSelectedRow() > 0) {
-            int fila = tablaFactura.getSelectedRow();
-            double total = Integer.parseInt(txtCantidad.getText())
-                    * Double.parseDouble(txtPrecio.getText());
-            tablaFactura.setValueAt(txtNumeroFactura.getText(), fila, 0);
-            tablaFactura.setValueAt(txtFechaFactura.getText(), fila, 1);
-            tablaFactura.setValueAt(txtHoraFactura.getText(), fila, 2);
-            tablaFactura.setValueAt(cbServicio.getSelectedItem().toString(), fila, 3);
-            tablaFactura.setValueAt(cbNombre.getSelectedItem().toString(), fila, 4);
-            tablaFactura.setValueAt(txtCantidad.getText(), fila, 5);
-            tablaFactura.setValueAt(txtPrecio.getText(), fila, 6);
-            tablaFactura.setValueAt(String.valueOf(total), fila, 7);
-            //actualizarArchivo();
+        if (tablaFactura.getSelectedRow() > -1) {
+            int cant = Integer.parseInt(txtCantidad.getText());
+            double precio = Double.parseDouble(txtPrecio.getText());
+            double total = cant * precio;
+            String totalFinal = String.valueOf(total);
+            lblTotal.setText(totalFinal);
+            actualizarArchivo(Integer.parseInt(txtNumeroFactura.getText()), txtFechaFactura.getText(), txtHoraFactura.getText(), cbServicio.getSelectedItem().toString(), cbNombre.getSelectedItem().toString(), Integer.parseInt(txtCantidad.getText()), Double.parseDouble(txtPrecio.getText()), Double.parseDouble(lblTotal.getText()));
+            for (int i = 0; i < tablaFactura.getRowCount(); i++) {
+                modelFacturas.removeRow(i);
+                i = -1;
+            }
+            llenarTabla();
         }
     }//GEN-LAST:event_btnEditarActionPerformed
 
@@ -393,8 +388,12 @@ public class Facturacion extends javax.swing.JFrame {
         } else {
             int resp = JOptionPane.showConfirmDialog(null, "¿Está seguro que desea eliminar la factura?", "¡Eliminar Factura!", JOptionPane.YES_NO_OPTION);
             if (JOptionPane.OK_OPTION == resp) {
-                modelo.removeRow(fila);
-                //borrarDeArchivo();
+                borrarArchivo(Integer.parseInt(txtNumeroFactura.getText()));
+                for (int i = 0; i < tablaFactura.getRowCount(); i++) {
+                    modelFacturas.removeRow(i);
+                    i = -1;
+                }
+                llenarTabla();
             }
         }
 
@@ -422,11 +421,11 @@ public class Facturacion extends javax.swing.JFrame {
         txtCantidad.setText("");
         lblTotal.setText("0.00");
     }
-    
-    public void mostrarPrecio(){
+
+    public void mostrarPrecio() {
         String servicio = String.valueOf(cbServicio.getSelectedItem());
         Double costoServicio = buscar(servicio);
-        String costoS  = String.valueOf(costoServicio);
+        String costoS = String.valueOf(costoServicio);
         txtPrecio.setText(costoS);
     }
 
@@ -485,12 +484,13 @@ public class Facturacion extends javax.swing.JFrame {
                     "Error en el dispositivo", JOptionPane.ERROR_MESSAGE);
         }
     }
-    
-    public Double buscar(String descripcion){
-        for(DatosServicios servicio : s.servicios){
-             if(servicio.getDescripcion().equals(descripcion))
-                 return servicio.getCosto();
-        }       
+
+    public Double buscar(String descripcion) {
+        for (DatosServicios servicio : s.servicios) {
+            if (servicio.getDescripcion().equals(descripcion)) {
+                return servicio.getCosto();
+            }
+        }
         return 0.00;
     }
 
@@ -562,7 +562,140 @@ public class Facturacion extends javax.swing.JFrame {
         return encontrado;
     }
 
-     public void llenarTabla() {
+    public void actualizarArchivo(int numFactura, String fecha, String hora, String descripcion, String cliente, int cant, double precio, double total) {
+        try {
+            Factura f = new Factura();
+            DataInputStream entrada = new DataInputStream(new FileInputStream("facturas.dat"));
+            DataOutputStream salida = new DataOutputStream(new FileOutputStream(
+                    "temporalFacturas.dat"));
+            try {
+                while (true) {
+                    f.setNumeroFactura(entrada.readInt());
+                    f.setFecha(entrada.readUTF());
+                    f.setHora(entrada.readUTF());
+                    f.setDescipcionServicios(entrada.readUTF());
+                    f.setCliente(entrada.readUTF());
+                    f.setCantidad(entrada.readInt());
+                    f.setPrecio(entrada.readDouble());
+                    f.setTotal(entrada.readDouble());
+                    if (f.getNumeroFactura() == numFactura) {
+                        f.setNumeroFactura(numFactura);
+                        f.setFecha(fecha);
+                        f.setHora(hora);
+                        f.setDescipcionServicios(descripcion);
+                        f.setCliente(cliente);
+                        f.setCantidad(cant);
+                        f.setPrecio(precio);
+                        f.setTotal(total);
+                    }
+                    salida.writeInt(f.getNumeroFactura());
+                    salida.writeUTF(f.getFecha());
+                    salida.writeUTF(f.getHora());
+                    salida.writeUTF(f.getDescipcionServicios());
+                    salida.writeUTF(f.getCliente());
+                    salida.writeInt(f.getCantidad());
+                    salida.writeDouble(f.getPrecio());
+                    salida.writeDouble(f.getTotal());
+                }
+            } catch (EOFException eofe) {
+                entrada.close();
+                salida.close();
+                mover();
+            }
+        } catch (FileNotFoundException fnfe) {
+            JOptionPane.showMessageDialog(null, "¡Archivo no encontrado, revise!",
+                    "Archivo no encontrado", JOptionPane.ERROR_MESSAGE);
+        } catch (IOException ioe) {
+            JOptionPane.showMessageDialog(null, "¡Error desconocido, revise!",
+                    "Error desconocido", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    public void mover() {
+        try {
+            Factura f = new Factura();
+            DataInputStream entrada = new DataInputStream(new FileInputStream(
+                    "temporalFacturas.dat"));
+            DataOutputStream salida = new DataOutputStream(new FileOutputStream(
+                    "facturas.dat"));
+            try {
+                while (true) {
+                    f.setNumeroFactura(entrada.readInt());
+                    f.setFecha(entrada.readUTF());
+                    f.setHora(entrada.readUTF());
+                    f.setDescipcionServicios(entrada.readUTF());
+                    f.setCliente(entrada.readUTF());
+                    f.setCantidad(entrada.readInt());
+                    f.setPrecio(entrada.readDouble());
+                    f.setTotal(entrada.readDouble());
+                    salida.writeInt(f.getNumeroFactura());
+                    salida.writeUTF(f.getFecha());
+                    salida.writeUTF(f.getHora());
+                    salida.writeUTF(f.getDescipcionServicios());
+                    salida.writeUTF(f.getCliente());
+                    salida.writeInt(f.getCantidad());
+                    salida.writeDouble(f.getPrecio());
+                    salida.writeDouble(f.getTotal());
+                }
+            } catch (EOFException eofe) {
+                entrada.close();
+                salida.close();
+            }
+        } catch (FileNotFoundException fnfe) {
+            JOptionPane.showMessageDialog(null, "¡Archivo no encontrado, revise!",
+                    "Archivo no encontrado", JOptionPane.ERROR_MESSAGE);
+        } catch (IOException ioe) {
+            JOptionPane.showMessageDialog(null, "¡Error desconocido, revise!",
+                    "Error desconocido", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
+    public void borrarArchivo(int buscar) {
+        try {
+            Factura f = new Factura();
+            DataInputStream entrada = new DataInputStream(new FileInputStream("facturas.dat"));
+            DataOutputStream salida = new DataOutputStream(new FileOutputStream(
+                    "temporalFacturas.dat"));
+            try {
+                while (true) {
+                    f.setNumeroFactura(entrada.readInt());
+                    f.setFecha(entrada.readUTF());
+                    f.setHora(entrada.readUTF());
+                    f.setDescipcionServicios(entrada.readUTF());
+                    f.setCliente(entrada.readUTF());
+                    f.setCantidad(entrada.readInt());
+                    f.setPrecio(entrada.readDouble());
+                    f.setTotal(entrada.readDouble());
+                    if (f.getNumeroFactura() != buscar) {
+                        salida.writeInt(f.getNumeroFactura());
+                        salida.writeUTF(f.getFecha());
+                        salida.writeUTF(f.getHora());
+                        salida.writeUTF(f.getDescipcionServicios());
+                        salida.writeUTF(f.getCliente());
+                        salida.writeInt(f.getCantidad());
+                        salida.writeDouble(f.getPrecio());
+                        salida.writeDouble(f.getTotal());
+                    }
+                }
+            } catch (EOFException eofe) {
+                entrada.close();
+                salida.close();
+                JOptionPane.showMessageDialog(null, "¡Datos fueron eliminados correctamente!",
+                        "Datos eliminados", JOptionPane.INFORMATION_MESSAGE);
+                limpiar();
+                mover();
+            }
+        } catch (FileNotFoundException fnfe) {
+            JOptionPane.showMessageDialog(null, "¡Archivo no encontrado, revise!",
+                    "Archivo no encontrado", JOptionPane.ERROR_MESSAGE);
+        } catch (IOException ioe) {
+            JOptionPane.showMessageDialog(null, "¡Error desconocido, revise!",
+                    "Error desconocido", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+
+    public void llenarTabla() {
         try {
             DataInputStream entrada = new DataInputStream(new FileInputStream("facturas.dat"));
             try {
@@ -576,7 +709,7 @@ public class Facturacion extends javax.swing.JFrame {
                     f.setCantidad(entrada.readInt());
                     f.setPrecio(entrada.readDouble());
                     f.setTotal(entrada.readDouble());
-                    modelFacturas.addRow(new Object[]{f.getNumeroFactura(), f.getFecha(),f.getHora(),f.getDescipcionServicios(),f.getCliente(),f.getCantidad(),f.getPrecio(),f.getTotal() });
+                    modelFacturas.addRow(new Object[]{f.getNumeroFactura(), f.getFecha(), f.getHora(), f.getDescipcionServicios(), f.getCliente(), f.getCantidad(), f.getPrecio(), f.getTotal()});
                     tablaFactura.setModel(modelFacturas);
                 }
             } catch (EOFException eeof) {
