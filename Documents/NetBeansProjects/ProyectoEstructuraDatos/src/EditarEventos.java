@@ -20,12 +20,12 @@ public class EditarEventos extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         setResizable(false);
         setTitle("Editar Eventos");
-        //Lista Simple Circular
-        this.inicio=null;
-        this.fin=null;
+        menup.lsc.cargarEventos();
     }
     
     //Lista Simple Circular
+    MenuPrincipal menup = new MenuPrincipal();
+    
     private NodoCatalogoEvento inicio;
     private NodoCatalogoEvento fin;
     

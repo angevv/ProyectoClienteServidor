@@ -25,8 +25,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
         setTitle("Multifiestas");
         setLocationRelativeTo(null);
         setExtendedState(MAXIMIZED_BOTH);
-        Image home=new ImageIcon(getClass().getResource("iconos\\home.png")).getImage();   
-        setIconImage(home);
+        //Image home=new ImageIcon(getClass().getResource("iconos\\home.png")).getImage();   
+        //setIconImage(home);
         setResizable(false);
     }
     //Estructuras
