@@ -120,11 +120,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jMenuBar1.setPreferredSize(new java.awt.Dimension(70, 70));
 
         jMenu1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jMenu1.setText("Usuarios");
+        jMenu1.setText("    Usuarios");
         jMenu1.setAlignmentX(0.8F);
         jMenu1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jMenu1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jMenu1.setMargin(new java.awt.Insets(0, 300, 0, 300));
+        jMenu1.setMargin(new java.awt.Insets(0, 800, 0, 300));
         jMenu1.setMaximumSize(new java.awt.Dimension(90, 70));
         jMenu1.setPreferredSize(new java.awt.Dimension(93, 41));
         jMenu1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
@@ -252,8 +252,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jMenuBar1.add(jMenu5);
 
         jMenu6.setText("MULTIFIESTAS");
+        jMenu6.setEnabled(false);
         jMenu6.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jMenu6.setMaximumSize(new java.awt.Dimension(1000, 32767));
+        jMenu6.setIconTextGap(100);
+        jMenu6.setMargin(new java.awt.Insets(2, 980, 2, 2));
+        jMenu6.setMaximumSize(new java.awt.Dimension(1200, 32767));
         jMenu6.setMinimumSize(new java.awt.Dimension(300, 29));
         jMenuBar1.add(jMenu6);
 
