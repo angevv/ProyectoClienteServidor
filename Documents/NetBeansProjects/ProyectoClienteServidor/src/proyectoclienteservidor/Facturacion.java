@@ -11,6 +11,11 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Scanner;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -33,12 +38,49 @@ public class Facturacion extends javax.swing.JFrame {
         llenarComboBox1();
         llenarComboBox2();
         llenarTabla();
+        obtenerFecha();
+        obtenerHora();
+        //inicializarServidor();
+       /* totales = new double[tablaFactura.getRowCount()];
+        System.out.println(totales.length);
+        
+        for(int i =0;i<totales.length;i++){
+            System.out.println(totales[i]);
+        }*/
+       //recorrerArchivo();
     }
 
     private int encontrado;
     public DefaultTableModel modelFacturas = new DefaultTableModel();
     Servicios s = new Servicios();
-
+    
+    /*public double recorrerArchivo(){
+        try {
+            DataInputStream entrada = new DataInputStream(new FileInputStream(
+                    "facturas.dat"));
+            try {
+                 Factura f = new Factura();
+                while (true) {
+                    f.setNumeroFactura(entrada.readInt());
+                    f.setFecha(entrada.readUTF());
+                    f.setHora(entrada.readUTF());
+                    f.setDescipcionServicios(entrada.readUTF());
+                    f.setCliente(entrada.readUTF());
+                    f.setCantidad(entrada.readInt());
+                    f.setPrecio(entrada.readDouble());
+                    f.setTotal(entrada.readDouble());
+                    return f.getTotal();
+                }
+            } catch (EOFException eeof) {
+                entrada.close();
+            }
+        } catch (IOException eioe) {
+            JOptionPane.showMessageDialog(null, "¡Error en el dispositivo de almacenamiento!",
+                    "Error en el dispositivo", JOptionPane.ERROR_MESSAGE);
+        }
+        return 0.00;
+    }
+    /*
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -362,6 +404,8 @@ public class Facturacion extends javax.swing.JFrame {
             i = -1;
         }
         llenarTabla();
+        obtenerFecha();
+        obtenerHora();
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
@@ -371,6 +415,8 @@ public class Facturacion extends javax.swing.JFrame {
             double total = cant * precio;
             String totalFinal = String.valueOf(total);
             lblTotal.setText(totalFinal);
+            obtenerFecha();
+            obtenerHora();
             actualizarArchivo(Integer.parseInt(txtNumeroFactura.getText()), txtFechaFactura.getText(), txtHoraFactura.getText(), cbServicio.getSelectedItem().toString(), cbNombre.getSelectedItem().toString(), Integer.parseInt(txtCantidad.getText()), Double.parseDouble(txtPrecio.getText()), Double.parseDouble(lblTotal.getText()));
             for (int i = 0; i < tablaFactura.getRowCount(); i++) {
                 modelFacturas.removeRow(i);
@@ -394,6 +440,8 @@ public class Facturacion extends javax.swing.JFrame {
                     i = -1;
                 }
                 llenarTabla();
+                obtenerFecha();
+                obtenerHora();
             }
         }
 
@@ -401,8 +449,7 @@ public class Facturacion extends javax.swing.JFrame {
 
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
         //SE GUARDA EN EL ARCHIVO CADA VEZ QUE SE VUELVE AL MENÚ PRINCIPAL
-        //guardarArchivo();
-        this.dispose();
+        this.dispose();    
     }//GEN-LAST:event_jButton11ActionPerformed
 
     private void txtHoraFacturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtHoraFacturaActionPerformed
@@ -427,6 +474,18 @@ public class Facturacion extends javax.swing.JFrame {
         Double costoServicio = buscar(servicio);
         String costoS = String.valueOf(costoServicio);
         txtPrecio.setText(costoS);
+    }
+
+    public void obtenerFecha() {
+        String dateTime = DateTimeFormatter.ofPattern("dd.MMM.yyyy")
+                .format(LocalDateTime.now());
+        txtFechaFactura.setText(dateTime);
+    }
+
+    public void obtenerHora() {
+        String dateTime = DateTimeFormatter.ofPattern("hh:mm:ss a")
+                .format(LocalDateTime.now());
+        txtHoraFactura.setText(dateTime);
     }
 
     public void llenarComboBox1() {
@@ -649,7 +708,7 @@ public class Facturacion extends javax.swing.JFrame {
                     "Error desconocido", JOptionPane.ERROR_MESSAGE);
         }
     }
-    
+
     public void borrarArchivo(int buscar) {
         try {
             Factura f = new Factura();
@@ -693,7 +752,6 @@ public class Facturacion extends javax.swing.JFrame {
                     "Error desconocido", JOptionPane.ERROR_MESSAGE);
         }
     }
-
 
     public void llenarTabla() {
         try {
@@ -779,7 +837,7 @@ public class Facturacion extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JLabel lblTotal;
-    private javax.swing.JTable tablaFactura;
+    public javax.swing.JTable tablaFactura;
     private javax.swing.JTextField txtCantidad;
     private javax.swing.JTextField txtFechaFactura;
     private javax.swing.JTextField txtHoraFactura;

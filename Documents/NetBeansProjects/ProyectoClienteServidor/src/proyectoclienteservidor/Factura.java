@@ -1,6 +1,6 @@
 package proyectoclienteservidor;
 
-public class Factura extends Producto {
+public class Factura {
     private int numeroFactura;
     private String fecha;
     private String hora;

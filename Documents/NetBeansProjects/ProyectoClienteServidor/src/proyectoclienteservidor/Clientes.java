@@ -259,7 +259,7 @@ public class Clientes extends javax.swing.JFrame implements Catalogos {
                                 .addGap(0, 0, Short.MAX_VALUE)))))
                 .addGap(51, 51, 51))
             .addGroup(layout.createSequentialGroup()
-                .addGap(136, 136, 136)
+                .addGap(157, 157, 157)
                 .addComponent(jLabel1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );

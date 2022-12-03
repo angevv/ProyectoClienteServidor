@@ -339,7 +339,7 @@ public class Servicios extends javax.swing.JFrame implements Catalogos {
 
         if(noExiste){
             limpiar();
-            JOptionPane.showMessageDialog(null, "¡No existe un proveedor con la identificacion ingresada!",
+            JOptionPane.showMessageDialog(null, "¡No existe un servicio con la identificacion ingresada!",
                 "Error al editar", JOptionPane.ERROR_MESSAGE);
         }else{
             limpiar();
@@ -416,7 +416,7 @@ public class Servicios extends javax.swing.JFrame implements Catalogos {
 
         if(noExiste){
             limpiar();
-            JOptionPane.showMessageDialog(null, "¡No existe un proveedor con la identificacion ingresada!",
+            JOptionPane.showMessageDialog(null, "¡No existe un servicio con la identificacion ingresada!",
                 "Error al consultar", JOptionPane.ERROR_MESSAGE);
         }
 

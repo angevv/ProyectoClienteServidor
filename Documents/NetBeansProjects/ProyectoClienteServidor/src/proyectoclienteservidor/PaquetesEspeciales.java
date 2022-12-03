@@ -413,7 +413,7 @@ public class PaquetesEspeciales extends javax.swing.JFrame implements Catalogos{
 
         if(noExiste){
             limpiar();
-            JOptionPane.showMessageDialog(null, "¡No existe un proveedor con la identificacion ingresada!",
+            JOptionPane.showMessageDialog(null, "¡No existe un paquete de servicio con la identificacion ingresada!",
                 "Error al editar", JOptionPane.ERROR_MESSAGE);
         }else{
             limpiar();
@@ -433,15 +433,15 @@ public class PaquetesEspeciales extends javax.swing.JFrame implements Catalogos{
                 noExiste = false;
                 paquete.setEstado((byte)0);
                 limpiar();
-                JOptionPane.showMessageDialog(null, "¡Proveedor inactivado correctamente!",
-                "Inactivar proveedor", JOptionPane.ERROR_MESSAGE); 
+                JOptionPane.showMessageDialog(null, "¡Paquete inactivado correctamente!",
+                "Inactivar paquete", JOptionPane.ERROR_MESSAGE); 
                 return;
 
             }
         }
         if(noExiste){
             limpiar();
-            JOptionPane.showMessageDialog(null, "¡No existe un proveedor con la identificacion ingresada!",
+            JOptionPane.showMessageDialog(null, "¡No existe un paquete de servicios con la identificacion ingresada!",
                 "Error al inactivar", JOptionPane.ERROR_MESSAGE);
         }
     }
@@ -477,7 +477,7 @@ public class PaquetesEspeciales extends javax.swing.JFrame implements Catalogos{
         
         if(noExiste){
             limpiar();
-            JOptionPane.showMessageDialog(null, "¡No existe un proveedor con la identificacion ingresada!",
+            JOptionPane.showMessageDialog(null, "¡No existe un paquete de servicios con la identificacion ingresada!",
                 "Error al consultar", JOptionPane.ERROR_MESSAGE);
         }
     }

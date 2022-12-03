@@ -5,6 +5,7 @@
 package proyectoclienteservidor;
 
 import java.awt.Image;
+import java.net.URL;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
@@ -139,6 +140,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jMenu4.setText("Cajas");
 
         MenuCajas.setText("Mostrar Listado");
+        MenuCajas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MenuCajasActionPerformed(evt);
+            }
+        });
         jMenu4.add(MenuCajas);
 
         jMenuBar1.add(jMenu4);
@@ -205,6 +211,13 @@ public class MenuPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
         new Facturacion().setVisible(true);
     }//GEN-LAST:event_MenuFacturacionActionPerformed
+
+    private void MenuCajasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuCajasActionPerformed
+        // TODO add your handling code here:
+        //new Cajas().setVisible(true);
+       Servidor s = new Servidor();
+        s.inicializarServidor();
+    }//GEN-LAST:event_MenuCajasActionPerformed
 
     /**
      * @param args the command line arguments
